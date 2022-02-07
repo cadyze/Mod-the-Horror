@@ -1,0 +1,32 @@
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Debug\net5.0-windows\Mod the Horror.exe
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Debug\net5.0-windows\Mod the Horror.deps.json
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Debug\net5.0-windows\Mod the Horror.runtimeconfig.json
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Debug\net5.0-windows\Mod the Horror.runtimeconfig.dev.json
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Debug\net5.0-windows\Mod the Horror.dll
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Debug\net5.0-windows\ref\Mod the Horror.dll
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Debug\net5.0-windows\Mod the Horror.pdb
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.csproj.AssemblyReference.cache
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\App.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror_MarkupCompile.cache
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror_MarkupCompile.lref
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.g.resources
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.AssemblyInfoInputs.cache
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.AssemblyInfo.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.csproj.CoreCompileInputs.cache
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.dll
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\ref\Mod the Horror.dll
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.pdb
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.genruntimeconfig.cache
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreateCharacterWindow.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreateCharacterWindow.baml
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\App.baml
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod_the_Horror.Properties.Resources.resources
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.csproj.GenerateResource.cache
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Mod the Horror.exe
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Mod the Horror.deps.json
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Mod the Horror.runtimeconfig.json
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Mod the Horror.runtimeconfig.dev.json
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Mod the Horror.dll
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\ref\Mod the Horror.dll
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Mod the Horror.pdb
