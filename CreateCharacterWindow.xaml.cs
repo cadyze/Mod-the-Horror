@@ -34,8 +34,8 @@ namespace Mod_the_Horror
 
         public void UpdateCurrentItoName(string path) {
             itoFileName = System.IO.Path.GetFileName(path);
-            string? directoryPath = System.IO.Path.GetDirectoryName(path);
-            if (directoryPath != null) UpdateCurrentDirectory(directoryPath);
+            //string? directoryPath = System.IO.Path.GetDirectoryName(path);
+            //if (directoryPath != null) UpdateCurrentDirectory(directoryPath);
         }
         public void UpdateCurrentDirectory(string newPath) {
             currentDirectoryPath = newPath;
@@ -47,27 +47,38 @@ namespace Mod_the_Horror
 
         public void UpdateSpriteIconPath(string newPath) {
             spriteIconPath = newPath;
-            UpdateImage(img_spriteIcon, System.IO.Path.Combine(currentDirectoryPath, spriteIconPath));
+            string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
+            Trace.WriteLine(newPath);
+            if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
+            if(!newPath.Equals("")) UpdateImage(img_spriteIcon, System.IO.Path.Combine(currentDirectoryPath, spriteIconPath));
         }
 
         public void UpdateSpriteChibiPath(string newPath) {
             spriteChibiPath = newPath;
-            UpdateImage(img_spriteChibi, System.IO.Path.Combine(currentDirectoryPath, spriteChibiPath));
+            string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
+            if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
+            if (!newPath.Equals("")) UpdateImage(img_spriteChibi, System.IO.Path.Combine(currentDirectoryPath, spriteChibiPath));
         }
 
         public void UpdateSpriteBackPath(string newPath) {
             spriteBackPath = newPath;
-            UpdateImage(img_spriteBack, System.IO.Path.Combine(currentDirectoryPath, spriteBackPath));
+            string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
+            if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
+            if (!newPath.Equals("")) UpdateImage(img_spriteBack, System.IO.Path.Combine(currentDirectoryPath, spriteBackPath));
         }
 
         public void UpdateSpriteHousePath(string newPath) {
             spriteHousePath = newPath;
-            UpdateImage(img_spriteHouse, System.IO.Path.Combine(currentDirectoryPath, spriteHousePath));
+            string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
+            if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
+            if (!newPath.Equals("")) UpdateImage(img_spriteHouse, System.IO.Path.Combine(currentDirectoryPath, spriteHousePath));
         }
 
         public void UpdateSpritePortraitPath(string newPath) {
             spritePortraitPath = newPath;
-            UpdateImage(img_spritePortrait, System.IO.Path.Combine(currentDirectoryPath, spritePortraitPath));
+            string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
+            if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
+            if (!newPath.Equals("")) UpdateImage(img_spritePortrait, System.IO.Path.Combine(currentDirectoryPath, spritePortraitPath));
         }
 
         public CreateCharacterWindow()
@@ -93,11 +104,11 @@ namespace Mod_the_Horror
 
         private void OnSaveClicked(object sender, RoutedEventArgs e)
         {
-            string sprIconName = System.IO.Path.GetFileName(spriteIconPath);
-            string sprBackName = System.IO.Path.GetFileName(spriteBackPath);
-            string sprHouseName = System.IO.Path.GetFileName(spriteHousePath);
-            string sprChibiName = System.IO.Path.GetFileName(spriteChibiPath);
-            string sprPortraitName = System.IO.Path.GetFileName(spritePortraitPath);
+            string? sprIconName = System.IO.Path.GetFileName(spriteIconPath);
+            string? sprBackName = System.IO.Path.GetFileName(spriteBackPath);
+            string? sprHouseName = System.IO.Path.GetFileName(spriteHousePath);
+            string? sprChibiName = System.IO.Path.GetFileName(spriteChibiPath);
+            string? sprPortraitName = System.IO.Path.GetFileName(spritePortraitPath);
 
             //Parses are safe here as the textboxes can only accept numbers
             ItoWriter.WriteCustomCharacter(currentDirectoryPath, itoFileName, txtBox_name.Text, txtBox_author.Text, txtBox_contact.Text,
@@ -108,18 +119,29 @@ namespace Mod_the_Horror
                 sprIconName, sprBackName, sprHouseName, sprChibiName, sprPortraitName);
 
             //Save images
-            SaveImage(img_spriteIcon, spriteIconPath);
-            SaveImage(img_spriteBack, spriteBackPath);
-            SaveImage(img_spriteHouse, spriteHousePath);
-            SaveImage(img_spriteChibi, spriteChibiPath);
-            SaveImage(img_spritePortrait, spritePortraitPath);
+            SaveImage(img_spriteIcon, System.IO.Path.Combine(currentSpriteDirectoryPath, sprIconName));
+            SaveImage(img_spriteBack, System.IO.Path.Combine(currentSpriteDirectoryPath, sprBackName));
+            SaveImage(img_spriteHouse, System.IO.Path.Combine(currentSpriteDirectoryPath, sprHouseName));
+            SaveImage(img_spriteChibi, System.IO.Path.Combine(currentSpriteDirectoryPath, sprChibiName));
+            SaveImage(img_spritePortrait, System.IO.Path.Combine(currentSpriteDirectoryPath, sprPortraitName));
         }
 
         void SaveImage(Image imageToSave, string filePath) {
             var pngEncoder = new PngBitmapEncoder();
-            pngEncoder.Frames.Add(BitmapFrame.Create((BitmapSource)imageToSave.Source));
-            using (FileStream stream = new FileStream(filePath, FileMode.Create))
-                pngEncoder.Save(stream);
+            BitmapSource bitmapSource = (BitmapSource)imageToSave.Source;
+            if (bitmapSource != null)
+            {
+                pngEncoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                if (!System.IO.File.Exists(filePath))
+                {
+                    using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        pngEncoder.Save(stream);
+                        stream.Close();
+                    }
+                }
+            }
+            
         }
 
         private void UpdateImage(Image imgToChange, string imgPath)

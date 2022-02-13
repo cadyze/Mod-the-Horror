@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,9 +32,13 @@ namespace Mod_the_Horror
             if (isFileSettingCreate)
             {
                 fileSettingBtn.Content = "EDIT FILE";
+                txtBox_fileName.Visibility = Visibility.Hidden;
+                label_fileName.Visibility = Visibility.Hidden;
             }
             else {
                 fileSettingBtn.Content = "CREATE FILE";
+                txtBox_fileName.Visibility = Visibility.Visible;
+                label_fileName.Visibility = Visibility.Visible;
             }
             isFileSettingCreate = !isFileSettingCreate;
         }
@@ -42,14 +47,20 @@ namespace Mod_the_Horror
         {
             if (isFileSettingCreate)
             {
-                //CREATING IN HERE
-                string potentialPath = FileManager.ChooseDirectory();
-                string spritePath = System.IO.Path.Combine(potentialPath, "charSprites");
-                if (!potentialPath.Equals(""))
+                if (!txtBox_fileName.Text.Equals(""))
                 {
-                    CreateCharacterWindow newCharWindow = new CreateCharacterWindow();
-                    newCharWindow.Owner = this;
-                    newCharWindow.ShowDialog();
+                    //CREATING IN HERE
+                    string potentialPath = FileManager.ChooseDirectory();
+                    if (!potentialPath.Equals(""))
+                    {
+                        CreateCharacterWindow newCharWindow = new CreateCharacterWindow();
+                        string characterDirectory = FileManager.CreateDirectory($"{txtBox_fileName.Text}", potentialPath);
+                        newCharWindow.UpdateCurrentDirectory(characterDirectory);
+                        string spriteDirectory = FileManager.CreateDirectory("char_sprites", characterDirectory);
+                        newCharWindow.UpdateCurrentSpriteDirectory(spriteDirectory);
+                        newCharWindow.UpdateCurrentItoName($"{txtBox_fileName.Text}.ito");
+                        newCharWindow.ShowDialog();
+                    }
                 }
             }
             else 
@@ -61,7 +72,7 @@ namespace Mod_the_Horror
                     CreateCharacterWindow newCharWindow = new CreateCharacterWindow();
                     string? directory = System.IO.Path.GetDirectoryName(potentialPath);
                     if(directory != null) newCharWindow.UpdateCurrentDirectory(directory);
-
+                    newCharWindow.UpdateCurrentItoName(System.IO.Path.GetFileName(potentialPath));
                     //Read the data from the file given.
                     var itoFileLines = System.IO.File.ReadAllLines(potentialPath);
                     foreach (string line in itoFileLines) {
@@ -98,7 +109,7 @@ namespace Mod_the_Horror
 
                         }
                         if (line.Contains("menu_desc=")) {
-                            //Menu description format: menu_desc="Name: _NAME_#_AGE_ / _GENDER_ #<<_DESCRIPTION_"
+                            //Menu description format: menu_desc="Name: _NAME_#_AGE_ / _GENDER_ #_DESCRIPTION_"
                             string descInfo = ItoWriter.ExtractInfo(line);
                             string charName = "";
                             string charGender = "";
