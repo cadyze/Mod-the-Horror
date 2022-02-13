@@ -30,3 +30,6 @@ C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Mo
 C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Mod the Horror.dll
 C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\ref\Mod the Horror.dll
 C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Mod the Horror.pdb
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\MainMenu.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\MainMenu.baml
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.csproj.CopyComplete

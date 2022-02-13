@@ -207,6 +207,7 @@
 
             <Label Content="Custom Character Creator" Style="{StaticResource header1}" HorizontalAlignment="Center" Grid.Column="1"/>
             <Button Content="SAVE" Grid.Column="2" Style="{StaticResource importBtnDesign}" FontSize="64" Click="OnSaveClicked"/>
+            <!--<Button Content="IMPORT" Grid.Column="0" Style="{StaticResource importBtnDesign}" FontSize="64" Click="OnImportClicked"/>-->
         </Grid>
     </Grid>
 </Window>

@@ -1,0 +1,86 @@
+﻿<Window x:Class="Mod_the_Horror.MainMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mod_the_Horror"
+        mc:Ignorable="d"
+        Title="Main Menu" Height="720" Width="1280" Background="Black">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        
+        <!--Grid for the project generation options-->
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <!--Headers-->
+                <Label Content="Project Options (Soon)" Style="{StaticResource header1}" HorizontalAlignment="Center" />
+                <!--<Label Content="f" Style="{StaticResource header1}" HorizontalAlignment="Center" />-->
+
+                <!--Grid for the generation options-->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </Grid>
+        </Grid>
+        
+        <!--Grid managing single file edits-->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+
+            <!--Header for single file edits-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                                
+                <Label Content="Single-File Editor" Style="{StaticResource header1}"/>
+                <Label Content="Current File Setting:" Style="{StaticResource header2}" Grid.Column="1" HorizontalAlignment="Right"/>
+                <Button x:Name="fileSettingBtn" Style="{StaticResource importBtnDesign}" FontSize="32" Content="CREATE FILE" Grid.Column="2" Click="fileSettingBtn_Click"/>
+            </Grid>
+
+            <!--Choosing the type of file to perform edits on-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Custom Character" Grid.Column="0" Style="{StaticResource importBtnDesign}" Click="CharacterBtn_Click"/>
+                <Button Content="Custom Event" Grid.Column="1" Style="{StaticResource importBtnDesign}" Click="EventBtn_Click"/>
+                <Button Content="Custom Enemy" Grid.Column="2" Style="{StaticResource importBtnDesign}" Click="EnemyBtn_Click"/>
+                <Button Content="Custom Mystery" Grid.Column="3" Style="{StaticResource importBtnDesign}" Click="MysteryBtn_Click"/>
+            </Grid>
+        </Grid>
+        
+        <Label Style="{StaticResource header1}" Content="Mod the Horror" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="128"/>
+    </Grid>
+</Window>
