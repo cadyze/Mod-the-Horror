@@ -56,14 +56,18 @@
             <!--Header for single file edits-->
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                                 
                 <Label Content="Single-File Editor" Style="{StaticResource header1}"/>
-                <Label Content="Current File Setting:" Style="{StaticResource header2}" Grid.Column="1" HorizontalAlignment="Right"/>
+                <Label Content="File Setting:" Style="{StaticResource header2}" Grid.Column="1" HorizontalAlignment="Right"/>
                 <Button x:Name="fileSettingBtn" Style="{StaticResource importBtnDesign}" FontSize="32" Content="CREATE FILE" Grid.Column="2" Click="fileSettingBtn_Click"/>
+                <Label x:Name="label_fileName" Content="File Name:" Style="{StaticResource header2}" Grid.Column="3" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtBox_fileName" Text="" Grid.Column="4" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
             </Grid>
 
             <!--Choosing the type of file to perform edits on-->

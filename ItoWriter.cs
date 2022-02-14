@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows;
 using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
+using System.Diagnostics;
 
 namespace Mod_the_Horror
 {
@@ -44,20 +45,20 @@ namespace Mod_the_Horror
             int strength, int dexterity, int perception, int charisma, int knowledge, int luck, 
             string name_a, string menu_tag, string menu_desc, string perkpack_a, string perkpack_b,
             string fullName, string gender, int age, 
-            string charSpritesDirectoryName, string sprIconName, string sprBackName, string sprHouseName,
-            string sprChibiName, string sprPortraitName) {
+            string charSpritesDirectoryName, string? sprIconName, string? sprBackName, string? sprHouseName,
+            string? sprChibiName, string? sprPortraitName) {
 
             string directoryPath = locationToSave;
             string charSpritesDirectoryPath = charSpritesDirectoryName;
-
-            string spriteIconPath = System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprIconName}.png");
-            string spriteBackPath = System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprBackName}.png");
-            string spriteHousePath = System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprHouseName}.png");
-            string spriteChibiPath = System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprChibiName}.png");
-            string spritePortraitPath = System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprPortraitName}.png");
+            string spriteIconPath = (sprIconName != null && !sprIconName.Equals("")) ? System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprIconName}") : "";
+            string spriteBackPath = (sprBackName != null && !sprBackName.Equals("")) ? System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprBackName}") : "";
+            string spriteHousePath = (sprHouseName != null && !sprHouseName.Equals("")) ? System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprHouseName}") : "";
+            string spriteChibiPath = (sprChibiName != null && !sprChibiName.Equals("")) ? System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprChibiName}") : "";
+            string spritePortraitPath = (sprPortraitName != null && !sprPortraitName.Equals("")) ?  System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprPortraitName}") : "";
 
             string fileName = itoFileName;
             string pathName = System.IO.Path.Combine(directoryPath, fileName);
+            //Trace.WriteLine(pathName);
 
             //Write the .ito file containing the character information.
             string charInfo = "[character]" +
@@ -81,10 +82,9 @@ namespace Mod_the_Horror
                 $"\nperkpack_a=\"{perkpack_a}\"" +
                 $"\nperkpack_b=\"{perkpack_b}\"";
 
-            //if (!System.IO.File.Exists(pathName)) {
-            TextWriter sw = new StreamWriter(pathName);
-            sw.WriteLine(charInfo);
-            sw.Close();
+            TextWriter tw = new StreamWriter(pathName);
+            tw.WriteLine(charInfo);
+            tw.Close();
 
             return directoryPath;
         }
