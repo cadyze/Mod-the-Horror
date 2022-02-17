@@ -33,3 +33,5 @@ C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Mo
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\MainMenu.g.cs
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\MainMenu.baml
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.csproj.CopyComplete
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreateEventWindow.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreateEventWindow.baml
