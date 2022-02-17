@@ -21,7 +21,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="Event Creator" Style="{StaticResource header1}"/>
-            <Button Content="SAVE" Style="{StaticResource importBtnDesign}" Grid.Column="1"/>
+            <Button Content="SAVE" Style="{StaticResource importBtnDesign}" Grid.Column="1" Click="OnSaveClicked"/>
         </Grid>
 
         <!--Grid for the basic information-->
@@ -46,11 +46,11 @@
             <Label Content="# Options:" Style="{StaticResource header2}" Grid.Column="4"/>
             <Label Content="" Style="{StaticResource header2}" Grid.Column="4" Grid.Row="1"/>
 
-            <TextBox x:Name="txtBox_name" Style="{StaticResource rightAlignedTxtBoxDesign}" Grid.Column="1" Grid.Row="0"/>
-            <TextBox x:Name="txtBox_location" Style="{StaticResource rightAlignedTxtBoxDesign}" Grid.Column="1" Grid.Row="1"/>
-            <TextBox x:Name="txtBox_author" Style="{StaticResource rightAlignedTxtBoxDesign}" Grid.Column="3" Grid.Row="0"/>
-            <TextBox x:Name="txtBox_contact" Style="{StaticResource rightAlignedTxtBoxDesign}" Grid.Column="3" Grid.Row="1"/>
-            <TextBox x:Name="txtBox_numOptions" Style="{StaticResource rightAlignedTxtBoxDesign}" Grid.Column="5" Grid.Row="0"/>
+            <TextBox x:Name="txtBox_name" Style="{StaticResource smallerTextBox}" Grid.Column="1" Grid.Row="0"/>
+            <TextBox x:Name="txtBox_location" Style="{StaticResource smallerTextBox}" Grid.Column="1" Grid.Row="1"/>
+            <TextBox x:Name="txtBox_author" Style="{StaticResource smallerTextBox}" Grid.Column="3" Grid.Row="0"/>
+            <TextBox x:Name="txtBox_contact" Style="{StaticResource smallerTextBox}" Grid.Column="3" Grid.Row="1"/>
+            <TextBox x:Name="txtBox_numOptions" Style="{StaticResource smallerTextBox}" Grid.Column="5" Grid.Row="0" TextChanged="txtBox_numOptions_TextChanged"/>
         </Grid>
 
         <!--Grid for bottom row-->
@@ -72,11 +72,11 @@
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
                 <Image x:Name="img_event" Width="Auto" Height="195" Style="{StaticResource pixelArtImage}"/>
-                <Button Content="Import Event Image" Style="{StaticResource importBtnDesign}" Grid.Row="1"/>
+                <Button Content="Import Event Image" Style="{StaticResource importBtnDesign}" Grid.Row="1" Click="ChangeEventSprite_Click"/>
                 <Label Content="Event Description:" Style="{StaticResource header2}" Grid.Row="2"/>
-                <TextBox x:Name="txtBox_description" Style="{StaticResource rightAlignedTxtBoxDesign}" Grid.Row="3"/>
+                <TextBox x:Name="txtBox_description" Style="{StaticResource summary}" Grid.Row="3"/>
                 <Label Content="Event Introduction:" Style="{StaticResource header2}" Grid.Row="4"/>
-                <TextBox x:Name="txtBox_flavor" Style="{StaticResource rightAlignedTxtBoxDesign}" Grid.Row="5"/>
+                <TextBox x:Name="txtBox_flavor" Style="{StaticResource summary}" Grid.Row="5"/>
             </Grid>
 
             <!--Option grid editor-->
@@ -126,14 +126,14 @@
                     <Label Content="[A] Fail Prize:" Style="{StaticResource header2}" Grid.Row="6"/>
                     <Label Content="[A] Fail Amount:" Style="{StaticResource header2}" Grid.Row="7"/>
 
-                    <TextBox x:Name="txtBox_optionA" Grid.Column="1" Grid.Row="0" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_testStatA" Grid.Column="1" Grid.Row="1" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_successTextA" Grid.Column="1" Grid.Row="2" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_successPrizeA" Grid.Column="1" Grid.Row="3" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_winAmtA" Grid.Column="1" Grid.Row="4" Style="{StaticResource numBox}"/>
-                    <TextBox x:Name="txtBox_failTextA" Grid.Column="1" Grid.Row="5" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_failPrizeA" Grid.Column="1" Grid.Row="6" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_failAmtA" Grid.Column="1" Grid.Row="7" Style="{StaticResource numBox}"/>
+                    <TextBox x:Name="txtBox_optionA" Grid.Column="1" Grid.Row="0" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_testStatA" Grid.Column="1" Grid.Row="1" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_successTextA" Grid.Column="1" Grid.Row="2" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_successPrizeA" Grid.Column="1" Grid.Row="3" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_winAmtA" Grid.Column="1" Grid.Row="4" Style="{StaticResource numBox}" TextChanged="NumberBoxChanged"/>
+                    <TextBox x:Name="txtBox_failTextA" Grid.Column="1" Grid.Row="5" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_failPrizeA" Grid.Column="1" Grid.Row="6" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_failAmtA" Grid.Column="1" Grid.Row="7" Style="{StaticResource numBox}" TextChanged="NumberBoxChanged"/>
                 </Grid>
                 <Grid Grid.Row="1" Visibility="Hidden" x:Name="bOptions">
                     <Grid.RowDefinitions>
@@ -159,14 +159,14 @@
                     <Label Content="[B] Fail Prize:" Style="{StaticResource header2}" Grid.Row="6"/>
                     <Label Content="[B] Fail Amount:" Style="{StaticResource header2}" Grid.Row="7"/>
 
-                    <TextBox x:Name="txtBox_optionB" Grid.Column="1" Grid.Row="0" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_testStatB" Grid.Column="1" Grid.Row="1" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_successTextB" Grid.Column="1" Grid.Row="2" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_successPrizeB" Grid.Column="1" Grid.Row="3" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_winAmtB" Grid.Column="1" Grid.Row="4" Style="{StaticResource numBox}"/>
-                    <TextBox x:Name="txtBox_failTextB" Grid.Column="1" Grid.Row="5" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_failPrizeB" Grid.Column="1" Grid.Row="6" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_failAmtB" Grid.Column="1" Grid.Row="7" Style="{StaticResource numBox}"/>
+                    <TextBox x:Name="txtBox_optionB" Grid.Column="1" Grid.Row="0" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_testStatB" Grid.Column="1" Grid.Row="1" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_successTextB" Grid.Column="1" Grid.Row="2" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_successPrizeB" Grid.Column="1" Grid.Row="3" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_winAmtB" Grid.Column="1" Grid.Row="4" Style="{StaticResource numBox}" TextChanged="NumberBoxChanged"/>
+                    <TextBox x:Name="txtBox_failTextB" Grid.Column="1" Grid.Row="5" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_failPrizeB" Grid.Column="1" Grid.Row="6" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_failAmtB" Grid.Column="1" Grid.Row="7" Style="{StaticResource numBox}" TextChanged="NumberBoxChanged"/>
                 </Grid>
                 <Grid Grid.Row="1" Visibility="Hidden" x:Name="cOptions">
                     <Grid.RowDefinitions>
@@ -192,14 +192,14 @@
                     <Label Content="[C] Fail Prize:" Style="{StaticResource header2}" Grid.Row="6"/>
                     <Label Content="[C] Fail Amount:" Style="{StaticResource header2}" Grid.Row="7"/>
 
-                    <TextBox x:Name="txtBox_optionC" Grid.Column="1" Grid.Row="0" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_testStatC" Grid.Column="1" Grid.Row="1" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_successTextC" Grid.Column="1" Grid.Row="2" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_successPrizeC" Grid.Column="1" Grid.Row="3" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_winAmtC" Grid.Column="1" Grid.Row="4" Style="{StaticResource numBox}"/>
-                    <TextBox x:Name="txtBox_failTextC" Grid.Column="1" Grid.Row="5" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_failPrizeC" Grid.Column="1" Grid.Row="6" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
-                    <TextBox x:Name="txtBox_failAmtC" Grid.Column="1" Grid.Row="7" Style="{StaticResource numBox}"/>
+                    <TextBox x:Name="txtBox_optionC" Grid.Column="1" Grid.Row="0" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_testStatC" Grid.Column="1" Grid.Row="1" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_successTextC" Grid.Column="1" Grid.Row="2" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_successPrizeC" Grid.Column="1" Grid.Row="3" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_winAmtC" Grid.Column="1" Grid.Row="4" Style="{StaticResource numBox}" TextChanged="NumberBoxChanged"/>
+                    <TextBox x:Name="txtBox_failTextC" Grid.Column="1" Grid.Row="5" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_failPrizeC" Grid.Column="1" Grid.Row="6" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_failAmtC" Grid.Column="1" Grid.Row="7" Style="{StaticResource numBox}" TextChanged="NumberBoxChanged"/>
                 </Grid>
             </Grid>
         </Grid>

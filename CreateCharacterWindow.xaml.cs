@@ -50,35 +50,35 @@ namespace Mod_the_Horror
             string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
             Trace.WriteLine(newPath);
             if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
-            if(!newPath.Equals("")) UpdateImage(img_spriteIcon, System.IO.Path.Combine(currentDirectoryPath, spriteIconPath));
+            if(!newPath.Equals("")) FileManager.UpdateImage(img_spriteIcon, System.IO.Path.Combine(currentDirectoryPath, spriteIconPath));
         }
 
         public void UpdateSpriteChibiPath(string newPath) {
             spriteChibiPath = newPath;
             string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
             if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
-            if (!newPath.Equals("")) UpdateImage(img_spriteChibi, System.IO.Path.Combine(currentDirectoryPath, spriteChibiPath));
+            if (!newPath.Equals("")) FileManager.UpdateImage(img_spriteChibi, System.IO.Path.Combine(currentDirectoryPath, spriteChibiPath));
         }
 
         public void UpdateSpriteBackPath(string newPath) {
             spriteBackPath = newPath;
             string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
             if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
-            if (!newPath.Equals("")) UpdateImage(img_spriteBack, System.IO.Path.Combine(currentDirectoryPath, spriteBackPath));
+            if (!newPath.Equals("")) FileManager.UpdateImage(img_spriteBack, System.IO.Path.Combine(currentDirectoryPath, spriteBackPath));
         }
 
         public void UpdateSpriteHousePath(string newPath) {
             spriteHousePath = newPath;
             string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
             if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
-            if (!newPath.Equals("")) UpdateImage(img_spriteHouse, System.IO.Path.Combine(currentDirectoryPath, spriteHousePath));
+            if (!newPath.Equals("")) FileManager.UpdateImage(img_spriteHouse, System.IO.Path.Combine(currentDirectoryPath, spriteHousePath));
         }
 
         public void UpdateSpritePortraitPath(string newPath) {
             spritePortraitPath = newPath;
             string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
             if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
-            if (!newPath.Equals("")) UpdateImage(img_spritePortrait, System.IO.Path.Combine(currentDirectoryPath, spritePortraitPath));
+            if (!newPath.Equals("")) FileManager.UpdateImage(img_spritePortrait, System.IO.Path.Combine(currentDirectoryPath, spritePortraitPath));
         }
 
         public CreateCharacterWindow()
@@ -119,36 +119,11 @@ namespace Mod_the_Horror
                 sprIconName, sprBackName, sprHouseName, sprChibiName, sprPortraitName);
 
             //Save images
-            SaveImage(img_spriteIcon, System.IO.Path.Combine(currentSpriteDirectoryPath, sprIconName));
-            SaveImage(img_spriteBack, System.IO.Path.Combine(currentSpriteDirectoryPath, sprBackName));
-            SaveImage(img_spriteHouse, System.IO.Path.Combine(currentSpriteDirectoryPath, sprHouseName));
-            SaveImage(img_spriteChibi, System.IO.Path.Combine(currentSpriteDirectoryPath, sprChibiName));
-            SaveImage(img_spritePortrait, System.IO.Path.Combine(currentSpriteDirectoryPath, sprPortraitName));
-        }
-
-        void SaveImage(Image imageToSave, string filePath) {
-            var pngEncoder = new PngBitmapEncoder();
-            BitmapSource bitmapSource = (BitmapSource)imageToSave.Source;
-            if (bitmapSource != null)
-            {
-                pngEncoder.Frames.Add(BitmapFrame.Create(bitmapSource));
-                if (!System.IO.File.Exists(filePath))
-                {
-                    using (FileStream stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        pngEncoder.Save(stream);
-                        stream.Close();
-                    }
-                }
-            }
-            
-        }
-
-        private void UpdateImage(Image imgToChange, string imgPath)
-        {
-            //Change the image of sprite to highlight the change.
-            Uri uriSource = new Uri(imgPath);
-            imgToChange.Source = new BitmapImage(uriSource);
+            FileManager.SaveImage(img_spriteIcon, System.IO.Path.Combine(currentSpriteDirectoryPath, sprIconName));
+            FileManager.SaveImage(img_spriteBack, System.IO.Path.Combine(currentSpriteDirectoryPath, sprBackName));
+            FileManager.SaveImage(img_spriteHouse, System.IO.Path.Combine(currentSpriteDirectoryPath, sprHouseName));
+            FileManager.SaveImage(img_spriteChibi, System.IO.Path.Combine(currentSpriteDirectoryPath, sprChibiName));
+            FileManager.SaveImage(img_spritePortrait, System.IO.Path.Combine(currentSpriteDirectoryPath, sprPortraitName));
         }
 
         private void btn_spriteIcon_Click(object sender, RoutedEventArgs e)
@@ -158,7 +133,7 @@ namespace Mod_the_Horror
             {
                 _hasDirtyData = true;
                 spriteIconPath = potentialPath;
-                UpdateImage(img_spriteIcon, spriteIconPath);
+                FileManager.UpdateImage(img_spriteIcon, spriteIconPath);
             }
         }
 
@@ -169,7 +144,7 @@ namespace Mod_the_Horror
             {
                 _hasDirtyData = true;
                 spriteBackPath = potentialPath;
-                UpdateImage(img_spriteBack, spriteBackPath);
+                FileManager.UpdateImage(img_spriteBack, spriteBackPath);
             }
 
         }
@@ -181,7 +156,7 @@ namespace Mod_the_Horror
             {
                 _hasDirtyData = true;
                 spriteHousePath = potentialPath;
-                UpdateImage(img_spriteHouse, spriteHousePath);
+                FileManager.UpdateImage(img_spriteHouse, spriteHousePath);
             }
         }
 
@@ -192,7 +167,7 @@ namespace Mod_the_Horror
             {
                 _hasDirtyData = true;
                 spritePortraitPath = potentialPath;
-                UpdateImage(img_spritePortrait, spritePortraitPath);
+                FileManager.UpdateImage(img_spritePortrait, spritePortraitPath);
             }
         }
 
@@ -203,7 +178,7 @@ namespace Mod_the_Horror
             {
                 _hasDirtyData = true;
                 spriteChibiPath = potentialPath;
-                UpdateImage(img_spriteChibi, spriteChibiPath);
+                FileManager.UpdateImage(img_spriteChibi, spriteChibiPath);
             }
 
         }

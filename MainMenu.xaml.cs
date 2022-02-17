@@ -162,7 +162,78 @@ namespace Mod_the_Horror
 
         private void EventBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (isFileSettingCreate) {
 
+                if (!txtBox_fileName.Text.Equals(""))
+                {
+                    //CREATING IN HERE
+                    string potentialPath = FileManager.ChooseDirectory();
+                    if (!potentialPath.Equals(""))
+                    {
+                        CreateEventWindow newEventWindow = new CreateEventWindow();
+                        string eventDirectory = FileManager.CreateDirectory($"{txtBox_fileName.Text}", potentialPath);
+                        newEventWindow.UpdateCurrentDirectory(eventDirectory);
+                        string spriteDirectory = FileManager.CreateDirectory("event_art", eventDirectory);
+                        newEventWindow.UpdateCurrentSpriteDirectory(spriteDirectory);
+                        newEventWindow.UpdateCurrentItoName($"{txtBox_fileName.Text}.ito");
+                        newEventWindow.ShowDialog();
+                    }
+                }
+            }
+            else
+            {
+                //EDITING IN HERE
+                string potentialPath = FileManager.ChooseItoFile();
+                if (!potentialPath.Equals(""))
+                {
+                    CreateEventWindow newEventWindow = new CreateEventWindow();
+                    string? directory = System.IO.Path.GetDirectoryName(potentialPath);
+                    if (directory != null) newEventWindow.UpdateCurrentDirectory(directory);
+                    newEventWindow.UpdateCurrentItoName(System.IO.Path.GetFileName(potentialPath));
+                    //Read the data from the file given.
+                    var itoFileLines = System.IO.File.ReadAllLines(potentialPath);
+                    foreach (string line in itoFileLines)
+                    {
+                        if (line.Contains("name=")) newEventWindow.txtBox_name.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("location=")) newEventWindow.txtBox_location.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("author=")) newEventWindow.txtBox_author.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("contact=")) newEventWindow.txtBox_contact.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("flavor=")) newEventWindow.txtBox_flavor.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("options=")) newEventWindow.txtBox_numOptions.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("image=")) newEventWindow.UpdateEventImagePath(ItoWriter.ExtractInfo(line));
+                        if (line.Contains("about=")) newEventWindow.txtBox_description.Text = ItoWriter.ExtractInfo(line);
+
+                        if (line.Contains("optiona=")) newEventWindow.txtBox_optionA.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("testa=")) newEventWindow.txtBox_testStatA.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("successa=")) newEventWindow.txtBox_successTextA.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("winprizea=")) newEventWindow.txtBox_successPrizeA.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("winnumbera=")) newEventWindow.txtBox_winAmtA.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("failurea=")) newEventWindow.txtBox_failTextA.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("failprizea=")) newEventWindow.txtBox_failPrizeA.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("failnumbera=")) newEventWindow.txtBox_failAmtA.Text = ItoWriter.ExtractInfo(line);
+
+                        if (line.Contains("optionb=")) newEventWindow.txtBox_optionB.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("testb=")) newEventWindow.txtBox_testStatB.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("successb=")) newEventWindow.txtBox_successTextB.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("winprizeb=")) newEventWindow.txtBox_successPrizeB.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("winnumberb=")) newEventWindow.txtBox_winAmtB.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("failureb=")) newEventWindow.txtBox_failTextB.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("failprizeb=")) newEventWindow.txtBox_failPrizeB.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("failnumberb=")) newEventWindow.txtBox_failAmtB.Text = ItoWriter.ExtractInfo(line);
+
+                        if (line.Contains("optionc=")) newEventWindow.txtBox_optionC.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("testc=")) newEventWindow.txtBox_testStatC.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("successc=")) newEventWindow.txtBox_successTextC.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("winprizec=")) newEventWindow.txtBox_successPrizeC.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("winnumberc=")) newEventWindow.txtBox_winAmtC.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("failurec=")) newEventWindow.txtBox_failTextC.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("failprizec=")) newEventWindow.txtBox_failPrizeC.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("failnumberc=")) newEventWindow.txtBox_failAmtC.Text = ItoWriter.ExtractInfo(line);
+
+                    }
+                    newEventWindow.ShowDialog();
+                }
+            }
         }
 
         private void EnemyBtn_Click(object sender, RoutedEventArgs e)
