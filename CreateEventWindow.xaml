@@ -1,0 +1,207 @@
+﻿<Window x:Class="Mod_the_Horror.CreateEventWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mod_the_Horror"
+        mc:Ignorable="d"
+        Title="CreateEventWindow" Height="720" Width="1280" Background="Black" OpacityMask="Black" BorderBrush="Black">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="17*"/>
+        </Grid.RowDefinitions>
+
+        <!--Grid for the header-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Event Creator" Style="{StaticResource header1}"/>
+            <Button Content="SAVE" Style="{StaticResource importBtnDesign}" Grid.Column="1" Click="OnSaveClicked"/>
+        </Grid>
+
+        <!--Grid for the basic information-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Label Content="Name:" Style="{StaticResource header2}"/>
+            <Label Content="Location:" Style="{StaticResource header2}" Grid.Row="1"/>
+            <Label Content="Author:" Style="{StaticResource header2}" Grid.Column="2"/>
+            <Label Content="Contact:" Style="{StaticResource header2}" Grid.Column="2" Grid.Row="1"/>
+            <Label Content="# Options:" Style="{StaticResource header2}" Grid.Column="4"/>
+            <Label Content="" Style="{StaticResource header2}" Grid.Column="4" Grid.Row="1"/>
+
+            <TextBox x:Name="txtBox_name" Style="{StaticResource smallerTextBox}" Grid.Column="1" Grid.Row="0"/>
+            <TextBox x:Name="txtBox_location" Style="{StaticResource smallerTextBox}" Grid.Column="1" Grid.Row="1"/>
+            <TextBox x:Name="txtBox_author" Style="{StaticResource smallerTextBox}" Grid.Column="3" Grid.Row="0"/>
+            <TextBox x:Name="txtBox_contact" Style="{StaticResource smallerTextBox}" Grid.Column="3" Grid.Row="1"/>
+            <TextBox x:Name="txtBox_numOptions" Style="{StaticResource smallerTextBox}" Grid.Column="5" Grid.Row="0" TextChanged="txtBox_numOptions_TextChanged"/>
+        </Grid>
+
+        <!--Grid for bottom row-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="630*"/>
+                <ColumnDefinition Width="221*"/>
+                <ColumnDefinition Width="409*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Image and description handler-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Image x:Name="img_event" Width="Auto" Height="195" Style="{StaticResource pixelArtImage}"/>
+                <Button Content="Import Event Image" Style="{StaticResource importBtnDesign}" Grid.Row="1" Click="ChangeEventSprite_Click"/>
+                <Label Content="Event Description:" Style="{StaticResource header2}" Grid.Row="2"/>
+                <TextBox x:Name="txtBox_description" Style="{StaticResource summary}" Grid.Row="3"/>
+                <Label Content="Event Introduction:" Style="{StaticResource header2}" Grid.Row="4"/>
+                <TextBox x:Name="txtBox_flavor" Style="{StaticResource summary}" Grid.Row="5"/>
+            </Grid>
+
+            <!--Option grid editor-->
+            <Grid Grid.Column="1" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="8*"/>
+                </Grid.RowDefinitions>
+                <!--Option header-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Editing..." Style="{StaticResource header2}" FontWeight="Bold"/>
+                    <Button x:Name="btn_moreOptions" Content="More Options" Style="{StaticResource importBtnDesign}" Grid.Column="2"/>
+                    <ComboBox SelectionChanged="comboBox_selectedOption_SelectionChanged" Grid.Column="1" x:Name="comboBox_selectedOption" HorizontalContentAlignment="Center" Style="{StaticResource comboBoxDark}" Foreground="Black">
+                        <ComboBoxItem IsSelected="True">Option 1</ComboBoxItem>
+                        <ComboBoxItem>Option 2</ComboBoxItem>
+                        <ComboBoxItem>Option 3</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+
+                <!--Option settings-->
+                <Grid Grid.Row="1" Visibility="Visible" x:Name="aOptions">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="[A] Option Text:" Style="{StaticResource header2}" Grid.Row="0"/>
+                    <Label Content="[A] Test Stat:" Style="{StaticResource header2}" Grid.Row="1"/>
+                    <Label Content="[A] Success Text:" Style="{StaticResource header2}" Grid.Row="2"/>
+                    <Label Content="[A] Success Prize:" Style="{StaticResource header2}" Grid.Row="3"/>
+                    <Label Content="[A] Win Amount:" Style="{StaticResource header2}" Grid.Row="4"/>
+                    <Label Content="[A] Fail Text:" Style="{StaticResource header2}" Grid.Row="5"/>
+                    <Label Content="[A] Fail Prize:" Style="{StaticResource header2}" Grid.Row="6"/>
+                    <Label Content="[A] Fail Amount:" Style="{StaticResource header2}" Grid.Row="7"/>
+
+                    <TextBox x:Name="txtBox_optionA" Grid.Column="1" Grid.Row="0" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_testStatA" Grid.Column="1" Grid.Row="1" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_successTextA" Grid.Column="1" Grid.Row="2" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_successPrizeA" Grid.Column="1" Grid.Row="3" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_winAmtA" Grid.Column="1" Grid.Row="4" Style="{StaticResource numBox}" TextChanged="NumberBoxChanged"/>
+                    <TextBox x:Name="txtBox_failTextA" Grid.Column="1" Grid.Row="5" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_failPrizeA" Grid.Column="1" Grid.Row="6" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_failAmtA" Grid.Column="1" Grid.Row="7" Style="{StaticResource numBox}" TextChanged="NumberBoxChanged"/>
+                </Grid>
+                <Grid Grid.Row="1" Visibility="Hidden" x:Name="bOptions">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="[B] Option Text:" Style="{StaticResource header2}" Grid.Row="0"/>
+                    <Label Content="[B] Test Stat:" Style="{StaticResource header2}" Grid.Row="1"/>
+                    <Label Content="[B] Success Text:" Style="{StaticResource header2}" Grid.Row="2"/>
+                    <Label Content="[B] Success Prize:" Style="{StaticResource header2}" Grid.Row="3"/>
+                    <Label Content="[B] Win Amount:" Style="{StaticResource header2}" Grid.Row="4"/>
+                    <Label Content="[B] Fail Text:" Style="{StaticResource header2}" Grid.Row="5"/>
+                    <Label Content="[B] Fail Prize:" Style="{StaticResource header2}" Grid.Row="6"/>
+                    <Label Content="[B] Fail Amount:" Style="{StaticResource header2}" Grid.Row="7"/>
+
+                    <TextBox x:Name="txtBox_optionB" Grid.Column="1" Grid.Row="0" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_testStatB" Grid.Column="1" Grid.Row="1" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_successTextB" Grid.Column="1" Grid.Row="2" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_successPrizeB" Grid.Column="1" Grid.Row="3" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_winAmtB" Grid.Column="1" Grid.Row="4" Style="{StaticResource numBox}" TextChanged="NumberBoxChanged"/>
+                    <TextBox x:Name="txtBox_failTextB" Grid.Column="1" Grid.Row="5" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_failPrizeB" Grid.Column="1" Grid.Row="6" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_failAmtB" Grid.Column="1" Grid.Row="7" Style="{StaticResource numBox}" TextChanged="NumberBoxChanged"/>
+                </Grid>
+                <Grid Grid.Row="1" Visibility="Hidden" x:Name="cOptions">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="[C] Option Text:" Style="{StaticResource header2}" Grid.Row="0"/>
+                    <Label Content="[C] Test Stat:" Style="{StaticResource header2}" Grid.Row="1"/>
+                    <Label Content="[C] Success Text:" Style="{StaticResource header2}" Grid.Row="2"/>
+                    <Label Content="[C] Success Prize:" Style="{StaticResource header2}" Grid.Row="3"/>
+                    <Label Content="[C] Win Amount:" Style="{StaticResource header2}" Grid.Row="4"/>
+                    <Label Content="[C] Fail Text:" Style="{StaticResource header2}" Grid.Row="5"/>
+                    <Label Content="[C] Fail Prize:" Style="{StaticResource header2}" Grid.Row="6"/>
+                    <Label Content="[C] Fail Amount:" Style="{StaticResource header2}" Grid.Row="7"/>
+
+                    <TextBox x:Name="txtBox_optionC" Grid.Column="1" Grid.Row="0" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_testStatC" Grid.Column="1" Grid.Row="1" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_successTextC" Grid.Column="1" Grid.Row="2" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_successPrizeC" Grid.Column="1" Grid.Row="3" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_winAmtC" Grid.Column="1" Grid.Row="4" Style="{StaticResource numBox}" TextChanged="NumberBoxChanged"/>
+                    <TextBox x:Name="txtBox_failTextC" Grid.Column="1" Grid.Row="5" Style="{StaticResource summary}"/>
+                    <TextBox x:Name="txtBox_failPrizeC" Grid.Column="1" Grid.Row="6" Style="{StaticResource smallerTextBox}"/>
+                    <TextBox x:Name="txtBox_failAmtC" Grid.Column="1" Grid.Row="7" Style="{StaticResource numBox}" TextChanged="NumberBoxChanged"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

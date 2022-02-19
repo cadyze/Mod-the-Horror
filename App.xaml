@@ -16,6 +16,19 @@
             <Setter Property="VerticalAlignment" Value="Stretch"/>
             <Setter Property="TextWrapping" Value="NoWrap"/>
         </Style>
+        
+        <Style x:Key="summary" TargetType="TextBox">
+            <Setter Property="FontFamily" Value="fonts/Silver.ttf #Silver"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontStretch" Value="UltraCondensed"/>
+        </Style>
 
         <Style x:Key="smallerTextBox" TargetType="TextBox">
             <Setter Property="FontFamily" Value="fonts/Silver.ttf #Silver"/>
@@ -99,6 +112,18 @@
                     <Setter Property="Background" Value="DimGray"/>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+        
+        <!--Combo box styles-->
+        <Style x:Key="comboBoxDark" TargetType="ComboBox">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="FontFamily" Value="fonts/Silver.ttf #Silver"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
     </Application.Resources>
 </Application>

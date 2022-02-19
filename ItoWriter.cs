@@ -89,6 +89,73 @@ namespace Mod_the_Horror
             return directoryPath;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="locationToSave"></param>
+        /// <param name="itoFileName">Should already include the .ito extension</param>
+        /// <param name="name"></param>
+        /// <param name="author"></param>
+        /// <param name="evnLocation"></param>
+        /// <param name="contact"></param>
+        /// <param name="flavor"></param>
+        /// <param name="numOptions"></param>
+        /// <param name="evnSpriteDirectoryName"></param>
+        /// <param name="evnSpriteName"></param>
+        /// <param name="desc"></param>
+        /// <param name="eventOptions"></param>
+        public static void WriteEvent(string locationToSave, string itoFileName, string name, string author, string evnLocation, string contact,
+            string flavor, int numOptions, string evnSpriteDirectoryName, string? evnSpriteName, string desc, List<EventOption> eventOptions) {
+            
+            string spritePath = evnSpriteName != null ? System.IO.Path.Combine(evnSpriteDirectoryName, evnSpriteName) : "";
+            string eventInfo = "[event]" +
+                $"\nname=\"{name}\"" +
+                $"\nlocation=\"{evnLocation}\"" +
+                $"\nauthor=\"{author}\"" +
+                $"\ncontact=\"{contact}\"" +
+                $"\nflavor=\"{flavor}\"" +
+                $"\noptions=\"{numOptions}\"" +
+                $"\nimage=\"{spritePath}\"" +
+                $"\nabout=\"{desc}\"";
+
+            switch (numOptions) {
+                case 1:
+                    EventOption optionA = eventOptions[0];
+                    eventInfo = eventInfo + ConvertOptionToIto(optionA, 'a');
+                    break;
+                case 2:
+                    EventOption optionB = eventOptions[1];
+                    eventInfo = eventInfo + ConvertOptionToIto(optionB, 'b');
+                    goto case 1;
+                case 3:
+                    EventOption optionC = eventOptions[2];
+                    eventInfo = eventInfo + ConvertOptionToIto(optionC, 'c');
+                    goto case 2;
+            }
+
+            TextWriter tw = new StreamWriter(System.IO.Path.Combine(locationToSave, itoFileName));
+            tw.WriteLine(eventInfo);
+            tw.Close();
+        }
+
+        public static string ConvertOptionToIto(EventOption option, char optionLetter) {
+            string optionInfo = "\n" +
+                $"option{optionLetter}=\"{option.optionDesc}\"\n" +
+                $"test{optionLetter}=\"{option.statTest}\"\n" +
+                $"success{optionLetter}=\"{option.successText}\"\n" +
+                $"winprize{optionLetter}=\"{option.successPrize}\"\n" +
+                $"winnumber{optionLetter}=\"{option.winPrizeAmt}\"\n" +
+                $"failure{optionLetter}=\"{option.failureText}\"\n" +
+                $"failureprize{optionLetter}=\"{option.failurePrize}\"\n" +
+                $"failprizenum{optionLetter}=\"{option.losePrizeAmt}\"\n";
+            return optionInfo;
+        }
+
+        /// <summary>
+        /// Will extract the information stored in a line of an .ito file.
+        /// </summary>
+        /// <param name="line">The requested line to extract information from.</param>
+        /// <returns>The information stored in the line given.</returns>
         public static string ExtractInfo(string line) {
             int startIndex = line.IndexOf("\"") + 1;
             int lastIndex = line.LastIndexOf("\"");

@@ -1,9 +1,12 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Mod_the_Horror
 {
@@ -68,6 +71,31 @@ namespace Mod_the_Horror
                 return dlg.FileName;
             }
             return "";
+        }
+
+        public static void SaveImage(Image imageToSave, string filePath)
+        {
+            var pngEncoder = new PngBitmapEncoder();
+            BitmapSource bitmapSource = (BitmapSource)imageToSave.Source;
+            if (bitmapSource != null)
+            {
+                pngEncoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                if (!System.IO.File.Exists(filePath))
+                {
+                    using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        pngEncoder.Save(stream);
+                        stream.Close();
+                    }
+                }
+            }
+        }
+
+        public static void UpdateImage(Image imgToChange, string imgPath)
+        {
+            //Change the image of sprite to highlight the change.
+            Uri uriSource = new Uri(imgPath);
+            imgToChange.Source = new BitmapImage(uriSource);
         }
     }
 }
