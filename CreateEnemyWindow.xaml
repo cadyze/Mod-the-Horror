@@ -1,0 +1,183 @@
+﻿<Window x:Class="Mod_the_Horror.CreateEnemyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mod_the_Horror"
+        mc:Ignorable="d"
+        Title="CreateEnemyWindow" Height="720" Width="1280" Background="Black">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+        <!--Header for the first row-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Custom Enemy Creator" Style="{StaticResource header1}"/>
+            <Button Content="SAVE" Style="{StaticResource importBtnDesign}" Grid.Column="1"/>
+        </Grid>
+
+        <!--Basic information organizer-->
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Labels-->
+            <Label Content="Name:" Style="{StaticResource header2}" Grid.Column="0" Grid.Row="0"/>
+            <Label Content="Subtitle:" Style="{StaticResource header2}" Grid.Column="0" Grid.Row="1"/>
+            <Label Content="Type:" Style="{StaticResource header2}" Grid.Column="2" Grid.Row="0"/>
+            <Label Content="Location:" Style="{StaticResource header2}" Grid.Column="2" Grid.Row="1"/>
+            <Label Content="Author:" Style="{StaticResource header2}" Grid.Column="4" Grid.Row="0"/>
+            <Label Content="Can Run:" Style="{StaticResource header2}" Grid.Column="4" Grid.Row="1"/>
+
+            <!--Controls for the user input-->
+            <TextBox x:Name="txtBox_name" Grid.Row="0" Grid.Column="1" Style="{StaticResource smallerTextBox}"/>
+            <TextBox x:Name="txtBox_subtitle" Grid.Row="1" Grid.Column="1" Style="{StaticResource smallerTextBox}"/>
+            <TextBox x:Name="txtBox_author" Grid.Row="0" Grid.Column="5" Style="{StaticResource smallerTextBox}"/>
+            <ComboBox x:Name="comboBox_type" Grid.Row="0" Grid.Column="3" Style="{StaticResource comboBoxDark}">
+                <ComboBoxItem IsSelected="True">Human</ComboBoxItem>
+                <ComboBoxItem>Monster</ComboBoxItem>
+                <ComboBoxItem>Ghost</ComboBoxItem>
+                <ComboBoxItem>Eldritch</ComboBoxItem>
+                <ComboBoxItem>Undead</ComboBoxItem>
+                <ComboBoxItem>Plant</ComboBoxItem>
+                <ComboBoxItem>Vampire</ComboBoxItem>
+                <ComboBoxItem>Circle</ComboBoxItem>
+            </ComboBox>
+            <ComboBox x:Name="comboBox_location" Grid.Row="1" Grid.Column="3" Style="{StaticResource comboBoxDark}">
+                <ComboBoxItem IsSelected="True">Downtown</ComboBoxItem>
+                <ComboBoxItem>School</ComboBoxItem>
+                <ComboBoxItem>Hospital</ComboBoxItem>
+                <ComboBoxItem>Seaside</ComboBoxItem>
+                <ComboBoxItem>Forest</ComboBoxItem>
+                <ComboBoxItem>Mansion</ComboBoxItem>
+                <ComboBoxItem>Village</ComboBoxItem>
+                <ComboBoxItem>Apartment</ComboBoxItem>
+            </ComboBox>
+            <ComboBox x:Name="comboBox_canRun" Grid.Row="1" Grid.Column="5" Style="{StaticResource comboBoxDark}">
+                <ComboBoxItem IsSelected="True">Yes</ComboBoxItem>
+                <ComboBoxItem>No</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+
+        <!--Information organizer for battle information (3rd row)-->
+        <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!--Introduction organizer-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Introduction: " Style="{StaticResource header2}"/>
+                    <TextBox x:Name="txtBox_introduction" Grid.Column="1" Style="{StaticResource summary}"/>
+                </Grid>
+
+                <!--Stat information-->
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Health:" Style="{StaticResource header2}"/>
+                    <Label Content="Power:" Style="{StaticResource header2}" Grid.Row="1"/>
+                    <Label Content="Damage Type:" Style="{StaticResource header2}" Grid.Column="2" Grid.Row="0"/>
+                    <Label Content="Damage Value:" Style="{StaticResource header2}" Grid.Column="2" Grid.Row="1"/>
+
+                    <TextBox x:Name="txtBox_health" Style="{StaticResource numBox}" Grid.Row="0" Grid.Column="1"/>
+                    <TextBox x:Name="txtBox_power" Style="{StaticResource numBox}" Grid.Row="1" Grid.Column="1"/>
+                    <TextBox x:Name="txtBox_dmgValue" Style="{StaticResource numBox}" Grid.Row="1" Grid.Column="3"/>
+                    <ComboBox x:Name="comboBox_dmgType" Style="{StaticResource comboBoxDark}" Grid.Column="3" Grid.Row="0">
+                        <ComboBoxItem IsSelected="True">Stamina</ComboBoxItem>
+                        <ComboBoxItem>Reason</ComboBoxItem>
+                        <ComboBoxItem>Both of Above</ComboBoxItem>
+                        <ComboBoxItem>Doom</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+            </Grid>
+        
+        <!--Last row organizer-->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--Image Grid-->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Content="Upload Frame #1" Style="{StaticResource importBtnDesign}" Grid.Row="1"/>
+                <Button Content="Upload Frame #2" Style="{StaticResource importBtnDesign}" Grid.Row="3"/>
+
+                <Image x:Name="img_frame1" Grid.Row="0"/>
+                <Image x:Name="img_frame2" Grid.Row="2"/>
+            </Grid>
+            
+            <!--Other battle information organizer-->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!--Labels-->
+                <Label Content="Hit Message [A]:" Style="{StaticResource header2}" Grid.Column="0" Grid.Row="0"/>
+                <Label Content="Hit Message [B]:" Style="{StaticResource header2}" Grid.Column="0" Grid.Row="1"/>
+                <Label Content="Hit Message [C]:" Style="{StaticResource header2}" Grid.Column="0" Grid.Row="2"/>
+                <Label Content="Experience Gained" Style="{StaticResource header2}" Grid.Column="0" Grid.Row="3"/>
+                <Label Content="Prize Type:" Style="{StaticResource header2}" Grid.Column="0" Grid.Row="4"/>
+                <Label Content="Prize Name:" Style="{StaticResource header2}" Grid.Column="0" Grid.Row="5"/>
+                <Label Content="Frame Frequency:" Style="{StaticResource header2}" Grid.Column="0" Grid.Row="6"/>
+                
+                <!--Controls for battle information-->
+                <TextBox x:Name="txtBox_hitMsgA" Style="{StaticResource summary}" Grid.Row="0" Grid.Column="1"/>
+                <TextBox x:Name="txtBox_hitMsgB" Style="{StaticResource summary}" Grid.Row="1" Grid.Column="1"/>
+                <TextBox x:Name="txtBox_hitMsgC" Style="{StaticResource summary}" Grid.Row="2" Grid.Column="1"/>
+                <TextBox x:Name="txtBox_experience" Style="{StaticResource numBox}" Grid.Row="3" Grid.Column="1"/>
+                <TextBox x:Name="txtBox_prizeType" Style="{StaticResource smallerTextBox}" Grid.Row="4" Grid.Column="1"/>
+                <TextBox x:Name="txtBox_prizeName" Style="{StaticResource smallerTextBox}" Grid.Row="5" Grid.Column="1"/>
+                <TextBox x:Name="txtBox_frequency" Style="{StaticResource numBox}" Grid.Row="6" Grid.Column="1"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="CreateEnemyWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="CreateEventWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -16,6 +19,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="CreateCharacterWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CreateEnemyWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="CreateEventWindow.xaml">

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\App.xaml
-3-1686227482
+4763428754
 
-13-753748741
+14-1422903830
 1961339060957
-CreateCharacterWindow.xaml;CreateEventWindow.xaml;MainMenu.xaml;
+CreateCharacterWindow.xaml;CreateEnemyWindow.xaml;CreateEventWindow.xaml;MainMenu.xaml;
 
-True
+False
 
