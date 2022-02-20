@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "sFLeb+lsL9izEfncUefeo3uAi1oHXDIWTCMkp8bEt6t3Z7KxHRBrkce+mRkrsACVhqxTyHFZl+qqant0iNi3eQ==",
+  "dgSpecHash": "lG9KLZ/EhHHoz9KGVpVQumC6Qy1UgYm/9lldTGZjQss/S0mxVF9jHEe8+np5kCYogZeAA2z2kJDQyEckFJkYCQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\jacob\\Desktop\\Software Projects\\Mod the Horror\\Mod the Horror.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jacob\\.nuget\\packages\\microsoft.windowsapicodepack-core\\1.1.0.2\\microsoft.windowsapicodepack-core.1.1.0.2.nupkg.sha512",
-    "C:\\Users\\jacob\\.nuget\\packages\\microsoft.windowsapicodepack-shell\\1.1.0\\microsoft.windowsapicodepack-shell.1.1.0.nupkg.sha512"
+    "C:\\Users\\jacob\\.nuget\\packages\\microsoft.windowsapicodepack-shell\\1.1.0\\microsoft.windowsapicodepack-shell.1.1.0.nupkg.sha512",
+    "C:\\Users\\jacob\\.nuget\\packages\\system.reactive.windows.forms\\5.0.0\\system.reactive.windows.forms.5.0.0.nupkg.sha512"
   ],
   "logs": [
     {
@@ -24,6 +25,16 @@
       "warningLevel": 1,
       "message": "Package 'Microsoft.WindowsAPICodePack-Shell 1.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.WindowsAPICodePack-Shell",
+      "targetGraphs": [
+        "net5.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Reactive.Windows.Forms 5.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "System.Reactive.Windows.Forms",
       "targetGraphs": [
         "net5.0-windows7.0"
       ]
