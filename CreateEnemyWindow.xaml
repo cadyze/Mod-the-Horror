@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Custom Enemy Creator" Style="{StaticResource header1}"/>
-            <Button Content="SAVE" Style="{StaticResource importBtnDesign}" Grid.Column="1"/>
+            <Button Content="SAVE" Style="{StaticResource importBtnDesign}" Grid.Column="1" Click="OnSaveClicked"/>
         </Grid>
 
         <!--Basic information organizer-->
@@ -51,24 +51,24 @@
             <TextBox x:Name="txtBox_subtitle" Grid.Row="1" Grid.Column="1" Style="{StaticResource smallerTextBox}"/>
             <TextBox x:Name="txtBox_author" Grid.Row="0" Grid.Column="5" Style="{StaticResource smallerTextBox}"/>
             <ComboBox x:Name="comboBox_type" Grid.Row="0" Grid.Column="3" Style="{StaticResource comboBoxDark}">
-                <ComboBoxItem IsSelected="True">Human</ComboBoxItem>
-                <ComboBoxItem>Monster</ComboBoxItem>
-                <ComboBoxItem>Ghost</ComboBoxItem>
-                <ComboBoxItem>Eldritch</ComboBoxItem>
-                <ComboBoxItem>Undead</ComboBoxItem>
-                <ComboBoxItem>Plant</ComboBoxItem>
-                <ComboBoxItem>Vampire</ComboBoxItem>
-                <ComboBoxItem>Circle</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">HUMAN</ComboBoxItem>
+                <ComboBoxItem>MONSTER</ComboBoxItem>
+                <ComboBoxItem>GHOST</ComboBoxItem>
+                <ComboBoxItem>ELDRITCH</ComboBoxItem>
+                <ComboBoxItem>UNDEAD</ComboBoxItem>
+                <ComboBoxItem>PLANT</ComboBoxItem>
+                <ComboBoxItem>VAMPIRE</ComboBoxItem>
+                <ComboBoxItem>CIRCLE</ComboBoxItem>
             </ComboBox>
             <ComboBox x:Name="comboBox_location" Grid.Row="1" Grid.Column="3" Style="{StaticResource comboBoxDark}">
-                <ComboBoxItem IsSelected="True">Downtown</ComboBoxItem>
-                <ComboBoxItem>School</ComboBoxItem>
-                <ComboBoxItem>Hospital</ComboBoxItem>
-                <ComboBoxItem>Seaside</ComboBoxItem>
-                <ComboBoxItem>Forest</ComboBoxItem>
-                <ComboBoxItem>Mansion</ComboBoxItem>
-                <ComboBoxItem>Village</ComboBoxItem>
-                <ComboBoxItem>Apartment</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">DOWNTOWN</ComboBoxItem>
+                <ComboBoxItem>SCHOOL</ComboBoxItem>
+                <ComboBoxItem>HOSPITAL</ComboBoxItem>
+                <ComboBoxItem>SEASIDE</ComboBoxItem>
+                <ComboBoxItem>FOREST</ComboBoxItem>
+                <ComboBoxItem>MANSION</ComboBoxItem>
+                <ComboBoxItem>VILLAGE</ComboBoxItem>
+                <ComboBoxItem>APARTMENT</ComboBoxItem>
             </ComboBox>
             <ComboBox x:Name="comboBox_canRun" Grid.Row="1" Grid.Column="5" Style="{StaticResource comboBoxDark}">
                 <ComboBoxItem IsSelected="True">Yes</ComboBoxItem>
@@ -137,8 +137,8 @@
                     <RowDefinition Height="4*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Button Content="Upload Frame #1" Style="{StaticResource importBtnDesign}" Grid.Row="1"/>
-                <Button Content="Upload Frame #2" Style="{StaticResource importBtnDesign}" Grid.Row="3"/>
+                <Button Content="Upload Frame #1" Style="{StaticResource importBtnDesign}" Grid.Row="1" Click="ImportFrame1_Click"/>
+                <Button Content="Upload Frame #2" Style="{StaticResource importBtnDesign}" Grid.Row="3" Click="ImportFrame2_Click"/>
 
                 <Image x:Name="img_frame1" Grid.Row="0"/>
                 <Image x:Name="img_frame2" Grid.Row="2"/>

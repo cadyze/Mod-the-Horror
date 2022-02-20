@@ -55,7 +55,7 @@ namespace Mod_the_Horror
 
         private void comboBox_selectedOption_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string? selectedOption = (string)(((ComboBoxItem)(comboBox_selectedOption.SelectedItem)).Content);
+            string? selectedOption = (string)((ComboBoxItem)comboBox_selectedOption.SelectedItem).Content;
             Trace.WriteLine(selectedOption);
             if (selectedOption != null && !selectedOption.Equals("")) {
                 switch (selectedOption) {

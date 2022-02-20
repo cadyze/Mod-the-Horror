@@ -238,6 +238,65 @@ namespace Mod_the_Horror
 
         private void EnemyBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (isFileSettingCreate)
+            {
+
+                if (!txtBox_fileName.Text.Equals(""))
+                {
+                    //CREATING IN HERE
+                    string potentialPath = FileManager.ChooseDirectory();
+                    if (!potentialPath.Equals(""))
+                    {
+                        CreateEnemyWindow newEnemyWindow = new CreateEnemyWindow();
+                        string eventDirectory = FileManager.CreateDirectory($"{txtBox_fileName.Text}", potentialPath);
+                        newEnemyWindow.UpdateCurrentDirectory(eventDirectory);
+                        string spriteDirectory = FileManager.CreateDirectory("enemy_art", eventDirectory);
+                        newEnemyWindow.UpdateCurrentSpriteDirectory(spriteDirectory);
+                        newEnemyWindow.UpdateCurrentItoName($"{txtBox_fileName.Text}.ito");
+                        newEnemyWindow.ShowDialog();
+                    }
+                }
+            }
+            else
+            {
+                //EDITING IN HERE
+                string potentialPath = FileManager.ChooseItoFile();
+                if (!potentialPath.Equals(""))
+                {
+                    CreateEnemyWindow newEnemyWindow = new CreateEnemyWindow();
+                    string? directory = System.IO.Path.GetDirectoryName(potentialPath);
+                    if (directory != null) newEnemyWindow.UpdateCurrentDirectory(directory);
+                    newEnemyWindow.UpdateCurrentItoName(System.IO.Path.GetFileName(potentialPath));
+
+                    //Read the data from the file given.
+                    var itoFileLines = System.IO.File.ReadAllLines(potentialPath);
+                    foreach (string line in itoFileLines)
+                    {
+                        if (line.Contains("name=")) newEnemyWindow.txtBox_name.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("subtitle=")) newEnemyWindow.txtBox_subtitle.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("location=")) newEnemyWindow.UpdateComboBox(newEnemyWindow.comboBox_location, ItoWriter.ExtractInfo(line));
+                        if (line.Length > 5 && line.Substring(0, 5).Equals("type=")) newEnemyWindow.UpdateComboBox(newEnemyWindow.comboBox_type, ItoWriter.ExtractInfo(line));
+                        if (line.Contains("intro=")) newEnemyWindow.txtBox_introduction.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("author=")) newEnemyWindow.txtBox_author.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("can_run=")) newEnemyWindow.UpdateComboBox(newEnemyWindow.comboBox_canRun, ItoWriter.ExtractInfo(line), Enemy_ComboBox.CanRun);
+                        if (line.Contains("health=")) newEnemyWindow.txtBox_health.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("power=")) newEnemyWindow.txtBox_power.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("damagevalue=")) newEnemyWindow.txtBox_dmgValue.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("damagetype=")) newEnemyWindow.UpdateComboBox(newEnemyWindow.comboBox_dmgType, ItoWriter.ExtractInfo(line), Enemy_ComboBox.DamageType);
+                        if (line.Contains("hit01=")) newEnemyWindow.txtBox_hitMsgA.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("hit02=")) newEnemyWindow.txtBox_hitMsgB.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("hit03=")) newEnemyWindow.txtBox_hitMsgC.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("art01=")) newEnemyWindow.UpdateFrame1(ItoWriter.ExtractInfo(line));
+                        if (line.Contains("art02=")) newEnemyWindow.UpdateFrame2(ItoWriter.ExtractInfo(line));
+                        if (line.Contains("artfreq=")) newEnemyWindow.txtBox_frequency.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("exp=")) newEnemyWindow.txtBox_experience.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("prize_type=")) newEnemyWindow.txtBox_prizeType.Text = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("prize_name=")) newEnemyWindow.txtBox_prizeName.Text = ItoWriter.ExtractInfo(line);
+
+                    }
+                    newEnemyWindow.ShowDialog();
+                }
+            }
 
         }
         private void MysteryBtn_Click(object sender, RoutedEventArgs e)

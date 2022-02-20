@@ -1,6 +1,7 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -93,9 +94,15 @@ namespace Mod_the_Horror
 
         public static void UpdateImage(Image imgToChange, string imgPath)
         {
-            //Change the image of sprite to highlight the change.
-            Uri uriSource = new Uri(imgPath);
-            imgToChange.Source = new BitmapImage(uriSource);
+            try
+            {
+                //Change the image of sprite to highlight the change.
+                Uri uriSource = new Uri(imgPath);
+                imgToChange.Source = new BitmapImage(uriSource);
+            }
+            catch (FileNotFoundException) {
+                Trace.WriteLine("File exception thrown!");
+            }
         }
     }
 }

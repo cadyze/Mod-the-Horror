@@ -21,6 +21,15 @@
           "lib/Microsoft.WindowsAPICodePack.Shell.dll": {},
           "lib/Microsoft.WindowsAPICodePack.ShellExtensions.dll": {}
         }
+      },
+      "System.Reactive.Windows.Forms/5.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net472/System.Reactive.Windows.Forms.dll": {}
+        },
+        "runtime": {
+          "lib/net472/System.Reactive.Windows.Forms.dll": {}
+        }
       }
     }
   },
@@ -55,12 +64,26 @@
         "microsoft.windowsapicodepack-shell.1.1.0.nupkg.sha512",
         "microsoft.windowsapicodepack-shell.nuspec"
       ]
+    },
+    "System.Reactive.Windows.Forms/5.0.0": {
+      "sha512": "8etq1f+TYSkBU2Z9WIzErjSiE6/Cz0cZC5G1e1ktxKMTRoNO+gJuoXwm+XCnyHCZtQ3fH6zCRB06AxEzAghzsA==",
+      "type": "package",
+      "path": "system.reactive.windows.forms/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net472/System.Reactive.Windows.Forms.dll",
+        "lib/net472/System.Reactive.Windows.Forms.xml",
+        "system.reactive.windows.forms.5.0.0.nupkg.sha512",
+        "system.reactive.windows.forms.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
       "Microsoft.WindowsAPICodePack-Core >= 1.1.0.2",
-      "Microsoft.WindowsAPICodePack-Shell >= 1.1.0"
+      "Microsoft.WindowsAPICodePack-Shell >= 1.1.0",
+      "System.Reactive.Windows.Forms >= 5.0.0"
     ]
   },
   "packageFolders": {
@@ -114,6 +137,10 @@
           "Microsoft.WindowsAPICodePack-Shell": {
             "target": "Package",
             "version": "[1.1.0, )"
+          },
+          "System.Reactive.Windows.Forms": {
+            "target": "Package",
+            "version": "[5.0.0, )"
           }
         },
         "imports": [
@@ -155,6 +182,16 @@
       "warningLevel": 1,
       "message": "Package 'Microsoft.WindowsAPICodePack-Shell 1.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.WindowsAPICodePack-Shell",
+      "targetGraphs": [
+        "net5.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Reactive.Windows.Forms 5.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "System.Reactive.Windows.Forms",
       "targetGraphs": [
         "net5.0-windows7.0"
       ]

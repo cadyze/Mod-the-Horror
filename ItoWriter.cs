@@ -107,7 +107,7 @@ namespace Mod_the_Horror
         public static void WriteEvent(string locationToSave, string itoFileName, string name, string author, string evnLocation, string contact,
             string flavor, int numOptions, string evnSpriteDirectoryName, string? evnSpriteName, string desc, List<EventOption> eventOptions) {
             
-            string spritePath = evnSpriteName != null ? System.IO.Path.Combine(evnSpriteDirectoryName, evnSpriteName) : "";
+            string spritePath = (evnSpriteName != null && !evnSpriteName.Equals("")) ? System.IO.Path.Combine(evnSpriteDirectoryName, evnSpriteName) : "";
             string eventInfo = "[event]" +
                 $"\nname=\"{name}\"" +
                 $"\nlocation=\"{evnLocation}\"" +
@@ -137,6 +137,42 @@ namespace Mod_the_Horror
             tw.WriteLine(eventInfo);
             tw.Close();
         }
+
+        public static void WriteEnemy(string locationToSave, string itoFileName, string name, string subtitle,
+            string type, string location, string author, bool canRun, string intro, int health, int power,
+            string dmgType, int dmgValue, string hitMsg1, string hitMsg2, string hitMsg3, int experience,
+            string prizeType, string prizeName, int frameFrequency, string spriteDirectoryName, string? frame1Name, string? frame2Name) {
+
+            string frame1Path = (frame1Name != null && !frame1Name.Equals("")) ? System.IO.Path.Combine(spriteDirectoryName, frame1Name) : "";
+            string frame2Path = (frame2Name != null && !frame2Name.Equals("")) ? System.IO.Path.Combine(spriteDirectoryName, frame2Name) : "";
+            int runValue = canRun ? 1 : 0;
+            string enemyInfo = "[enemy]\n" +
+                $"name=\"{name}\"\n" +
+                $"subtitle=\"{subtitle}\"\n" +
+                $"type=\"{type}\"\n" +
+                $"location=\"{location}\"\n" +
+                $"author=\"{author}\"\n\n" +
+                $"intro=\"{intro}\"\n" +
+                $"can_run=\"{runValue}\"\n" +
+                $"health=\"{health}\"\n" +
+                $"power=\"{power}\"\n" +
+                $"damagevalue=\"{dmgValue}\"\n" +
+                $"damagetype=\"{dmgType}\"\n" +
+                $"exp=\"{experience}\"\n" +
+                $"prize_type=\"{prizeType}\"\n" +
+                $"prize_name=\"{prizeName}\"\n" +
+                $"hit01=\"{hitMsg1}\"\n" +
+                $"hit02=\"{hitMsg2}\"\n" +
+                $"hit03=\"{hitMsg3}\"\n" +
+                $"art01=\"{frame1Path}\"\n" +
+                $"art02=\"{frame2Path}\"\n" +
+                $"artfreq=\"{frameFrequency}\"\n";
+
+            TextWriter tw = new StreamWriter(System.IO.Path.Combine(locationToSave, itoFileName));
+            tw.WriteLine(enemyInfo);
+            tw.Close();
+        }
+
 
         public static string ConvertOptionToIto(EventOption option, char optionLetter) {
             string optionInfo = "\n" +
