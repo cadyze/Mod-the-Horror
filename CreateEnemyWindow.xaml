@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Custom Enemy Creator" Style="{StaticResource header1}"/>
+            <Label Content="CUSTOM ENEMY CREATOR" Style="{StaticResource header1}"/>
             <Button Content="SAVE" Style="{StaticResource importBtnDesign}" Grid.Column="1" Click="OnSaveClicked"/>
         </Grid>
 
@@ -50,30 +50,9 @@
             <TextBox x:Name="txtBox_name" Grid.Row="0" Grid.Column="1" Style="{StaticResource smallerTextBox}"/>
             <TextBox x:Name="txtBox_subtitle" Grid.Row="1" Grid.Column="1" Style="{StaticResource smallerTextBox}"/>
             <TextBox x:Name="txtBox_author" Grid.Row="0" Grid.Column="5" Style="{StaticResource smallerTextBox}"/>
-            <ComboBox x:Name="comboBox_type" Grid.Row="0" Grid.Column="3" Style="{StaticResource comboBoxDark}">
-                <ComboBoxItem IsSelected="True">HUMAN</ComboBoxItem>
-                <ComboBoxItem>MONSTER</ComboBoxItem>
-                <ComboBoxItem>GHOST</ComboBoxItem>
-                <ComboBoxItem>ELDRITCH</ComboBoxItem>
-                <ComboBoxItem>UNDEAD</ComboBoxItem>
-                <ComboBoxItem>PLANT</ComboBoxItem>
-                <ComboBoxItem>VAMPIRE</ComboBoxItem>
-                <ComboBoxItem>CIRCLE</ComboBoxItem>
-            </ComboBox>
-            <ComboBox x:Name="comboBox_location" Grid.Row="1" Grid.Column="3" Style="{StaticResource comboBoxDark}">
-                <ComboBoxItem IsSelected="True">DOWNTOWN</ComboBoxItem>
-                <ComboBoxItem>SCHOOL</ComboBoxItem>
-                <ComboBoxItem>HOSPITAL</ComboBoxItem>
-                <ComboBoxItem>SEASIDE</ComboBoxItem>
-                <ComboBoxItem>FOREST</ComboBoxItem>
-                <ComboBoxItem>MANSION</ComboBoxItem>
-                <ComboBoxItem>VILLAGE</ComboBoxItem>
-                <ComboBoxItem>APARTMENT</ComboBoxItem>
-            </ComboBox>
-            <ComboBox x:Name="comboBox_canRun" Grid.Row="1" Grid.Column="5" Style="{StaticResource comboBoxDark}">
-                <ComboBoxItem IsSelected="True">Yes</ComboBoxItem>
-                <ComboBoxItem>No</ComboBoxItem>
-            </ComboBox>
+            <ComboBox x:Name="comboBox_type" Grid.Row="0" Grid.Column="3" Style="{StaticResource comboBoxDark}"/>
+            <ComboBox x:Name="comboBox_location" Grid.Row="1" Grid.Column="3" Style="{StaticResource comboBoxDark}"/>
+            <ComboBox x:Name="comboBox_canRun" Grid.Row="1" Grid.Column="5" Style="{StaticResource comboBoxDark}"/>
         </Grid>
 
         <!--Information organizer for battle information (3rd row)-->
@@ -110,16 +89,11 @@
                     <Label Content="Damage Type:" Style="{StaticResource header2}" Grid.Column="2" Grid.Row="0"/>
                     <Label Content="Damage Value:" Style="{StaticResource header2}" Grid.Column="2" Grid.Row="1"/>
 
-                    <TextBox x:Name="txtBox_health" Style="{StaticResource numBox}" Grid.Row="0" Grid.Column="1"/>
-                    <TextBox x:Name="txtBox_power" Style="{StaticResource numBox}" Grid.Row="1" Grid.Column="1"/>
-                    <TextBox x:Name="txtBox_dmgValue" Style="{StaticResource numBox}" Grid.Row="1" Grid.Column="3"/>
-                    <ComboBox x:Name="comboBox_dmgType" Style="{StaticResource comboBoxDark}" Grid.Column="3" Grid.Row="0">
-                        <ComboBoxItem IsSelected="True">Stamina</ComboBoxItem>
-                        <ComboBoxItem>Reason</ComboBoxItem>
-                        <ComboBoxItem>Both of Above</ComboBoxItem>
-                        <ComboBoxItem>Doom</ComboBoxItem>
-                    </ComboBox>
-                </Grid>
+                <TextBox x:Name="txtBox_health" Style="{StaticResource numBox}" Grid.Row="0" Grid.Column="1" TextChanged="OnNumBoxChanged"/>
+                    <TextBox x:Name="txtBox_power" Style="{StaticResource numBox}" Grid.Row="1" Grid.Column="1" TextChanged="OnNumBoxChanged"/>
+                <TextBox x:Name="txtBox_dmgValue" Style="{StaticResource numBox}" Grid.Row="1" Grid.Column="3" TextChanged="OnNumBoxChanged"/>
+                <ComboBox x:Name="comboBox_dmgType" Style="{StaticResource comboBoxDark}" Grid.Column="3" Grid.Row="0"/>
+            </Grid>
             </Grid>
         
         <!--Last row organizer-->
@@ -173,10 +147,12 @@
                 <TextBox x:Name="txtBox_hitMsgA" Style="{StaticResource summary}" Grid.Row="0" Grid.Column="1"/>
                 <TextBox x:Name="txtBox_hitMsgB" Style="{StaticResource summary}" Grid.Row="1" Grid.Column="1"/>
                 <TextBox x:Name="txtBox_hitMsgC" Style="{StaticResource summary}" Grid.Row="2" Grid.Column="1"/>
-                <TextBox x:Name="txtBox_experience" Style="{StaticResource numBox}" Grid.Row="3" Grid.Column="1"/>
-                <TextBox x:Name="txtBox_prizeType" Style="{StaticResource smallerTextBox}" Grid.Row="4" Grid.Column="1"/>
+                <TextBox x:Name="txtBox_experience" Style="{StaticResource numBox}" Grid.Row="3" Grid.Column="1" TextChanged="OnNumBoxChanged"/>
+                <!--<TextBox x:Name="txtBox_prizeType" Style="{StaticResource smallerTextBox}" Grid.Row="4" Grid.Column="1"/>-->
                 <TextBox x:Name="txtBox_prizeName" Style="{StaticResource smallerTextBox}" Grid.Row="5" Grid.Column="1"/>
-                <TextBox x:Name="txtBox_frequency" Style="{StaticResource numBox}" Grid.Row="6" Grid.Column="1"/>
+                <ComboBox x:Name="comboBox_prizeType" Style="{StaticResource comboBoxDark}" Grid.Row="4" Grid.Column="1" SelectionChanged="comboBox_prizeType_SelectionChanged" />
+                <ComboBox x:Name="comboBox_prizeItem" Style="{StaticResource comboBoxDark}" Grid.Row="5" Grid.Column="1"/>
+                <TextBox x:Name="txtBox_frequency" Style="{StaticResource numBox}" Grid.Row="6" Grid.Column="1" TextChanged="OnNumBoxChanged"/>
             </Grid>
         </Grid>
     </Grid>

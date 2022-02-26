@@ -38,3 +38,14 @@ C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreateEnemyWindow.g.cs
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreateEnemyWindow.baml
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.csproj.ResolveComReference.cache
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\EnemyDamageTypes.txt
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\EnemyEscapeOptions.txt
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\EnemyLocations.txt
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\EnemyPrizes.txt
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\EnemyTypes.txt
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\EventLocations.txt
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\EventPrizes.txt
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\EventStatTests.txt
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\ObtainableItems.txt
+C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\Perkpacks.txt
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror_Content.g.cs

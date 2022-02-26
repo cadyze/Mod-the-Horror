@@ -27,7 +27,7 @@
                 </Grid.RowDefinitions>
 
                 <!--Headers-->
-                <Label Content="Project Options (Soon)" Style="{StaticResource header1}" HorizontalAlignment="Center" />
+                <Label Content="UPCOMING FEATURE" Style="{StaticResource header1}" HorizontalAlignment="Left" />
                 <!--<Label Content="f" Style="{StaticResource header1}" HorizontalAlignment="Center" />-->
 
                 <!--Grid for the generation options-->
@@ -63,8 +63,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                                 
-                <Label Content="Single-File Editor" Style="{StaticResource header1}"/>
-                <Label Content="File Setting:" Style="{StaticResource header2}" Grid.Column="1" HorizontalAlignment="Right"/>
+                <Label Content="SINGLE-FILE EDITOR" Style="{StaticResource header1}"/>
+                <Label Content="FILE SETTING:" Style="{StaticResource header2}" Grid.Column="1" HorizontalAlignment="Right"/>
                 <Button x:Name="fileSettingBtn" Style="{StaticResource importBtnDesign}" FontSize="32" Content="CREATE FILE" Grid.Column="2" Click="fileSettingBtn_Click"/>
                 <Label x:Name="label_fileName" Content="File Name:" Style="{StaticResource header2}" Grid.Column="3" HorizontalAlignment="Right"/>
                 <TextBox x:Name="txtBox_fileName" Text="" Grid.Column="4" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
@@ -81,10 +81,12 @@
                 <Button Content="Custom Character" Grid.Column="0" Style="{StaticResource importBtnDesign}" Click="CharacterBtn_Click"/>
                 <Button Content="Custom Event" Grid.Column="1" Style="{StaticResource importBtnDesign}" Click="EventBtn_Click"/>
                 <Button Content="Custom Enemy" Grid.Column="2" Style="{StaticResource importBtnDesign}" Click="EnemyBtn_Click"/>
-                <Button Content="Custom Mystery" Grid.Column="3" Style="{StaticResource importBtnDesign}" Click="MysteryBtn_Click"/>
+                <Button Content="Custom Mystery (Implementation Soon)" Grid.Column="3" Style="{StaticResource importBtnDesign}" Click="MysteryBtn_Click"/>
             </Grid>
         </Grid>
-        
-        <Label Style="{StaticResource header1}" Content="Mod the Horror" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="128"/>
+
+        <Label Style="{StaticResource header1}" Content="MOD THE HORROR" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="128"/>
+        <Label Style="{StaticResource header1}" Content="V. 0.1A" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="48"/>
+        <Label Style="{StaticResource header1}" Content="CREATED BY CADYZE" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="48"/>
     </Grid>
 </Window>

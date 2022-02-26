@@ -46,7 +46,7 @@ namespace Mod_the_Horror
             string name_a, string menu_tag, string menu_desc, string perkpack_a, string perkpack_b,
             string fullName, string gender, int age, 
             string charSpritesDirectoryName, string? sprIconName, string? sprBackName, string? sprHouseName,
-            string? sprChibiName, string? sprPortraitName) {
+            string? sprChibiName, string? sprPortraitName, string? sprPortraitBName) {
 
             string directoryPath = locationToSave;
             string charSpritesDirectoryPath = charSpritesDirectoryName;
@@ -55,6 +55,7 @@ namespace Mod_the_Horror
             string spriteHousePath = (sprHouseName != null && !sprHouseName.Equals("")) ? System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprHouseName}") : "";
             string spriteChibiPath = (sprChibiName != null && !sprChibiName.Equals("")) ? System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprChibiName}") : "";
             string spritePortraitPath = (sprPortraitName != null && !sprPortraitName.Equals("")) ?  System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprPortraitName}") : "";
+            string spritePortraitBPath = (sprPortraitBName != null && !sprPortraitBName.Equals("")) ? System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprPortraitBName}") : "";
 
             string fileName = itoFileName;
             string pathName = System.IO.Path.Combine(directoryPath, fileName);
@@ -76,9 +77,10 @@ namespace Mod_the_Horror
                 $"\nsprite_house=\"{spriteHousePath}\"" +
                 $"\nsprite_chibi=\"{spriteChibiPath}\"" +
                 $"\nportrait_a=\"{spritePortraitPath}\"" +
+                $"\nportrait_a=\"{spritePortraitBPath}\"" +
                 $"\nname_a=\"{name_a}\"" +
-                $"\nmenu_tag=\"{menu_tag}\"" +
-                $"\nmenu_desc=\"Name: {fullName}#{age} / {gender} #{menu_desc}\"" +
+                $"\nmenu_tag=\"--{menu_tag}--\"" +
+                $"\nmenu_desc=\"{fullName}#{age} / {gender}# #{menu_desc}\"" +
                 $"\nperkpack_a=\"{perkpack_a}\"" +
                 $"\nperkpack_b=\"{perkpack_b}\"";
 

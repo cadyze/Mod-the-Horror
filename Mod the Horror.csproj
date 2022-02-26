@@ -15,6 +15,16 @@
 
   <ItemGroup>
     <None Remove="fonts\Silver.ttf" />
+    <None Remove="GameInformation\EnemyDamageTypes.txt" />
+    <None Remove="GameInformation\EnemyEscapeOptions.txt" />
+    <None Remove="GameInformation\EnemyLocations.txt" />
+    <None Remove="GameInformation\EnemyPrizes.txt" />
+    <None Remove="GameInformation\EnemyTypes.txt" />
+    <None Remove="GameInformation\EventLocations.txt" />
+    <None Remove="GameInformation\EventPrizes.txt" />
+    <None Remove="GameInformation\EventStatTests.txt" />
+    <None Remove="GameInformation\ObtainableItems.txt" />
+    <None Remove="GameInformation\Perkpacks.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +34,39 @@
       <VersionMajor>2</VersionMajor>
       <Guid>215d64d2-031c-33c7-96e3-61794cd1ee61</Guid>
     </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="GameInformation\EnemyDamageTypes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameInformation\EnemyEscapeOptions.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameInformation\EnemyLocations.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameInformation\EnemyPrizes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameInformation\EnemyTypes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameInformation\EventLocations.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameInformation\EventPrizes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameInformation\EventStatTests.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameInformation\ObtainableItems.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameInformation\Perkpacks.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

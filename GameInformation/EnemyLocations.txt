@@ -1,0 +1,8 @@
+﻿school
+seaside
+mansion
+downtown
+hospital
+forest
+village
+apartment

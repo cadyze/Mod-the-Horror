@@ -1,0 +1,9 @@
+﻿story
+strength
+dexterity
+perception
+knowledge
+charisma
+luck
+funds1
+funds2

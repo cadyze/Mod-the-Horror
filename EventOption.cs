@@ -12,13 +12,13 @@ namespace Mod_the_Horror
         public string statTest;
         public string successText;
         public string successPrize;
-        public int winPrizeAmt;
+        public string winPrizeAmt;
         public string failureText;
         public string failurePrize;
-        public int losePrizeAmt;
+        public string losePrizeAmt;
 
-        public EventOption(string optionDesc, string statTest, string successText, string successPrize, int winPrizeAmt,
-            string failureText, string failurePrize, int losePrizeAmt) {
+        public EventOption(string optionDesc, string statTest, string successText, string successPrize, string winPrizeAmt,
+            string failureText, string failurePrize, string losePrizeAmt) {
 
             this.optionDesc = optionDesc;
             this.statTest = statTest;

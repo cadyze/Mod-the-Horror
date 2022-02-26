@@ -1,0 +1,8 @@
+﻿human
+monster
+ghost
+eldritch
+undead
+plant
+vampire
+circle

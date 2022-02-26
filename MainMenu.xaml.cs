@@ -72,92 +72,12 @@ namespace Mod_the_Horror
                     CreateCharacterWindow newCharWindow = new CreateCharacterWindow();
                     string? directory = System.IO.Path.GetDirectoryName(potentialPath);
                     if(directory != null) newCharWindow.UpdateCurrentDirectory(directory);
+
                     newCharWindow.UpdateCurrentItoName(System.IO.Path.GetFileName(potentialPath));
-                    //Read the data from the file given.
-                    var itoFileLines = System.IO.File.ReadAllLines(potentialPath);
-                    foreach (string line in itoFileLines) {
-                        if (line.Contains("name=")) newCharWindow.txtBox_name.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("author=")) newCharWindow.txtBox_author.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("contact=")) newCharWindow.txtBox_contact.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("strength=")) newCharWindow.txtBox_strength.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("dexterity=")) newCharWindow.txtBox_dexterity.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("perception=")) newCharWindow.txtBox_perception.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("charisma=")) newCharWindow.txtBox_charisma.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("knowledge=")) newCharWindow.txtBox_knowledge.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("luck=")) newCharWindow.txtBox_luck.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("sprite_icon=")) newCharWindow.UpdateSpriteIconPath(ItoWriter.ExtractInfo(line));
-                        if (line.Contains("sprite_back=")) newCharWindow.UpdateSpriteBackPath(ItoWriter.ExtractInfo(line));
-                        if (line.Contains("sprite_house=")) newCharWindow.UpdateSpriteHousePath(ItoWriter.ExtractInfo(line));
-                        if (line.Contains("sprite_chibi=")) newCharWindow.UpdateSpriteChibiPath(ItoWriter.ExtractInfo(line));
-                        if (line.Contains("portrait_a=")) newCharWindow.UpdateSpritePortraitPath(ItoWriter.ExtractInfo(line));
-                        if (line.Contains("name_a=")) newCharWindow.txtBox_aName.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("perkpack_a=")) newCharWindow.txtBox_aPerkPack.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("perkpack_b=")) newCharWindow.txtBox_bPerkPack.Text = ItoWriter.ExtractInfo(line);
-
-                        if (line.Contains("menu_tag="))
-                        {
-                            string tagInfo = ItoWriter.ExtractInfo(line);
-                            try {
-                                int startPos = tagInfo.IndexOf("--") + 2;
-                                int endPos = tagInfo.LastIndexOf("--");
-                                tagInfo = tagInfo.Substring(startPos, endPos - startPos);
-                            }
-                            catch(ArgumentOutOfRangeException) {
-                                tagInfo = "";
-                            }
-                            newCharWindow.txtBox_menuTag.Text = tagInfo;
-
-                        }
-                        if (line.Contains("menu_desc=")) {
-                            //Menu description format: menu_desc="Name: _NAME_#_AGE_ / _GENDER_ #_DESCRIPTION_"
-                            string descInfo = ItoWriter.ExtractInfo(line);
-                            string charName = "";
-                            string charGender = "";
-                            string charAge = "";
-                            if (descInfo.Contains("Name:")) {
-                                int startPos = descInfo.IndexOf("Name:") + 6;
-                                int endPos = descInfo.IndexOf("#");
-                                charName = descInfo.Substring(startPos, endPos - startPos);
-                                descInfo = descInfo.Substring(endPos + 1);
-                            }
-                            if (descInfo.Contains("/"))
-                            {
-                                try
-                                {
-                                    int startPos = 0;
-                                    int endPos = descInfo.IndexOf("/") - 1;
-                                    charAge = descInfo.Substring(startPos, endPos - startPos);
-                                    descInfo = descInfo.Substring(endPos + 2);
-
-                                    startPos = 1;
-                                    endPos = descInfo.IndexOf("#");
-                                    charGender = descInfo.Substring(startPos, endPos - startPos);
-                                    descInfo = descInfo.Substring(descInfo.LastIndexOf("#") + 1);
-                                }
-                                catch (ArgumentOutOfRangeException)
-                                {
-                                    descInfo = "";
-                                    charName = "";
-                                    charGender = "";
-                                    charAge = "";
-                                }
-                            }
-                            newCharWindow.txtBox_menuDesc.Text = descInfo;
-                            newCharWindow.txtBox_age.Text = charAge;
-                            newCharWindow.txtBox_gender.Text = charGender;
-                            newCharWindow.txtBox_fullName.Text = charName;
-                        } 
-                    }
-
+                    newCharWindow.ReadItoInformation(System.IO.File.ReadAllLines(potentialPath));
                     newCharWindow.ShowDialog();
                 }
             }
-            //if (!System.IO.File.Exists(spritePath)) {
-            //    MessageBox.Show("Choose new folder where sprites are located.", "Sprite folder not found!");
-            //    spritePath = ChooseDirectory();
-            //    System.Diagnostics.Debug.WriteLine(spritePath);
-            ////}
-            //System.IO.Path.GetFileName(spritePath);
         }
 
         private void EventBtn_Click(object sender, RoutedEventArgs e)
@@ -190,47 +110,7 @@ namespace Mod_the_Horror
                     string? directory = System.IO.Path.GetDirectoryName(potentialPath);
                     if (directory != null) newEventWindow.UpdateCurrentDirectory(directory);
                     newEventWindow.UpdateCurrentItoName(System.IO.Path.GetFileName(potentialPath));
-                    //Read the data from the file given.
-                    var itoFileLines = System.IO.File.ReadAllLines(potentialPath);
-                    foreach (string line in itoFileLines)
-                    {
-                        if (line.Contains("name=")) newEventWindow.txtBox_name.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("location=")) newEventWindow.txtBox_location.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("author=")) newEventWindow.txtBox_author.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("contact=")) newEventWindow.txtBox_contact.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("flavor=")) newEventWindow.txtBox_flavor.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("options=")) newEventWindow.txtBox_numOptions.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("image=")) newEventWindow.UpdateEventImagePath(ItoWriter.ExtractInfo(line));
-                        if (line.Contains("about=")) newEventWindow.txtBox_description.Text = ItoWriter.ExtractInfo(line);
-
-                        if (line.Contains("optiona=")) newEventWindow.txtBox_optionA.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("testa=")) newEventWindow.txtBox_testStatA.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("successa=")) newEventWindow.txtBox_successTextA.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("winprizea=")) newEventWindow.txtBox_successPrizeA.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("winnumbera=")) newEventWindow.txtBox_winAmtA.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("failurea=")) newEventWindow.txtBox_failTextA.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("failprizea=")) newEventWindow.txtBox_failPrizeA.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("failnumbera=")) newEventWindow.txtBox_failAmtA.Text = ItoWriter.ExtractInfo(line);
-
-                        if (line.Contains("optionb=")) newEventWindow.txtBox_optionB.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("testb=")) newEventWindow.txtBox_testStatB.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("successb=")) newEventWindow.txtBox_successTextB.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("winprizeb=")) newEventWindow.txtBox_successPrizeB.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("winnumberb=")) newEventWindow.txtBox_winAmtB.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("failureb=")) newEventWindow.txtBox_failTextB.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("failprizeb=")) newEventWindow.txtBox_failPrizeB.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("failnumberb=")) newEventWindow.txtBox_failAmtB.Text = ItoWriter.ExtractInfo(line);
-
-                        if (line.Contains("optionc=")) newEventWindow.txtBox_optionC.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("testc=")) newEventWindow.txtBox_testStatC.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("successc=")) newEventWindow.txtBox_successTextC.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("winprizec=")) newEventWindow.txtBox_successPrizeC.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("winnumberc=")) newEventWindow.txtBox_winAmtC.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("failurec=")) newEventWindow.txtBox_failTextC.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("failprizec=")) newEventWindow.txtBox_failPrizeC.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("failnumberc=")) newEventWindow.txtBox_failAmtC.Text = ItoWriter.ExtractInfo(line);
-
-                    }
+                    newEventWindow.ReadItoInformation(System.IO.File.ReadAllLines(potentialPath));
                     newEventWindow.ShowDialog();
                 }
             }
@@ -240,7 +120,6 @@ namespace Mod_the_Horror
         {
             if (isFileSettingCreate)
             {
-
                 if (!txtBox_fileName.Text.Equals(""))
                 {
                     //CREATING IN HERE
@@ -267,33 +146,7 @@ namespace Mod_the_Horror
                     string? directory = System.IO.Path.GetDirectoryName(potentialPath);
                     if (directory != null) newEnemyWindow.UpdateCurrentDirectory(directory);
                     newEnemyWindow.UpdateCurrentItoName(System.IO.Path.GetFileName(potentialPath));
-
-                    //Read the data from the file given.
-                    var itoFileLines = System.IO.File.ReadAllLines(potentialPath);
-                    foreach (string line in itoFileLines)
-                    {
-                        if (line.Contains("name=")) newEnemyWindow.txtBox_name.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("subtitle=")) newEnemyWindow.txtBox_subtitle.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("location=")) newEnemyWindow.UpdateComboBox(newEnemyWindow.comboBox_location, ItoWriter.ExtractInfo(line));
-                        if (line.Length > 5 && line.Substring(0, 5).Equals("type=")) newEnemyWindow.UpdateComboBox(newEnemyWindow.comboBox_type, ItoWriter.ExtractInfo(line));
-                        if (line.Contains("intro=")) newEnemyWindow.txtBox_introduction.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("author=")) newEnemyWindow.txtBox_author.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("can_run=")) newEnemyWindow.UpdateComboBox(newEnemyWindow.comboBox_canRun, ItoWriter.ExtractInfo(line), Enemy_ComboBox.CanRun);
-                        if (line.Contains("health=")) newEnemyWindow.txtBox_health.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("power=")) newEnemyWindow.txtBox_power.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("damagevalue=")) newEnemyWindow.txtBox_dmgValue.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("damagetype=")) newEnemyWindow.UpdateComboBox(newEnemyWindow.comboBox_dmgType, ItoWriter.ExtractInfo(line), Enemy_ComboBox.DamageType);
-                        if (line.Contains("hit01=")) newEnemyWindow.txtBox_hitMsgA.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("hit02=")) newEnemyWindow.txtBox_hitMsgB.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("hit03=")) newEnemyWindow.txtBox_hitMsgC.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("art01=")) newEnemyWindow.UpdateFrame1(ItoWriter.ExtractInfo(line));
-                        if (line.Contains("art02=")) newEnemyWindow.UpdateFrame2(ItoWriter.ExtractInfo(line));
-                        if (line.Contains("artfreq=")) newEnemyWindow.txtBox_frequency.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("exp=")) newEnemyWindow.txtBox_experience.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("prize_type=")) newEnemyWindow.txtBox_prizeType.Text = ItoWriter.ExtractInfo(line);
-                        if (line.Contains("prize_name=")) newEnemyWindow.txtBox_prizeName.Text = ItoWriter.ExtractInfo(line);
-
-                    }
+                    newEnemyWindow.ReadItoInformation(System.IO.File.ReadAllLines(potentialPath));
                     newEnemyWindow.ShowDialog();
                 }
             }

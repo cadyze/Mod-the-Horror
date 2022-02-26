@@ -1,0 +1,4 @@
+﻿STA
+REA
+ALL
+DOOM

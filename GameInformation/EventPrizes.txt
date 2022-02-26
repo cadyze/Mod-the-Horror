@@ -1,0 +1,14 @@
+﻿stamina
+reason
+doom
+experience
+funds
+item
+itempool
+curse
+spell
+injury
+ally
+trigger_event
+trigger_enemy
+ending_trigger
