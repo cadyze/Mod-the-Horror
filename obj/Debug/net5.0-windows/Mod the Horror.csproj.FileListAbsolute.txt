@@ -18,8 +18,6 @@ C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\ref\Mod the Horror.dll
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.pdb
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.genruntimeconfig.cache
-C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreateCharacterWindow.g.cs
-C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreateCharacterWindow.baml
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\App.baml
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod_the_Horror.Properties.Resources.resources
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.csproj.GenerateResource.cache
@@ -30,13 +28,7 @@ C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Mo
 C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Mod the Horror.dll
 C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\ref\Mod the Horror.dll
 C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Mod the Horror.pdb
-C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\MainMenu.g.cs
-C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\MainMenu.baml
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.csproj.CopyComplete
-C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreateEventWindow.g.cs
-C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreateEventWindow.baml
-C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreateEnemyWindow.g.cs
-C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreateEnemyWindow.baml
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror.csproj.ResolveComReference.cache
 C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\EnemyDamageTypes.txt
 C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\EnemyEscapeOptions.txt
@@ -49,3 +41,11 @@ C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\Ga
 C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\ObtainableItems.txt
 C:\Users\jacob\Desktop\Software Projects\Builds\Mod the Horror\net5.0-windows\GameInformation\Perkpacks.txt
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\Mod the Horror_Content.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreatorWindows\CreateCharacterWindow.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreatorWindows\CreateEnemyWindow.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreatorWindows\CreateEventWindow.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\OtherWindows\MainMenu.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreatorWindows\CreateCharacterWindow.baml
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreatorWindows\CreateEnemyWindow.baml
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\CreatorWindows\CreateEventWindow.baml
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Debug\net5.0-windows\OtherWindows\MainMenu.baml

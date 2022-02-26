@@ -7,27 +7,27 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="CreateEnemyWindow.xaml.cs">
+    <Compile Update="CreatorWindows\CreateEnemyWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="CreateEventWindow.xaml.cs">
+    <Compile Update="CreatorWindows\CreateEventWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MainMenu.xaml.cs">
+    <Compile Update="OtherWindows\MainMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="CreateCharacterWindow.xaml">
+    <Page Update="CreatorWindows\CreateCharacterWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="CreateEnemyWindow.xaml">
+    <Page Update="CreatorWindows\CreateEnemyWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="CreateEventWindow.xaml">
+    <Page Update="CreatorWindows\CreateEventWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainMenu.xaml">
+    <Page Update="OtherWindows\MainMenu.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
