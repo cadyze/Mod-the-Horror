@@ -1,0 +1,48 @@
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\Mod the Horror.exe
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\GameInformation\EnemyDamageTypes.txt
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\GameInformation\EnemyEscapeOptions.txt
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\GameInformation\EnemyLocations.txt
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\GameInformation\EnemyPrizes.txt
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\GameInformation\EnemyTypes.txt
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\GameInformation\EventLocations.txt
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\GameInformation\EventPrizes.txt
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\GameInformation\EventStatTests.txt
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\GameInformation\ObtainableItems.txt
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\GameInformation\Perkpacks.txt
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\Mod the Horror.deps.json
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\Mod the Horror.runtimeconfig.json
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\Mod the Horror.runtimeconfig.dev.json
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\Mod the Horror.dll
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\ref\Mod the Horror.dll
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\Mod the Horror.pdb
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\Microsoft.WindowsAPICodePack.dll
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\Microsoft.WindowsAPICodePack.ShellExtensions.dll
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\System.Reactive.Windows.Forms.dll
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror.csproj.AssemblyReference.cache
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror.csproj.ResolveComReference.cache
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\CreatorWindows\CreateCharacterWindow.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\CreatorWindows\CreateEnemyWindow.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\CreatorWindows\CreateEventWindow.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\OtherWindows\MainMenu.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\App.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror_Content.g.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror_MarkupCompile.cache
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror_MarkupCompile.lref
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\App.baml
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\CreatorWindows\CreateCharacterWindow.baml
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\CreatorWindows\CreateEnemyWindow.baml
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\CreatorWindows\CreateEventWindow.baml
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\OtherWindows\MainMenu.baml
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror.g.resources
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod_the_Horror.Properties.Resources.resources
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror.csproj.GenerateResource.cache
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror.AssemblyInfoInputs.cache
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror.AssemblyInfo.cs
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror.csproj.CoreCompileInputs.cache
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror.csproj.CopyComplete
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror.dll
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\ref\Mod the Horror.dll
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror.pdb
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\Mod the Horror.genruntimeconfig.cache

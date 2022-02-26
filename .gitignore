@@ -1,0 +1,6 @@
+Mod The Horror/bin
+Mod The Horror/obj
+*.user
+*.suo
+_ReSharper.*
+*.sln.cache
