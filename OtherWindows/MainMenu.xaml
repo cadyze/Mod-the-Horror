@@ -27,7 +27,18 @@
                 </Grid.RowDefinitions>
 
                 <!--Headers-->
-                <Label Content="UPCOMING FEATURE" Style="{StaticResource header1}" HorizontalAlignment="Left" />
+                <Label Content="PROJECT EDITOR" Style="{StaticResource header1}" HorizontalAlignment="Left" />
+                <Button Content="Edit Project" Style="{StaticResource importBtnDesign}" Grid.Row="1" Click="EditProject_Click"/>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="PROJECT NAME:" Style="{StaticResource header2}"/>
+                    <TextBox Grid.Column="1" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
+                </Grid>
+                <Button Content="Create Project" Style="{StaticResource importBtnDesign}" Grid.Row="1" Grid.Column="1" Click="CreateProject_Click"/>
                 <!--<Label Content="f" Style="{StaticResource header1}" HorizontalAlignment="Center" />-->
 
                 <!--Grid for the generation options-->

@@ -1,0 +1,58 @@
+﻿<Window x:Class="Mod_the_Horror.OtherWindows.CreateProject"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mod_the_Horror.OtherWindows"
+        mc:Ignorable="d"
+        Title="Project Manager" Height="720" Width="1280" Background="Black">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+        <!--Grid for the headers-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="PROJECT EDITOR" Style="{StaticResource header1}"/>
+            <Label x:Name="lbl_projectName" Content="NAME OF PROJECT HERE" Style="{StaticResource header1}" HorizontalAlignment="Center" Grid.Column="1"/>
+            <Button Style="{StaticResource importBtnDesign}" Content="Add New Mod" FontSize="48" Grid.Column="2" Click="NewMod_Click"/>
+        </Grid>
+        
+        <!--Grid for managing the custom mods-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox x:Name="ModList" ItemsSource="{Binding Mods}" Background="Transparent" BorderBrush="Transparent" HorizontalContentAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel CanVerticallyScroll="True" Background="Black">
+                            <Button Style="{StaticResource importBtnDesign}" Content="{Binding ModName}" Click="ModPreviewClick" FontSize="48" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <!--Preview of Mod-->
+            <Grid Grid.Column="1" x:Name="grid_preview" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image x:Name="img_preview"/>
+                <Label x:Name="lbl_name" Grid.Row="1" Content="PREVIEW TITLE" Style="{StaticResource header1}" HorizontalAlignment="Center"/>
+                <Label x:Name="lbl_description" Grid.Row="2" Content="PREVIEW DESCRIPTION" Style="{StaticResource header2}" HorizontalAlignment="Center"/>
+                <Button Grid.Row="3" Content="Edit Mod" Style="{StaticResource importBtnDesign}" Click="Edit_Click"/>
+            </Grid>
+            
+        </Grid>
+    </Grid>
+</Window>

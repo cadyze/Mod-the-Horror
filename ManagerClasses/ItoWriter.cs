@@ -11,6 +11,14 @@ using System.Diagnostics;
 
 namespace Mod_the_Horror
 {
+    public enum ModType { 
+        CHARACTER,
+        EVENT,
+        ENEMY,
+        MYSTERY,
+        ERROR
+    }
+
     public class ItoWriter
     {
         /// <summary>
@@ -175,6 +183,16 @@ namespace Mod_the_Horror
             tw.Close();
         }
 
+        public static ModType ReadItoType(string path) {
+            string[] allLines = System.IO.File.ReadAllLines(path);
+            foreach (string line in allLines) {
+                if (line.Contains("character")) return ModType.CHARACTER;
+                if (line.Contains("event")) return ModType.EVENT;
+                if (line.Contains("enemy")) return ModType.ENEMY;
+                if (line.Contains("[mystery]")) return ModType.MYSTERY;
+            }
+            return ModType.ERROR;
+        }
 
         public static string ConvertOptionToIto(EventOption option, char optionLetter) {
             string optionInfo = "\n" +

@@ -54,11 +54,7 @@ namespace Mod_the_Horror
                     if (!potentialPath.Equals(""))
                     {
                         CreateCharacterWindow newCharWindow = new CreateCharacterWindow();
-                        string characterDirectory = FileManager.CreateDirectory($"{txtBox_fileName.Text}", potentialPath);
-                        newCharWindow.UpdateCurrentDirectory(characterDirectory);
-                        string spriteDirectory = FileManager.CreateDirectory("char_sprites", characterDirectory);
-                        newCharWindow.UpdateCurrentSpriteDirectory(spriteDirectory);
-                        newCharWindow.UpdateCurrentItoName($"{txtBox_fileName.Text}.ito");
+                        newCharWindow.InitializeMod(txtBox_fileName.Text, potentialPath);
                         newCharWindow.ShowDialog();
                     }
                 }
@@ -70,11 +66,7 @@ namespace Mod_the_Horror
                 if (!potentialPath.Equals(""))
                 {
                     CreateCharacterWindow newCharWindow = new CreateCharacterWindow();
-                    string? directory = System.IO.Path.GetDirectoryName(potentialPath);
-                    if(directory != null) newCharWindow.UpdateCurrentDirectory(directory);
-
-                    newCharWindow.UpdateCurrentItoName(System.IO.Path.GetFileName(potentialPath));
-                    newCharWindow.ReadItoInformation(System.IO.File.ReadAllLines(potentialPath));
+                    newCharWindow.LoadMod(potentialPath);
                     newCharWindow.ShowDialog();
                 }
             }
@@ -91,11 +83,7 @@ namespace Mod_the_Horror
                     if (!potentialPath.Equals(""))
                     {
                         CreateEventWindow newEventWindow = new CreateEventWindow();
-                        string eventDirectory = FileManager.CreateDirectory($"{txtBox_fileName.Text}", potentialPath);
-                        newEventWindow.UpdateCurrentDirectory(eventDirectory);
-                        string spriteDirectory = FileManager.CreateDirectory("event_art", eventDirectory);
-                        newEventWindow.UpdateCurrentSpriteDirectory(spriteDirectory);
-                        newEventWindow.UpdateCurrentItoName($"{txtBox_fileName.Text}.ito");
+                        newEventWindow.InitializeMod(txtBox_fileName.Text, potentialPath);
                         newEventWindow.ShowDialog();
                     }
                 }
@@ -107,10 +95,7 @@ namespace Mod_the_Horror
                 if (!potentialPath.Equals(""))
                 {
                     CreateEventWindow newEventWindow = new CreateEventWindow();
-                    string? directory = System.IO.Path.GetDirectoryName(potentialPath);
-                    if (directory != null) newEventWindow.UpdateCurrentDirectory(directory);
-                    newEventWindow.UpdateCurrentItoName(System.IO.Path.GetFileName(potentialPath));
-                    newEventWindow.ReadItoInformation(System.IO.File.ReadAllLines(potentialPath));
+                    newEventWindow.LoadMod(potentialPath);
                     newEventWindow.ShowDialog();
                 }
             }
@@ -127,11 +112,7 @@ namespace Mod_the_Horror
                     if (!potentialPath.Equals(""))
                     {
                         CreateEnemyWindow newEnemyWindow = new CreateEnemyWindow();
-                        string eventDirectory = FileManager.CreateDirectory($"{txtBox_fileName.Text}", potentialPath);
-                        newEnemyWindow.UpdateCurrentDirectory(eventDirectory);
-                        string spriteDirectory = FileManager.CreateDirectory("enemy_art", eventDirectory);
-                        newEnemyWindow.UpdateCurrentSpriteDirectory(spriteDirectory);
-                        newEnemyWindow.UpdateCurrentItoName($"{txtBox_fileName.Text}.ito");
+                        newEnemyWindow.InitializeMod(txtBox_fileName.Text, potentialPath);
                         newEnemyWindow.ShowDialog();
                     }
                 }
@@ -143,16 +124,32 @@ namespace Mod_the_Horror
                 if (!potentialPath.Equals(""))
                 {
                     CreateEnemyWindow newEnemyWindow = new CreateEnemyWindow();
-                    string? directory = System.IO.Path.GetDirectoryName(potentialPath);
-                    if (directory != null) newEnemyWindow.UpdateCurrentDirectory(directory);
-                    newEnemyWindow.UpdateCurrentItoName(System.IO.Path.GetFileName(potentialPath));
-                    newEnemyWindow.ReadItoInformation(System.IO.File.ReadAllLines(potentialPath));
+                    newEnemyWindow.LoadMod(potentialPath);
                     newEnemyWindow.ShowDialog();
                 }
             }
 
         }
         private void MysteryBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditProject_Click(object sender, RoutedEventArgs e)
+        {
+            Trace.WriteLine("BRUH");
+            //EDITING IN HERE
+            string potentialPath = FileManager.ChooseDirectory();
+            if (!potentialPath.Equals(""))
+            {
+                OtherWindows.CreateProject createProjectWindow = new OtherWindows.CreateProject();
+                createProjectWindow.InitializeModList(potentialPath);
+                Trace.WriteLine(potentialPath);
+                createProjectWindow.ShowDialog();
+            }
+        }
+
+        private void CreateProject_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -53,7 +53,7 @@ namespace Mod_the_Horror
             if (folderPath.Equals("")) folderPath = Settings.defaultFolderPath;
 
             string directoryPath = System.IO.Path.Combine(folderPath, nameOfFolder);
-            if (!System.IO.Directory.Exists(directoryPath)) System.IO.Directory.CreateDirectory(directoryPath);
+            if (!Directory.Exists(directoryPath)) Directory.CreateDirectory(directoryPath);
             return directoryPath;
         }
 

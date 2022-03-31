@@ -34,6 +34,21 @@ namespace Mod_the_Horror
         private string currentSpriteDirectoryPath = "";
         private string itoFileName = "";
 
+        public void LoadMod(string path) {
+            string? directory = System.IO.Path.GetDirectoryName(path);
+            if (directory != null) UpdateCurrentDirectory(directory);
+            UpdateCurrentItoName(System.IO.Path.GetFileName(path));
+            ReadItoInformation(System.IO.File.ReadAllLines(path));
+        }
+
+        public void InitializeMod(string modName, string path) {
+            string rootDirectory = FileManager.CreateDirectory(modName, path);
+            UpdateCurrentDirectory(rootDirectory);
+            string spriteDirectory = FileManager.CreateDirectory("char_sprites", rootDirectory);
+            UpdateCurrentSpriteDirectory(spriteDirectory);
+            UpdateCurrentItoName($"{modName}.ito");
+        }
+
         public void ReadItoInformation(string[] itoInformation) {
 
             foreach (string line in itoInformation)
