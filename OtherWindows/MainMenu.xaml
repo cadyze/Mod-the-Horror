@@ -36,7 +36,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Content="PROJECT NAME:" Style="{StaticResource header2}"/>
-                    <TextBox Grid.Column="1" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
+                    <TextBox x:Name="txtBox_projectName" Grid.Column="1" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
                 </Grid>
                 <Button Content="Create Project" Style="{StaticResource importBtnDesign}" Grid.Row="1" Grid.Column="1" Click="CreateProject_Click"/>
                 <!--<Label Content="f" Style="{StaticResource header1}" HorizontalAlignment="Center" />-->

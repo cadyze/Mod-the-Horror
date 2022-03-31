@@ -137,7 +137,6 @@ namespace Mod_the_Horror
 
         private void EditProject_Click(object sender, RoutedEventArgs e)
         {
-            Trace.WriteLine("BRUH");
             //EDITING IN HERE
             string potentialPath = FileManager.ChooseDirectory();
             if (!potentialPath.Equals(""))
@@ -151,7 +150,19 @@ namespace Mod_the_Horror
 
         private void CreateProject_Click(object sender, RoutedEventArgs e)
         {
+            string projectName = txtBox_projectName.Text;
+            projectName.Replace(' ', '_');
+            if (projectName.Length != 0) {
+                string potentialPath = FileManager.ChooseDirectory();
+                if (!potentialPath.Equals("")) {
 
+                    string projectPath = FileManager.CreateDirectory(projectName, potentialPath);
+
+                    OtherWindows.CreateProject createProjectWindow = new OtherWindows.CreateProject();
+                    createProjectWindow.InitializeProject(projectPath);
+                    createProjectWindow.ShowDialog();
+                }
+            }
         }
     }
 }

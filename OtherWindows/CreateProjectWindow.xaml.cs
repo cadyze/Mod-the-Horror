@@ -25,6 +25,7 @@ namespace Mod_the_Horror.OtherWindows
     {
         Mod? currentModSelected;
         string projectDirectory = "";
+
         public void InitializeModList(string rootDirectory) {
             projectDirectory = rootDirectory;
             List<string> directories = Directory.GetDirectories(projectDirectory).ToList<string>();
@@ -37,6 +38,10 @@ namespace Mod_the_Horror.OtherWindows
                     if (modType != ModType.ERROR) mods.Add(new Mod(mod, modType));
                 }
             }
+        }
+
+        public void InitializeProject(string path) {
+            projectDirectory = path;
         }
 
 
