@@ -22,53 +22,21 @@ namespace Mod_the_Horror
 
     public class ItoWriter
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="locationToSave"></param>
-        /// <param name="name"></param>
-        /// <param name="author"></param>
-        /// <param name="contact"></param>
-        /// <param name="strength"></param>
-        /// <param name="dexterity"></param>
-        /// <param name="perception"></param>
-        /// <param name="charisma"></param>
-        /// <param name="knowledge"></param>
-        /// <param name="luck"></param>
-        /// <param name="name_a"></param>
-        /// <param name="menu_tag"></param>
-        /// <param name="menu_desc"></param>
-        /// <param name="perkpack_a"></param>
-        /// <param name="perkpack_b"></param>
-        /// <param name="fullName"></param>
-        /// <param name="gender"></param>
-        /// <param name="age"></param>
-        /// <param name="charSpritesDirectoryName"></param>
-        /// <param name="sprIconName"></param>
-        /// <param name="sprBackName"></param>
-        /// <param name="sprHouseName"></param>
-        /// <param name="sprChibiName"></param>
-        /// <param name="sprPortraitName"></param>
-        /// <returns></returns>
-        public static string WriteCustomCharacter(string locationToSave, string itoFileName, string name, string author, string contact, 
-            int strength, int dexterity, int perception, int charisma, int knowledge, int luck, 
+        public static void WriteCustomCharacter(string locationToSave, string itoFileName, string name, string author, string contact,
+            int strength, int dexterity, int perception, int charisma, int knowledge, int luck,
             string name_a, string menu_tag, string menu_desc, string perkpack_a, string perkpack_b,
-            string fullName, string gender, int age, 
-            string charSpritesDirectoryName, string? sprIconName, string? sprBackName, string? sprHouseName,
-            string? sprChibiName, string? sprPortraitName, string? sprPortraitBName) {
+            string fullName, string gender, int age,
+            string iconPath, string backPath, string housePath,
+            string chibiPath, string portraitAPath, string portraitBPath) {
 
-            string directoryPath = locationToSave;
-            string charSpritesDirectoryPath = charSpritesDirectoryName;
-            string spriteIconPath = (sprIconName != null && !sprIconName.Equals("")) ? System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprIconName}") : "";
-            string spriteBackPath = (sprBackName != null && !sprBackName.Equals("")) ? System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprBackName}") : "";
-            string spriteHousePath = (sprHouseName != null && !sprHouseName.Equals("")) ? System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprHouseName}") : "";
-            string spriteChibiPath = (sprChibiName != null && !sprChibiName.Equals("")) ? System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprChibiName}") : "";
-            string spritePortraitPath = (sprPortraitName != null && !sprPortraitName.Equals("")) ?  System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprPortraitName}") : "";
-            string spritePortraitBPath = (sprPortraitBName != null && !sprPortraitBName.Equals("")) ? System.IO.Path.Combine(charSpritesDirectoryPath, $"{sprPortraitBName}") : "";
+            string relativeIconPath = iconPath.Equals("") ? "" : Path.GetRelativePath(locationToSave, iconPath);
+            string relativeBackPath = backPath.Equals("") ? "" : Path.GetRelativePath(locationToSave, backPath);
+            string relativeHousePath = housePath.Equals("") ? "" : Path.GetRelativePath(locationToSave, housePath);
+            string relativeChibiPath = chibiPath.Equals("") ? "" : Path.GetRelativePath(locationToSave, chibiPath);
+            string relativePortraitAPath = portraitAPath.Equals("") ? "" : Path.GetRelativePath(locationToSave, portraitAPath);
+            string relativePortraitABath = portraitBPath.Equals("") ? "" : Path.GetRelativePath(locationToSave, portraitBPath);
 
-            string fileName = itoFileName;
-            string pathName = System.IO.Path.Combine(directoryPath, fileName);
-            //Trace.WriteLine(pathName);
+            if (!itoFileName.Contains(".ito")) itoFileName = itoFileName + ".ito";
 
             //Write the .ito file containing the character information.
             string charInfo = "[character]" +
@@ -81,40 +49,23 @@ namespace Mod_the_Horror
                 $"\ncharisma=\"{charisma}\"" +
                 $"\nknowledge=\"{knowledge}\"" +
                 $"\nluck=\"{luck}\"" +
-                $"\nsprite_icon=\"{spriteIconPath}\"" +
-                $"\nsprite_back=\"{spriteBackPath}\"" +
-                $"\nsprite_house=\"{spriteHousePath}\"" +
-                $"\nsprite_chibi=\"{spriteChibiPath}\"" +
-                $"\nportrait_a=\"{spritePortraitPath}\"" +
-                $"\nportrait_b=\"{spritePortraitBPath}\"" +
+                $"\nsprite_icon=\"{relativeIconPath}\"" +
+                $"\nsprite_back=\"{relativeBackPath}\"" +
+                $"\nsprite_house=\"{relativeHousePath}\"" +
+                $"\nsprite_chibi=\"{relativeChibiPath}\"" +
+                $"\nportrait_a=\"{relativePortraitAPath}\"" +
+                $"\nportrait_b=\"{relativePortraitABath}\"" +
                 $"\nname_a=\"{name_a}\"" +
                 $"\nmenu_tag=\"--{menu_tag}--\"" +
                 $"\nmenu_desc=\"{fullName}#{age} / {gender}# #{menu_desc}\"" +
                 $"\nperkpack_a=\"{perkpack_a}\"" +
                 $"\nperkpack_b=\"{perkpack_b}\"";
 
-            TextWriter tw = new StreamWriter(pathName);
+            TextWriter tw = new StreamWriter(Path.Combine(locationToSave, itoFileName));
             tw.WriteLine(charInfo);
             tw.Close();
-
-            return directoryPath;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="locationToSave"></param>
-        /// <param name="itoFileName">Should already include the .ito extension</param>
-        /// <param name="name"></param>
-        /// <param name="author"></param>
-        /// <param name="evnLocation"></param>
-        /// <param name="contact"></param>
-        /// <param name="flavor"></param>
-        /// <param name="numOptions"></param>
-        /// <param name="evnSpriteDirectoryName"></param>
-        /// <param name="evnSpriteName"></param>
-        /// <param name="desc"></param>
-        /// <param name="eventOptions"></param>
         public static void WriteEvent(string locationToSave, string itoFileName, string name, string author, string evnLocation, string contact,
             string flavor, int numOptions, string evnSpriteDirectoryName, string? evnSpriteName, string desc, List<EventOption> eventOptions) {
             
@@ -192,6 +143,7 @@ namespace Mod_the_Horror
             string relativeIconPath = iconPath.Equals("") ? "" : Path.GetRelativePath(locationToSave, iconPath);
             string relativeBackgroundPath = backgroundPath.Equals("") ? "" : Path.GetRelativePath(locationToSave, backgroundPath);
 
+            if (!itoFileName.Contains(".ito")) itoFileName = itoFileName + ".ito";
 
             string mysteryInfo = "[mystery]\n" +
                 $"name=\"{name}\"\n" +

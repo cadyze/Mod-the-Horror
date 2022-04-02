@@ -211,14 +211,12 @@ namespace Mod_the_Horror.CreatorWindows
         void UpdateIcon(string relativePath) 
         {
             if (!relativePath.Equals("")) iconPath = System.IO.Path.Combine(modLocation, relativePath);
-            Trace.WriteLine(iconPath);
             FileManager.UpdateImage(img_icon, iconPath);
         }
 
         void UpdatePreviewArt(string relativePath)
         {
             if (!relativePath.Equals("")) previewPath = System.IO.Path.Combine(modLocation, relativePath);
-            Trace.WriteLine(previewPath);
             FileManager.UpdateImage(img_mysteryPreview, previewPath);
         }
 
