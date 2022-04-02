@@ -74,14 +74,32 @@ namespace Mod_the_Horror
             return "";
         }
 
-        public static void SaveImage(Image imageToSave, string filePath)
+        public static void SaveImage(Image imageToSave, string filePath, bool overrideFile = false)
         {
             var pngEncoder = new PngBitmapEncoder();
             BitmapSource bitmapSource = (BitmapSource)imageToSave.Source;
             if (bitmapSource != null)
             {
                 pngEncoder.Frames.Add(BitmapFrame.Create(bitmapSource));
-                if (!System.IO.File.Exists(filePath))
+                if (overrideFile || !System.IO.File.Exists(filePath))
+                {
+                    using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        pngEncoder.Save(stream);
+                        stream.Close();
+                    }
+                }
+            }
+        }
+        public static void SaveImage(string pathToImage, string filePath, bool overrideFile = false)
+        {
+            var pngEncoder = new PngBitmapEncoder();
+            Uri uriSource = new Uri(pathToImage);
+            BitmapSource bitmapSource = (BitmapSource)new BitmapImage(uriSource);
+            if (bitmapSource != null)
+            {
+                pngEncoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                if (overrideFile || !System.IO.File.Exists(filePath))
                 {
                     using (FileStream stream = new FileStream(filePath, FileMode.Create))
                     {
@@ -100,8 +118,12 @@ namespace Mod_the_Horror
                 Uri uriSource = new Uri(imgPath);
                 imgToChange.Source = new BitmapImage(uriSource);
             }
-            catch (FileNotFoundException) {
+            catch (FileNotFoundException)
+            {
                 Trace.WriteLine("File exception thrown!");
+            }
+            catch (System.UriFormatException) {
+                Trace.WriteLine("URI Format is incorrect!");
             }
         }
     }

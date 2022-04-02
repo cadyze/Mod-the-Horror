@@ -10,11 +10,11 @@ none
 false
 TRACE;RELEASE;NET;NET5_0;NETCOREAPP
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\App.xaml
-6-1607799392
+9-951762666
 10-37174063
-18-176891125
+25-2074178822
 1972114276141
-CreatorWindows\CreateCharacterWindow.xaml;CreatorWindows\CreateEnemyWindow.xaml;CreatorWindows\CreateEventWindow.xaml;CreatorWindows\CreateNewMod.xaml;OtherWindows\CreateProjectWindow.xaml;OtherWindows\MainMenu.xaml;
+CreatorWindows\CreateCharacterWindow.xaml;CreatorWindows\CreateEnemyWindow.xaml;CreatorWindows\CreateEventWindow.xaml;CreatorWindows\CreateMysteryWindow.xaml;CreatorWindows\CreateNewMod.xaml;CreatorWindows\InvestigationTurnEditor.xaml;CreatorWindows\MysteryEndingEditor.xaml;OtherWindows\CreateProjectWindow.xaml;OtherWindows\MainMenu.xaml;
 
-False
+True
 

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Mod_the_Horror.CreatorWindows;
 
 namespace Mod_the_Horror
 {
@@ -27,112 +28,43 @@ namespace Mod_the_Horror
             InitializeComponent();
         }
 
-        private void fileSettingBtn_Click(object sender, RoutedEventArgs e)
+        private void EditMod_Click(object sender, RoutedEventArgs e)
         {
-            if (isFileSettingCreate)
+            string potentialPath = FileManager.ChooseItoFile();
+            if (!potentialPath.Equals(""))
             {
-                fileSettingBtn.Content = "EDIT FILE";
-                txtBox_fileName.Visibility = Visibility.Hidden;
-                label_fileName.Visibility = Visibility.Hidden;
-            }
-            else {
-                fileSettingBtn.Content = "CREATE FILE";
-                txtBox_fileName.Visibility = Visibility.Visible;
-                label_fileName.Visibility = Visibility.Visible;
-            }
-            isFileSettingCreate = !isFileSettingCreate;
-        }
-
-        private void CharacterBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (isFileSettingCreate)
-            {
-                if (!txtBox_fileName.Text.Equals(""))
-                {
-                    //CREATING IN HERE
-                    string potentialPath = FileManager.ChooseDirectory();
-                    if (!potentialPath.Equals(""))
-                    {
-                        CreateCharacterWindow newCharWindow = new CreateCharacterWindow();
-                        newCharWindow.InitializeMod(txtBox_fileName.Text, potentialPath);
-                        newCharWindow.ShowDialog();
-                    }
-                }
-            }
-            else 
-            {
-                //EDITING IN HERE
-                string potentialPath = FileManager.ChooseItoFile();
-                if (!potentialPath.Equals(""))
-                {
-                    CreateCharacterWindow newCharWindow = new CreateCharacterWindow();
-                    newCharWindow.LoadMod(potentialPath);
-                    newCharWindow.ShowDialog();
+                ModType loadedModType = ItoWriter.ReadItoType(potentialPath);
+                switch (loadedModType) {
+                    case ModType.CHARACTER:
+                        CreateCharacterWindow characterWindow = new CreateCharacterWindow();
+                        characterWindow.LoadMod(potentialPath);
+                        characterWindow.ShowDialog();
+                        break;
+                    case ModType.EVENT:
+                        CreateEventWindow eventWindow = new CreateEventWindow();
+                        eventWindow.LoadMod(potentialPath);
+                        eventWindow.ShowDialog();
+                        break;
+                    case ModType.ENEMY:
+                        CreateEnemyWindow enemyWindow = new CreateEnemyWindow();
+                        enemyWindow.LoadMod(potentialPath);
+                        enemyWindow.ShowDialog();
+                        break;
+                    case ModType.MYSTERY:
+                        CreateMysteryWindow mysteryWindow = new CreateMysteryWindow();
+                        mysteryWindow.LoadMod(potentialPath);
+                        mysteryWindow.ShowDialog();
+                        break;
+                    default:
+                        break;
                 }
             }
         }
 
-        private void EventBtn_Click(object sender, RoutedEventArgs e)
+        private void CreateMod_Click(object sender, RoutedEventArgs e)
         {
-            if (isFileSettingCreate) {
-
-                if (!txtBox_fileName.Text.Equals(""))
-                {
-                    //CREATING IN HERE
-                    string potentialPath = FileManager.ChooseDirectory();
-                    if (!potentialPath.Equals(""))
-                    {
-                        CreateEventWindow newEventWindow = new CreateEventWindow();
-                        newEventWindow.InitializeMod(txtBox_fileName.Text, potentialPath);
-                        newEventWindow.ShowDialog();
-                    }
-                }
-            }
-            else
-            {
-                //EDITING IN HERE
-                string potentialPath = FileManager.ChooseItoFile();
-                if (!potentialPath.Equals(""))
-                {
-                    CreateEventWindow newEventWindow = new CreateEventWindow();
-                    newEventWindow.LoadMod(potentialPath);
-                    newEventWindow.ShowDialog();
-                }
-            }
-        }
-
-        private void EnemyBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (isFileSettingCreate)
-            {
-                if (!txtBox_fileName.Text.Equals(""))
-                {
-                    //CREATING IN HERE
-                    string potentialPath = FileManager.ChooseDirectory();
-                    if (!potentialPath.Equals(""))
-                    {
-                        CreateEnemyWindow newEnemyWindow = new CreateEnemyWindow();
-                        newEnemyWindow.InitializeMod(txtBox_fileName.Text, potentialPath);
-                        newEnemyWindow.ShowDialog();
-                    }
-                }
-            }
-            else
-            {
-                //EDITING IN HERE
-                string potentialPath = FileManager.ChooseItoFile();
-                if (!potentialPath.Equals(""))
-                {
-                    CreateEnemyWindow newEnemyWindow = new CreateEnemyWindow();
-                    newEnemyWindow.LoadMod(potentialPath);
-                    newEnemyWindow.ShowDialog();
-                }
-            }
-
-        }
-        private void MysteryBtn_Click(object sender, RoutedEventArgs e)
-        {
-
+            CreatorWindows.CreateNewMod newModWindow = new CreatorWindows.CreateNewMod();
+            newModWindow.ShowDialog();
         }
 
         private void EditProject_Click(object sender, RoutedEventArgs e)

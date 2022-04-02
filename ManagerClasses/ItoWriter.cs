@@ -8,6 +8,7 @@ using System.Windows;
 using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
 using System.Diagnostics;
+using Mod_the_Horror.Classes;
 
 namespace Mod_the_Horror
 {
@@ -85,7 +86,7 @@ namespace Mod_the_Horror
                 $"\nsprite_house=\"{spriteHousePath}\"" +
                 $"\nsprite_chibi=\"{spriteChibiPath}\"" +
                 $"\nportrait_a=\"{spritePortraitPath}\"" +
-                $"\nportrait_a=\"{spritePortraitBPath}\"" +
+                $"\nportrait_b=\"{spritePortraitBPath}\"" +
                 $"\nname_a=\"{name_a}\"" +
                 $"\nmenu_tag=\"--{menu_tag}--\"" +
                 $"\nmenu_desc=\"{fullName}#{age} / {gender}# #{menu_desc}\"" +
@@ -180,6 +181,60 @@ namespace Mod_the_Horror
 
             TextWriter tw = new StreamWriter(System.IO.Path.Combine(locationToSave, itoFileName));
             tw.WriteLine(enemyInfo);
+            tw.Close();
+        }
+
+        public static void WriteMystery(string locationToSave, string itoFileName, string name, string author, string description, string endLocation,
+            string mysterySummary, string[] introPages, MysteryEnding[] endings, InvestigationTurn[] investigationTurns,
+            string iconPath, string mysteryArtPath, string backgroundPath)
+        {
+            string relativeMysteryArtPath = mysteryArtPath.Equals("") ? "" : Path.GetRelativePath(locationToSave, mysteryArtPath);
+            string relativeIconPath = iconPath.Equals("") ? "" : Path.GetRelativePath(locationToSave, iconPath);
+            string relativeBackgroundPath = backgroundPath.Equals("") ? "" : Path.GetRelativePath(locationToSave, backgroundPath);
+
+
+            string mysteryInfo = "[mystery]\n" +
+                $"name=\"{name}\"\n" +
+                $"author=\"{author}\"\n" +
+                $"art=\"{relativeIconPath}\"\n" +
+                $"description=\"{description}\"\n" +
+
+                $"[intro]\n" +
+                $"art=\"{relativeMysteryArtPath}\"\n" +
+                $"text_one=\"{introPages[0]}\"\n" +
+                $"text_two=\"{introPages[1]}\"\n" +
+                $"text_three=\"{introPages[2]}\"\n" +
+
+                $"[progress]\n" +
+                $"location=\"{endLocation}\"\n" +
+                $"background=\"{relativeBackgroundPath}\"\n";
+
+            foreach (InvestigationTurn turn in investigationTurns) {
+                string relativeEventPath = turn.forcedEvent.Equals("") ? "" : Path.GetRelativePath(locationToSave, turn.forcedEvent);
+                mysteryInfo = mysteryInfo +
+                    $"{turn.progressNum}_loc=\"{turn.location}\"\n" +
+                    $"{turn.progressNum}_txt=\"{turn.precedingText}\"\n" +
+                    $"{turn.progressNum}_frc=\"{relativeEventPath}\"\n";
+            }
+
+            foreach (MysteryEnding end in endings) {
+                string relativeEndArtPath = end.pathToImage.Equals("") ? "" : Path.GetRelativePath(locationToSave, end.pathToImage);
+                mysteryInfo = mysteryInfo +
+                    $"[ending_{end.EndingLetter.ToLower()}]\n" +
+                    $"end_title=\"{end.endingTitle}\"\n" +
+                    $"end_img=\"{relativeEndArtPath}\"\n" +
+                    $"end_txta=\"{end.pageA}\"\n" +
+                    $"end_txtb=\"{end.pageB}\"\n" +
+                    $"end_txtc=\"{end.pageC}\"\n" +
+                    $"end_txtd=\"{end.pageD}\"\n";
+            }
+
+            mysteryInfo = mysteryInfo + 
+                $"[big_ending]\n" +
+                $"end_txt=\"{mysterySummary}\"";
+
+            TextWriter tw = new StreamWriter(Path.Combine(locationToSave, itoFileName));
+            tw.WriteLine(mysteryInfo);
             tw.Close();
         }
 

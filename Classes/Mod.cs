@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 namespace Mod_the_Horror.Classes
 {
     public class Mod
+
     {
         public string pathToPreview = "";
         public string previewName = "";
@@ -51,6 +53,12 @@ namespace Mod_the_Horror.Classes
                     }
                     break;
                 case ModType.MYSTERY:
+                    foreach (string line in lines)
+                    {
+                        if (line.Length > 5 && line.Substring(0, 5).Equals("name=")) previewName = $"[MYSTERY] {ItoWriter.ExtractInfo(line)}";
+                        if (line.Contains("description=")) previewDescription = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("background=")) pathToPreview = ItoWriter.ExtractInfo(line);
+                    }
                     break;
                 default:
                     pathToPreview = "";
@@ -59,6 +67,9 @@ namespace Mod_the_Horror.Classes
                     break;
             }
         }
+
+
+
 
         public string PreviewPath { 
             get { return pathToPreview; }

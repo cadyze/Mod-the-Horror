@@ -1,7 +1,9 @@
 ﻿using Mod_the_Horror.Classes;
+using Mod_the_Horror.CreatorWindows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -26,16 +28,27 @@ namespace Mod_the_Horror.OtherWindows
         Mod? currentModSelected;
         string projectDirectory = "";
 
-        public void InitializeModList(string rootDirectory) {
-            projectDirectory = rootDirectory;
-            List<string> directories = Directory.GetDirectories(projectDirectory).ToList<string>();
-            directories.Add(rootDirectory);
+        public void InitializeModList(string rootDirectory = "") {
+            if(!rootDirectory.Equals("")) projectDirectory = rootDirectory;
+            List<string> directories = new List<string>();
+            AddDirectories(projectDirectory, directories);
 
             foreach (string directory in directories) {
                 foreach (string mod in Directory.GetFiles(directory, "*.ito"))
                 {
                     ModType modType = ItoWriter.ReadItoType(mod);
                     if (modType != ModType.ERROR) mods.Add(new Mod(mod, modType));
+                }
+            }
+        }
+
+        public void AddDirectories(string path, List<string> directoryList) {
+            string[] directories = Directory.GetDirectories(path);
+            if (directories.Length == 0) directoryList.Add(path);
+            else {
+                directoryList.Add(path);
+                foreach (string directory in directories) {
+                    AddDirectories(directory, directoryList);
                 }
             }
         }
@@ -52,6 +65,7 @@ namespace Mod_the_Horror.OtherWindows
         }
 
         public ObservableCollection<Mod> mods = new ObservableCollection<Mod>();
+
         public ObservableCollection<Mod> Mods { get { return mods; } }
 
         private void ModPreviewClick(object sender, RoutedEventArgs e)
@@ -73,6 +87,13 @@ namespace Mod_the_Horror.OtherWindows
             CreatorWindows.CreateNewMod createNewModWindow = new CreatorWindows.CreateNewMod();
             createNewModWindow.ChosenDirectory = projectDirectory;
             createNewModWindow.ShowDialog();
+        }
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            mods.Clear();
+            grid_preview.Visibility = Visibility.Hidden;
+            InitializeModList();
+            ModList.Items.Refresh();
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
@@ -97,8 +118,9 @@ namespace Mod_the_Horror.OtherWindows
                         eventWindow.ShowDialog();
                         break;
                     case ModType.MYSTERY:
-
-                        //To be impemented
+                        CreateMysteryWindow mysteryWindow = new CreateMysteryWindow();
+                        mysteryWindow.LoadMod(currentModSelected.pathToMod);
+                        mysteryWindow.ShowDialog();
                         break;
                     default:
                         break;

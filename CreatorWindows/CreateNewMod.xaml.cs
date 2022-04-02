@@ -41,6 +41,7 @@ namespace Mod_the_Horror.CreatorWindows
                 {
                     CreateCharacterWindow newCreateWindow = new CreateCharacterWindow();
                     newCreateWindow.InitializeMod(modName, chosenDirectory);
+                    Close();
                     newCreateWindow.ShowDialog();
                 }
                 else
@@ -50,6 +51,7 @@ namespace Mod_the_Horror.CreatorWindows
                     {
                         CreateCharacterWindow newCreateWindow = new CreateCharacterWindow();
                         newCreateWindow.InitializeMod(modName, potentialPath);
+                        Close();
                         newCreateWindow.ShowDialog();
                     }
                 }
@@ -66,6 +68,7 @@ namespace Mod_the_Horror.CreatorWindows
                 {
                     CreateEventWindow newCreateWindow = new CreateEventWindow();
                     newCreateWindow.InitializeMod(modName, chosenDirectory);
+                    Close();
                     newCreateWindow.ShowDialog();
                 }
                 else
@@ -75,6 +78,7 @@ namespace Mod_the_Horror.CreatorWindows
                     {
                         CreateEventWindow newCreateWindow = new CreateEventWindow();
                         newCreateWindow.InitializeMod(modName, potentialPath);
+                        Close();
                         newCreateWindow.ShowDialog();
                     }
                 }
@@ -91,6 +95,7 @@ namespace Mod_the_Horror.CreatorWindows
                 {
                     CreateEnemyWindow newCreateWindow = new CreateEnemyWindow();
                     newCreateWindow.InitializeMod(modName, chosenDirectory);
+                    Close();
                     newCreateWindow.ShowDialog();
                 }
                 else
@@ -100,6 +105,7 @@ namespace Mod_the_Horror.CreatorWindows
                     {
                         CreateEnemyWindow newCreateWindow = new CreateEnemyWindow();
                         newCreateWindow.InitializeMod(modName, potentialPath);
+                        Close();
                         newCreateWindow.ShowDialog();
                     }
                 }
@@ -107,7 +113,30 @@ namespace Mod_the_Horror.CreatorWindows
         }
         private void NewMystery_Click(object sender, RoutedEventArgs e)
         {
+            string modName = txtBox_modName.Text;
+            modName = modName.Replace(' ', '_');
 
+            if (modName.Length != 0)
+            {
+                if (!chosenDirectory.Equals(""))
+                {
+                    CreateMysteryWindow newCreateWindow = new CreateMysteryWindow();
+                    newCreateWindow.InitializeMod(modName, chosenDirectory);
+                    Close();
+                    newCreateWindow.ShowDialog();
+                }
+                else
+                {
+                    string potentialPath = FileManager.ChooseDirectory();
+                    if (!potentialPath.Equals(""))
+                    {
+                        CreateMysteryWindow newCreateWindow = new CreateMysteryWindow();
+                        newCreateWindow.InitializeMod(modName, potentialPath);
+                        Close();
+                        newCreateWindow.ShowDialog();
+                    }
+                }
+            }
         }
     }
 }

@@ -1,0 +1,41 @@
+﻿<Window x:Class="Mod_the_Horror.CreatorWindows.InvestigationTurnEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mod_the_Horror.CreatorWindows"
+        mc:Ignorable="d"
+        Title="Progress Check" Height="450" Width="400" Background="Black">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="lbl_num" Content="Progress Check #" Style="{StaticResource header2}"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Location:" Style="{StaticResource header3}" VerticalAlignment="Top"/>
+            <Label Content="Preceding&#13;Text:" Style="{StaticResource header3}" Grid.Row="1" VerticalAlignment="Top"/>
+            <Label Content="Forced &#13;Event/Enemy:" Style="{StaticResource header3}" Grid.Row="2" VerticalAlignment="Top"/>
+
+            <ComboBox x:Name="comboBox_location" Style="{StaticResource comboBoxDark}" Grid.Column="1"/>
+            <TextBox x:Name="txtBox_precedingText" Style="{StaticResource summary}" Grid.Column="1" Grid.Row="1"/>
+            <Grid Grid.Column="1" Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="lbl_path" Style="{StaticResource header3}" Content="Thing" HorizontalAlignment="Center" Foreground="Gray"/>
+                <Button Style="{StaticResource importBtnDesign}" Content="Import .ito file" Grid.Row="1" Click="ImportEventEnemy_Click"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

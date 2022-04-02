@@ -15,13 +15,16 @@
         <!--Grid for the headers-->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <Label Content="PROJECT EDITOR" Style="{StaticResource header1}"/>
-            <Label x:Name="lbl_projectName" Content="NAME OF PROJECT HERE" Style="{StaticResource header1}" HorizontalAlignment="Center" Grid.Column="1"/>
-            <Button Style="{StaticResource importBtnDesign}" Content="Add New Mod" FontSize="48" Grid.Column="2" Click="NewMod_Click"/>
+            <Label x:Name="lbl_projectName" Content="NAME OF PROJECT HERE" Style="{StaticResource header1}" HorizontalAlignment="Center" Grid.Column="1" FontWeight="Light"/>
+            <Button Style="{StaticResource importBtnDesign}" Content="ADD NEW MOD" FontSize="48" Grid.Column="2" Click="NewMod_Click"/>
+            <Button Style="{StaticResource importBtnDesign}" Content="REFRESH" FontSize="48" Grid.Column="3" Click="Refresh_Click"/>
+
         </Grid>
         
         <!--Grid for managing the custom mods-->

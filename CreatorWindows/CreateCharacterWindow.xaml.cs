@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using Mod_the_Horror.Classes;
 
 namespace Mod_the_Horror
 {
@@ -33,15 +34,18 @@ namespace Mod_the_Horror
         private string currentDirectoryPath = "";
         private string currentSpriteDirectoryPath = "";
         private string itoFileName = "";
+        private CharacterMod? currentMod;
 
         public void LoadMod(string path) {
             string? directory = System.IO.Path.GetDirectoryName(path);
             if (directory != null) UpdateCurrentDirectory(directory);
             UpdateCurrentItoName(System.IO.Path.GetFileName(path));
-            ReadItoInformation(System.IO.File.ReadAllLines(path));
+            currentMod = new CharacterMod(File.ReadAllLines(path));
+            UpdateUI();
         }
 
         public void InitializeMod(string modName, string path) {
+            currentMod = new CharacterMod();
             string rootDirectory = FileManager.CreateDirectory(modName, path);
             UpdateCurrentDirectory(rootDirectory);
             string spriteDirectory = FileManager.CreateDirectory("char_sprites", rootDirectory);
@@ -49,76 +53,30 @@ namespace Mod_the_Horror
             UpdateCurrentItoName($"{modName}.ito");
         }
 
-        public void ReadItoInformation(string[] itoInformation) {
-
-            foreach (string line in itoInformation)
+        public void UpdateUI() {
+            if (currentMod != null)
             {
-                if (line.Length > 5 && line.Substring(0, 5).Equals("name=")) txtBox_name.Text = ItoWriter.ExtractInfo(line);
-                if (line.Contains("author=")) txtBox_author.Text = ItoWriter.ExtractInfo(line);
-                if (line.Contains("contact=")) txtBox_contact.Text = ItoWriter.ExtractInfo(line);
-                if (line.Contains("strength=")) txtBox_strength.Text = ItoWriter.ExtractInfo(line);
-                if (line.Contains("dexterity=")) txtBox_dexterity.Text = ItoWriter.ExtractInfo(line);
-                if (line.Contains("perception=")) txtBox_perception.Text = ItoWriter.ExtractInfo(line);
-                if (line.Contains("charisma=")) txtBox_charisma.Text = ItoWriter.ExtractInfo(line);
-                if (line.Contains("knowledge=")) txtBox_knowledge.Text = ItoWriter.ExtractInfo(line);
-                if (line.Contains("luck=")) txtBox_luck.Text = ItoWriter.ExtractInfo(line);
-                if (line.Contains("sprite_icon=")) UpdateSpriteIconPath(ItoWriter.ExtractInfo(line));
-                if (line.Contains("sprite_back=")) UpdateSpriteBackPath(ItoWriter.ExtractInfo(line));
-                if (line.Contains("sprite_house=")) UpdateSpriteHousePath(ItoWriter.ExtractInfo(line));
-                if (line.Contains("sprite_chibi=")) UpdateSpriteChibiPath(ItoWriter.ExtractInfo(line));
-                if (line.Contains("portrait_a=")) UpdateSpritePortraitAPath(ItoWriter.ExtractInfo(line));
-                if (line.Contains("portrait_b=")) UpdateSpritePortraitBPath(ItoWriter.ExtractInfo(line));
-                if (line.Contains("name_a=")) txtBox_aName.Text = ItoWriter.ExtractInfo(line);
-                if (line.Contains("name_b=")) txtBox_bName.Text = ItoWriter.ExtractInfo(line);
-                if (line.Contains("perkpack_a=")) UIManager.UpdateComboBox(comboBox_aPerkPack, ItoWriter.ExtractInfo(line));
-                if (line.Contains("perkpack_b=")) UIManager.UpdateComboBox(comboBox_bPerkPack, ItoWriter.ExtractInfo(line));
-
-                if (line.Contains("menu_tag="))
-                {
-                    string tagInfo = ItoWriter.ExtractInfo(line);
-                    try
-                    {
-                        int startPos = tagInfo.IndexOf("--") + 2;
-                        int endPos = tagInfo.LastIndexOf("--");
-                        tagInfo = tagInfo.Substring(startPos, endPos - startPos);
-                    }
-                    catch (ArgumentOutOfRangeException)
-                    {
-                        tagInfo = "";
-                    }
-                    txtBox_menuTag.Text = tagInfo;
-
-                }
-                if (line.Contains("menu_desc="))
-                {
-                    //Menu description format: menu_desc="NAME#AGE / GENDER # #DESCRIPTION"
-                    string descInfo = ItoWriter.ExtractInfo(line);
-                    try
-                    {
-                        int endPos = descInfo.IndexOf("#");
-                        string charName = descInfo.Substring(0, endPos);
-                        descInfo = descInfo.Substring(descInfo.IndexOf("#") + 1);
-
-                        endPos = descInfo.IndexOf("/");
-                        string charAge = descInfo.Substring(0, endPos - 1);
-                        descInfo = descInfo.Substring(endPos + 2);
-
-                        endPos = descInfo.IndexOf("#");
-                        string charGender = descInfo.Substring(0, endPos);
-                        descInfo = descInfo.Substring(descInfo.LastIndexOf("#") + 1);
-
-                        txtBox_menuDesc.Text = descInfo;
-                        txtBox_age.Text = charAge;
-                        txtBox_gender.Text = charGender;
-                        txtBox_fullName.Text = charName;
-                    }
-                    catch (ArgumentOutOfRangeException) {
-                        txtBox_menuDesc.Text = "";
-                        txtBox_age.Text = "";
-                        txtBox_gender.Text = "";
-                        txtBox_fullName.Text = "";
-                    }
-                }
+                txtBox_name.Text = currentMod.name;
+                txtBox_author.Text = currentMod.author;
+                txtBox_contact.Text = currentMod.contact;
+                txtBox_dexterity.Text = currentMod.dexterity.ToString();
+                txtBox_perception.Text = currentMod.perception.ToString();
+                txtBox_charisma.Text = currentMod.charisma.ToString();
+                txtBox_knowledge.Text = currentMod.knowledge.ToString();
+                txtBox_luck.Text = currentMod.luck.ToString();
+                UpdateSpriteIconPath(currentMod.sprite_icon);
+                UpdateSpriteBackPath(currentMod.sprite_back);
+                UpdateSpriteHousePath(currentMod.sprite_house);
+                UpdateSpriteChibiPath(currentMod.sprite_chibi);
+                UpdateSpritePortraitAPath(currentMod.portrait_a);
+                UpdateSpritePortraitBPath(currentMod.portrait_b);
+                txtBox_aName.Text = currentMod.name_a;
+                txtBox_bName.Text = currentMod.name_b;
+                txtBox_menuTag.Text = currentMod.occupation;
+                txtBox_menuDesc.Text = currentMod.description;
+                txtBox_fullName.Text = currentMod.full_name;
+                UIManager.UpdateComboBox(comboBox_aPerkPack, currentMod.perkpack_a);
+                UIManager.UpdateComboBox(comboBox_bPerkPack, currentMod.perkpack_b);
             }
         }
 
