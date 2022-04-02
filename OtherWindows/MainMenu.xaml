@@ -27,7 +27,18 @@
                 </Grid.RowDefinitions>
 
                 <!--Headers-->
-                <Label Content="UPCOMING FEATURE" Style="{StaticResource header1}" HorizontalAlignment="Left" />
+                <Label Content="PROJECT EDITOR" Style="{StaticResource header1}" HorizontalAlignment="Left" />
+                <Button Content="Edit Project" Style="{StaticResource importBtnDesign}" Grid.Row="1" Click="EditProject_Click"/>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="PROJECT NAME:" Style="{StaticResource header2}"/>
+                    <TextBox x:Name="txtBox_projectName" Grid.Column="1" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
+                </Grid>
+                <Button Content="Create Project" Style="{StaticResource importBtnDesign}" Grid.Row="1" Grid.Column="1" Click="CreateProject_Click"/>
                 <!--<Label Content="f" Style="{StaticResource header1}" HorizontalAlignment="Center" />-->
 
                 <!--Grid for the generation options-->
@@ -56,18 +67,16 @@
             <!--Header for single file edits-->
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                                 
                 <Label Content="SINGLE-FILE EDITOR" Style="{StaticResource header1}"/>
-                <Label Content="FILE SETTING:" Style="{StaticResource header2}" Grid.Column="1" HorizontalAlignment="Right"/>
-                <Button x:Name="fileSettingBtn" Style="{StaticResource importBtnDesign}" FontSize="32" Content="CREATE FILE" Grid.Column="2" Click="fileSettingBtn_Click"/>
-                <Label x:Name="label_fileName" Content="File Name:" Style="{StaticResource header2}" Grid.Column="3" HorizontalAlignment="Right"/>
-                <TextBox x:Name="txtBox_fileName" Text="" Grid.Column="4" Style="{StaticResource rightAlignedTxtBoxDesign}"/>
+                <!--<Label Content="FILE SETTING:" Style="{StaticResource header2}" Grid.Column="1" HorizontalAlignment="Right"/>
+                <Button x:Name="fileSettingBtn" Style="{StaticResource importBtnDesign}" FontSize="32" Content="CREATE FILE" Grid.Column="2" Click="fileSettingBtn_Click"/>-->
+                <!--<Label x:Name="label_fileName" Content="MOD NAME:" Style="{StaticResource header2}" Grid.Column="1" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtBox_fileName" Text="" Grid.Column="4" Style="{StaticResource rightAlignedTxtBoxDesign}"/>-->
             </Grid>
 
             <!--Choosing the type of file to perform edits on-->
@@ -75,13 +84,9 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Custom Character" Grid.Column="0" Style="{StaticResource importBtnDesign}" Click="CharacterBtn_Click"/>
-                <Button Content="Custom Event" Grid.Column="1" Style="{StaticResource importBtnDesign}" Click="EventBtn_Click"/>
-                <Button Content="Custom Enemy" Grid.Column="2" Style="{StaticResource importBtnDesign}" Click="EnemyBtn_Click"/>
-                <Button Content="Custom Mystery (Implementation Soon)" Grid.Column="3" Style="{StaticResource importBtnDesign}" Click="MysteryBtn_Click"/>
+                <Button Grid.Column="0" Content="Edit Mod" Style="{StaticResource importBtnDesign}" Click="EditMod_Click"/>
+                <Button Grid.Column="1" Content="Create Mod" Style="{StaticResource importBtnDesign}" Click="CreateMod_Click"/>
             </Grid>
         </Grid>
 

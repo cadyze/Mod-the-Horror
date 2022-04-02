@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Mod_the_Horror.CreatorWindows;
 
 namespace Mod_the_Horror
 {
@@ -27,134 +28,73 @@ namespace Mod_the_Horror
             InitializeComponent();
         }
 
-        private void fileSettingBtn_Click(object sender, RoutedEventArgs e)
+        private void EditMod_Click(object sender, RoutedEventArgs e)
         {
-            if (isFileSettingCreate)
+            string potentialPath = FileManager.ChooseItoFile();
+            if (!potentialPath.Equals(""))
             {
-                fileSettingBtn.Content = "EDIT FILE";
-                txtBox_fileName.Visibility = Visibility.Hidden;
-                label_fileName.Visibility = Visibility.Hidden;
-            }
-            else {
-                fileSettingBtn.Content = "CREATE FILE";
-                txtBox_fileName.Visibility = Visibility.Visible;
-                label_fileName.Visibility = Visibility.Visible;
-            }
-            isFileSettingCreate = !isFileSettingCreate;
-        }
-
-        private void CharacterBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (isFileSettingCreate)
-            {
-                if (!txtBox_fileName.Text.Equals(""))
-                {
-                    //CREATING IN HERE
-                    string potentialPath = FileManager.ChooseDirectory();
-                    if (!potentialPath.Equals(""))
-                    {
-                        CreateCharacterWindow newCharWindow = new CreateCharacterWindow();
-                        string characterDirectory = FileManager.CreateDirectory($"{txtBox_fileName.Text}", potentialPath);
-                        newCharWindow.UpdateCurrentDirectory(characterDirectory);
-                        string spriteDirectory = FileManager.CreateDirectory("char_sprites", characterDirectory);
-                        newCharWindow.UpdateCurrentSpriteDirectory(spriteDirectory);
-                        newCharWindow.UpdateCurrentItoName($"{txtBox_fileName.Text}.ito");
-                        newCharWindow.ShowDialog();
-                    }
-                }
-            }
-            else 
-            {
-                //EDITING IN HERE
-                string potentialPath = FileManager.ChooseItoFile();
-                if (!potentialPath.Equals(""))
-                {
-                    CreateCharacterWindow newCharWindow = new CreateCharacterWindow();
-                    string? directory = System.IO.Path.GetDirectoryName(potentialPath);
-                    if(directory != null) newCharWindow.UpdateCurrentDirectory(directory);
-
-                    newCharWindow.UpdateCurrentItoName(System.IO.Path.GetFileName(potentialPath));
-                    newCharWindow.ReadItoInformation(System.IO.File.ReadAllLines(potentialPath));
-                    newCharWindow.ShowDialog();
+                ModType loadedModType = ItoWriter.ReadItoType(potentialPath);
+                switch (loadedModType) {
+                    case ModType.CHARACTER:
+                        CreateCharacterWindow characterWindow = new CreateCharacterWindow();
+                        characterWindow.LoadMod(potentialPath);
+                        characterWindow.ShowDialog();
+                        break;
+                    case ModType.EVENT:
+                        CreateEventWindow eventWindow = new CreateEventWindow();
+                        eventWindow.LoadMod(potentialPath);
+                        eventWindow.ShowDialog();
+                        break;
+                    case ModType.ENEMY:
+                        CreateEnemyWindow enemyWindow = new CreateEnemyWindow();
+                        enemyWindow.LoadMod(potentialPath);
+                        enemyWindow.ShowDialog();
+                        break;
+                    case ModType.MYSTERY:
+                        CreateMysteryWindow mysteryWindow = new CreateMysteryWindow();
+                        mysteryWindow.LoadMod(potentialPath);
+                        mysteryWindow.ShowDialog();
+                        break;
+                    default:
+                        break;
                 }
             }
         }
 
-        private void EventBtn_Click(object sender, RoutedEventArgs e)
+        private void CreateMod_Click(object sender, RoutedEventArgs e)
         {
-            if (isFileSettingCreate) {
+            CreatorWindows.CreateNewMod newModWindow = new CreatorWindows.CreateNewMod();
+            newModWindow.ShowDialog();
+        }
 
-                if (!txtBox_fileName.Text.Equals(""))
-                {
-                    //CREATING IN HERE
-                    string potentialPath = FileManager.ChooseDirectory();
-                    if (!potentialPath.Equals(""))
-                    {
-                        CreateEventWindow newEventWindow = new CreateEventWindow();
-                        string eventDirectory = FileManager.CreateDirectory($"{txtBox_fileName.Text}", potentialPath);
-                        newEventWindow.UpdateCurrentDirectory(eventDirectory);
-                        string spriteDirectory = FileManager.CreateDirectory("event_art", eventDirectory);
-                        newEventWindow.UpdateCurrentSpriteDirectory(spriteDirectory);
-                        newEventWindow.UpdateCurrentItoName($"{txtBox_fileName.Text}.ito");
-                        newEventWindow.ShowDialog();
-                    }
-                }
-            }
-            else
+        private void EditProject_Click(object sender, RoutedEventArgs e)
+        {
+            //EDITING IN HERE
+            string potentialPath = FileManager.ChooseDirectory();
+            if (!potentialPath.Equals(""))
             {
-                //EDITING IN HERE
-                string potentialPath = FileManager.ChooseItoFile();
-                if (!potentialPath.Equals(""))
-                {
-                    CreateEventWindow newEventWindow = new CreateEventWindow();
-                    string? directory = System.IO.Path.GetDirectoryName(potentialPath);
-                    if (directory != null) newEventWindow.UpdateCurrentDirectory(directory);
-                    newEventWindow.UpdateCurrentItoName(System.IO.Path.GetFileName(potentialPath));
-                    newEventWindow.ReadItoInformation(System.IO.File.ReadAllLines(potentialPath));
-                    newEventWindow.ShowDialog();
-                }
+                OtherWindows.CreateProject createProjectWindow = new OtherWindows.CreateProject();
+                createProjectWindow.InitializeModList(potentialPath);
+                Trace.WriteLine(potentialPath);
+                createProjectWindow.ShowDialog();
             }
         }
 
-        private void EnemyBtn_Click(object sender, RoutedEventArgs e)
+        private void CreateProject_Click(object sender, RoutedEventArgs e)
         {
-            if (isFileSettingCreate)
-            {
-                if (!txtBox_fileName.Text.Equals(""))
-                {
-                    //CREATING IN HERE
-                    string potentialPath = FileManager.ChooseDirectory();
-                    if (!potentialPath.Equals(""))
-                    {
-                        CreateEnemyWindow newEnemyWindow = new CreateEnemyWindow();
-                        string eventDirectory = FileManager.CreateDirectory($"{txtBox_fileName.Text}", potentialPath);
-                        newEnemyWindow.UpdateCurrentDirectory(eventDirectory);
-                        string spriteDirectory = FileManager.CreateDirectory("enemy_art", eventDirectory);
-                        newEnemyWindow.UpdateCurrentSpriteDirectory(spriteDirectory);
-                        newEnemyWindow.UpdateCurrentItoName($"{txtBox_fileName.Text}.ito");
-                        newEnemyWindow.ShowDialog();
-                    }
+            string projectName = txtBox_projectName.Text;
+            projectName.Replace(' ', '_');
+            if (projectName.Length != 0) {
+                string potentialPath = FileManager.ChooseDirectory();
+                if (!potentialPath.Equals("")) {
+
+                    string projectPath = FileManager.CreateDirectory(projectName, potentialPath);
+
+                    OtherWindows.CreateProject createProjectWindow = new OtherWindows.CreateProject();
+                    createProjectWindow.InitializeProject(projectPath);
+                    createProjectWindow.ShowDialog();
                 }
             }
-            else
-            {
-                //EDITING IN HERE
-                string potentialPath = FileManager.ChooseItoFile();
-                if (!potentialPath.Equals(""))
-                {
-                    CreateEnemyWindow newEnemyWindow = new CreateEnemyWindow();
-                    string? directory = System.IO.Path.GetDirectoryName(potentialPath);
-                    if (directory != null) newEnemyWindow.UpdateCurrentDirectory(directory);
-                    newEnemyWindow.UpdateCurrentItoName(System.IO.Path.GetFileName(potentialPath));
-                    newEnemyWindow.ReadItoInformation(System.IO.File.ReadAllLines(potentialPath));
-                    newEnemyWindow.ShowDialog();
-                }
-            }
-
-        }
-        private void MysteryBtn_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

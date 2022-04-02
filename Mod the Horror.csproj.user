@@ -13,6 +13,21 @@
     <Compile Update="CreatorWindows\CreateEventWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="CreatorWindows\CreateMysteryWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="CreatorWindows\CreateNewMod.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="CreatorWindows\InvestigationTurnEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="CreatorWindows\MysteryEndingEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="OtherWindows\CreateProjectWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="OtherWindows\MainMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -25,6 +40,21 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="CreatorWindows\CreateEventWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CreatorWindows\CreateMysteryWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CreatorWindows\CreateNewMod.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CreatorWindows\InvestigationTurnEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CreatorWindows\MysteryEndingEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="OtherWindows\CreateProjectWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="OtherWindows\MainMenu.xaml">

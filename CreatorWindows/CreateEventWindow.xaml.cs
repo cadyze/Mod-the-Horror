@@ -31,6 +31,24 @@ namespace Mod_the_Horror
             { "funds2", "AT LEAST 2 FUNDS"}
         };
 
+        public void LoadMod(string path)
+        {
+            string? directory = System.IO.Path.GetDirectoryName(path);
+            if (directory != null) UpdateCurrentDirectory(directory);
+            UpdateCurrentItoName(System.IO.Path.GetFileName(path));
+            ReadItoInformation(System.IO.File.ReadAllLines(path));
+        }
+
+
+        public void InitializeMod(string modName, string path)
+        {
+            string rootDirectory = FileManager.CreateDirectory(modName, path);
+            UpdateCurrentDirectory(rootDirectory);
+            string spriteDirectory = FileManager.CreateDirectory("event_art", rootDirectory);
+            UpdateCurrentSpriteDirectory(spriteDirectory);
+            UpdateCurrentItoName($"{modName}.ito");
+        }
+
         public void ReadItoInformation(string[] lines) {
             foreach (string line in lines)
             {

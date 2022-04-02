@@ -1,5 +1,5 @@
-Mod The Horror/bin
-Mod The Horror/obj
+/bin
+/obj/
 *.user
 *.suo
 _ReSharper.*
