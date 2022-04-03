@@ -37,7 +37,6 @@ namespace Mod_the_Horror.CreatorWindows
             txtBox_pageB.Text = endingData.pageB;
             txtBox_pageC.Text = endingData.pageC;
             txtBox_pageD.Text = endingData.pageD;
-            Trace.WriteLine("SAVEINGIGNG" + endingData.pathToImage);
             FileManager.UpdateImage(img_ending, endingData.pathToImage);
         }
 

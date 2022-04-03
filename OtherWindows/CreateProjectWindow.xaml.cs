@@ -84,6 +84,17 @@ namespace Mod_the_Horror.OtherWindows
                 lbl_name.Content = mod.previewName;
                 currentModSelected = mod;
 
+                if (!mod.pathToPreview.Equals(""))
+                {
+                    string modDirectory = System.IO.Path.GetDirectoryName(mod.pathToMod);
+                    FileManager.UpdateImage(img_preview, System.IO.Path.Combine(modDirectory, mod.pathToPreview));
+                    img_preview.Visibility = Visibility.Visible;
+                }
+                else {
+                    FileManager.UpdateImage(img_preview, @"Sprites/PROJECT_NoSpriteFound.png");
+                    img_preview.Visibility = Visibility.Hidden;
+                }
+
                 grid_preview.Visibility = Visibility.Visible;
             }
         }
