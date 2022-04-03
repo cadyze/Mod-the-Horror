@@ -28,12 +28,14 @@ namespace Mod_the_Horror.OtherWindows
         Mod? currentModSelected;
         string projectDirectory = "";
 
-        public void InitializeModList(string rootDirectory = "") {
-            if(!rootDirectory.Equals("")) projectDirectory = rootDirectory;
+        public void InitializeModList(string rootDirectory = "")
+        {
+            if (!rootDirectory.Equals("")) projectDirectory = rootDirectory;
             List<string> directories = new List<string>();
             AddDirectories(projectDirectory, directories);
 
-            foreach (string directory in directories) {
+            foreach (string directory in directories)
+            {
                 foreach (string mod in Directory.GetFiles(directory, "*.ito"))
                 {
                     ModType modType = ItoWriter.ReadItoType(mod);
@@ -42,18 +44,22 @@ namespace Mod_the_Horror.OtherWindows
             }
         }
 
-        public void AddDirectories(string path, List<string> directoryList) {
+        public void AddDirectories(string path, List<string> directoryList)
+        {
             string[] directories = Directory.GetDirectories(path);
             if (directories.Length == 0) directoryList.Add(path);
-            else {
+            else
+            {
                 directoryList.Add(path);
-                foreach (string directory in directories) {
+                foreach (string directory in directories)
+                {
                     AddDirectories(directory, directoryList);
                 }
             }
         }
 
-        public void InitializeProject(string path) {
+        public void InitializeProject(string path)
+        {
             projectDirectory = path;
         }
 
@@ -77,6 +83,17 @@ namespace Mod_the_Horror.OtherWindows
                 lbl_description.Content = mod.previewDescription;
                 lbl_name.Content = mod.previewName;
                 currentModSelected = mod;
+
+                if (!mod.pathToPreview.Equals(""))
+                {
+                    string modDirectory = System.IO.Path.GetDirectoryName(mod.pathToMod);
+                    FileManager.UpdateImage(img_preview, System.IO.Path.Combine(modDirectory, mod.pathToPreview));
+                    img_preview.Visibility = Visibility.Visible;
+                }
+                else {
+                    FileManager.UpdateImage(img_preview, @"Sprites/PROJECT_NoSpriteFound.png");
+                    img_preview.Visibility = Visibility.Hidden;
+                }
 
                 grid_preview.Visibility = Visibility.Visible;
             }

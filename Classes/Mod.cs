@@ -32,7 +32,12 @@ namespace Mod_the_Horror.Classes
                 case ModType.CHARACTER:
                     foreach (string line in lines) {
                         if (line.Length > 5 && line.Substring(0, 5).Equals("name=")) previewName = $"[CHARACTER] {ItoWriter.ExtractInfo(line)}";
-                        if (line.Contains("menu_desc=")) previewDescription = ItoWriter.ExtractInfo(line);
+                        if (line.Contains("menu_desc="))
+                        {
+                            string descInfo = ItoWriter.ExtractInfo(line);
+                            descInfo = descInfo.Substring(descInfo.LastIndexOf("#") + 1);
+                            previewDescription = descInfo;
+                        }
                         if (line.Contains("sprite_house=")) pathToPreview = ItoWriter.ExtractInfo(line);
                     }
                     break;

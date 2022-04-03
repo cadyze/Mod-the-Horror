@@ -106,9 +106,13 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Update="Sprites\PROJECT_NoSpriteFound.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Sprites\" />
     <Folder Include="Pages\" />
   </ItemGroup>
 

@@ -29,8 +29,7 @@ namespace Mod_the_Horror
     public partial class CreateEnemyWindow : Window
     {
         string fileName = "";
-        string currentDirectoryPath = "";
-        string currentSpriteDirectoryPath = "";
+        string modLocation = "";
         string frame1Path = "";
         string frame2Path = "";
         private Dictionary<string, string> canRunDecoder = new Dictionary<string, string>()
@@ -58,8 +57,6 @@ namespace Mod_the_Horror
         {
             string rootDirectory = FileManager.CreateDirectory(modName, path);
             UpdateCurrentDirectory(rootDirectory);
-            string spriteDirectory = FileManager.CreateDirectory("enemy_art", rootDirectory);
-            UpdateCurrentSpriteDirectory(spriteDirectory);
             UpdateCurrentItoName($"{modName}.ito");
         }
 
@@ -126,10 +123,6 @@ namespace Mod_the_Horror
                 else if(canRunString.Equals("No", StringComparison.OrdinalIgnoreCase)) canRun = false;
             }
 
-            string? frame1Name = System.IO.Path.GetFileName(frame1Path);
-            string? frame2Name = System.IO.Path.GetFileName(frame2Path);
-            string? spriteDirectoryName = System.IO.Path.GetFileName(currentSpriteDirectoryPath);
-
             int health, power, experience, dmgValue, frameFreq;
             health = int.Parse(txtBox_health.Text);
             power = int.Parse(txtBox_power.Text);
@@ -137,23 +130,29 @@ namespace Mod_the_Horror
             dmgValue = int.Parse(txtBox_dmgValue.Text);
             frameFreq = int.Parse(txtBox_frequency.Text);
 
-            FileManager.SaveImage(img_frame1, System.IO.Path.Combine(currentSpriteDirectoryPath, frame1Name));
-            FileManager.SaveImage(img_frame2, System.IO.Path.Combine(currentSpriteDirectoryPath, frame2Name));
+            string spriteDirectory = System.IO.Path.Combine(modLocation, "enemy_sprites");
+            if (!Directory.Exists(spriteDirectory))
+            {
+                FileManager.CreateDirectory("enemy_sprites", modLocation);
+            }
 
-            ItoWriter.WriteEnemy(currentDirectoryPath, fileName, txtBox_name.Text, txtBox_subtitle.Text,
+            frame1Path = frame1Path.Equals("") ? "" : System.IO.Path.Combine(spriteDirectory, System.IO.Path.GetFileName(frame1Path));
+            frame2Path = frame2Path.Equals("") ? "" : System.IO.Path.Combine(spriteDirectory, System.IO.Path.GetFileName(frame2Path));
+
+            FileManager.SaveImage(img_frame1, frame1Path);
+            FileManager.SaveImage(img_frame2, frame2Path);
+
+            ItoWriter.WriteEnemy(modLocation, fileName, txtBox_name.Text, txtBox_subtitle.Text,
                 type, location, txtBox_author.Text, canRun, txtBox_introduction.Text, health, power,
                 dmgType, dmgValue, txtBox_hitMsgA.Text, txtBox_hitMsgB.Text, txtBox_hitMsgC.Text, experience,
-                prizeType, prize, frameFreq, spriteDirectoryName, frame1Name, frame2Name);
+                prizeType, prize, frameFreq, frame1Path, frame2Path);
         }
-
-
 
         private void ImportFrame1_Click(object sender, RoutedEventArgs e)
         {
             string potentialPath = FileManager.ImportSprite();
             if (!potentialPath.Equals(""))
             {
-                //_hasDirtyData = true;
                 frame1Path = potentialPath;
                 FileManager.UpdateImage(img_frame1, frame1Path);
             }
@@ -163,7 +162,6 @@ namespace Mod_the_Horror
             string potentialPath = FileManager.ImportSprite();
             if (!potentialPath.Equals(""))
             {
-                //_hasDirtyData = true;
                 frame2Path = potentialPath;
                 FileManager.UpdateImage(img_frame2, frame2Path);
             }
@@ -171,7 +169,7 @@ namespace Mod_the_Horror
 
         internal void UpdateCurrentDirectory(string directory)
         {
-            currentDirectoryPath = directory;
+            modLocation = directory;
         }
 
         internal void UpdateCurrentItoName(string path)
@@ -179,24 +177,15 @@ namespace Mod_the_Horror
             fileName = System.IO.Path.GetFileName(path);
         }
 
-        public void UpdateCurrentSpriteDirectory(string newPath)
+        public void UpdateFrame1(string relativePath)
         {
-            currentSpriteDirectoryPath = newPath;
+            if (!relativePath.Equals("")) frame1Path = System.IO.Path.Combine(modLocation, relativePath);
+            FileManager.UpdateImage(img_frame1, frame1Path);
         }
-
-        public void UpdateFrame1(string imagePath)
+        public void UpdateFrame2(string relativePath)
         {
-            frame1Path = imagePath;
-            string? spriteLocation = System.IO.Path.GetDirectoryName(imagePath);
-            if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
-            if (!imagePath.Equals("")) FileManager.UpdateImage(img_frame1, System.IO.Path.Combine(currentDirectoryPath, frame1Path));
-        }
-        public void UpdateFrame2(string imagePath)
-        {
-            frame2Path = imagePath;
-            string? spriteLocation = System.IO.Path.GetDirectoryName(imagePath);
-            if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
-            if (!imagePath.Equals("")) FileManager.UpdateImage(img_frame2, System.IO.Path.Combine(currentDirectoryPath, frame2Path));
+            if (!relativePath.Equals("")) frame2Path = System.IO.Path.Combine(modLocation, relativePath);
+            FileManager.UpdateImage(img_frame2, frame2Path);
         }
 
         private void OnNumBoxChanged(object sender, TextChangedEventArgs e)

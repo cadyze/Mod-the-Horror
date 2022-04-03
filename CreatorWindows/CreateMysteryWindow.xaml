@@ -12,7 +12,7 @@
             <RowDefinition Height="10*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        
+
         <!--Header-->
         <Grid>
             <Grid.ColumnDefinitions>
@@ -22,14 +22,14 @@
             <Label Content="MYSTERY EDITOR" Style="{StaticResource header1}"/>
             <Button Content="SAVE" Style="{StaticResource importBtnDesign}" Grid.Column="1" Click="Save_Click"/>
         </Grid>
-        
+
         <!--Row 1 of information-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
             <!--Basic information-->
             <Grid>
                 <Grid.RowDefinitions>
@@ -56,7 +56,7 @@
                 <TextBox x:Name="txtBox_endLocation" Style="{StaticResource rightAlignedTxtBoxDesign}" Grid.Row="3" Grid.Column="1"/>
                 <TextBox x:Name="txtBox_endSummary" Style="{StaticResource rightAlignedTxtBoxDesign}" Grid.Row="4" Grid.Column="1"/>
             </Grid>
-            
+
             <!--Introduction Information-->
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -83,7 +83,7 @@
                     <Button Content="Import Preview Art" Style="{StaticResource importBtnDesign}" Grid.Row="1" Grid.Column="1" Click="PreviewImport_Click"/>
                     <Button Content="Import Background" Style="{StaticResource importBtnDesign}" Grid.Row="1" Grid.Column="2" Click="BackgroundImport_Click"/>
                 </Grid>
-                
+
                 <!--Introduction Text-->
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
@@ -106,7 +106,7 @@
                 </Grid>
             </Grid>
         </Grid>
-        
+
         <!--Lists of endings and progressions-->
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
@@ -141,6 +141,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        
+
     </Grid>
 </Window>
