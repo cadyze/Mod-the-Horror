@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Mod_the_Horror.Classes;
+using System.Text.RegularExpressions;
 
 namespace Mod_the_Horror
 {
@@ -46,7 +47,7 @@ namespace Mod_the_Horror
         public void InitializeMod(string modName, string path) {
             currentMod = new CharacterMod();
 
-            modLocation = FileManager.CreateDirectory(modName, path);
+            modLocation = path;
             itoFileName = $"{modName}.ito";
         }
 
@@ -79,8 +80,6 @@ namespace Mod_the_Horror
 
         public void UpdateCurrentItoName(string path) {
             itoFileName = System.IO.Path.GetFileName(path);
-            //string? directoryPath = System.IO.Path.GetDirectoryName(path);
-            //if (directoryPath != null) UpdateCurrentDirectory(directoryPath);
         }
         public void UpdateCurrentDirectory(string newPath) {
             modLocation = newPath;
@@ -165,6 +164,9 @@ namespace Mod_the_Horror
             spritePortraitAPath = spritePortraitAPath.Equals("") ? "" : System.IO.Path.Combine(spriteDirectory, System.IO.Path.GetFileName(spritePortraitAPath));
             spritePortraitBPath = spritePortraitBPath.Equals("") ? "" : System.IO.Path.Combine(spriteDirectory, System.IO.Path.GetFileName(spritePortraitBPath));
 
+            //Translate line breaks
+            string description = Regex.Replace(txtBox_menuDesc.Text, @"\r\n?|\n", "#");
+
             //Save images
             FileManager.SaveImage(img_spriteIcon, spriteIconPath);
             FileManager.SaveImage(img_spriteBack, spriteBackPath);
@@ -177,7 +179,7 @@ namespace Mod_the_Horror
             ItoWriter.WriteCustomCharacter(modLocation, itoFileName, txtBox_name.Text, txtBox_author.Text, txtBox_contact.Text,
                 int.Parse(txtBox_strength.Text), int.Parse(txtBox_dexterity.Text), int.Parse(txtBox_perception.Text),
                 int.Parse(txtBox_charisma.Text), int.Parse(txtBox_knowledge.Text), int.Parse(txtBox_luck.Text),
-                txtBox_aName.Text, txtBox_menuTag.Text, txtBox_menuDesc.Text, perkPackA, perkPackB,
+                txtBox_aName.Text, txtBox_menuTag.Text, description, perkPackA, perkPackB,
                 txtBox_fullName.Text, txtBox_gender.Text, int.Parse(txtBox_age.Text),
                 spriteIconPath, spriteBackPath, spriteHousePath, spriteChibiPath, spritePortraitAPath, spritePortraitBPath);
         }

@@ -93,7 +93,8 @@ namespace Mod_the_Horror.Classes
 
                         endPos = descInfo.IndexOf("#");
                         string charGender = descInfo.Substring(0, endPos);
-                        descInfo = descInfo.Substring(descInfo.LastIndexOf("#") + 1);
+                        descInfo = descInfo.Substring(descInfo.IndexOf("#", 1) + 1);
+                        descInfo = descInfo.Replace('#', '\n');
 
                         description = descInfo;
                         age = int.Parse(charAge);

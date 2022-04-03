@@ -60,7 +60,7 @@
                 <TextBox x:Name="txtBox_gender" Grid.Row="2" Grid.Column="1" Style="{StaticResource rightAlignedTxtBoxDesign}" TextChanged="OnTextBoxChange"/>
                 <TextBox x:Name="txtBox_age" Grid.Row="3" Grid.Column="1" Style="{StaticResource numBox}" TextChanged="OnNumberBoxChanged"/>
                 <TextBox x:Name="txtBox_menuTag" Grid.Row="4" Grid.Column="1" Style="{StaticResource rightAlignedTxtBoxDesign}" TextChanged="OnTextBoxChange"/>
-                <TextBox x:Name="txtBox_menuDesc" Grid.Row="5" Grid.Column="1" Style="{StaticResource rightAlignedTxtBoxDesign}" FontSize="32" FontStyle="Normal" TextAlignment="Center" FontWeight="Thin" TextWrapping="Wrap" TextChanged="OnTextBoxChange"/>
+                <TextBox x:Name="txtBox_menuDesc" Grid.Row="5" Grid.Column="1" Style="{StaticResource rightAlignedTxtBoxDesign}" FontSize="32" FontStyle="Normal" TextAlignment="Center" FontWeight="Thin" TextWrapping="Wrap" TextChanged="OnTextBoxChange" AcceptsReturn="True"/>
             </Grid>
 
             <!--Grid for the sprites of the custom character-->

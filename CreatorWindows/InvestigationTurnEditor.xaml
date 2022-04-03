@@ -27,7 +27,7 @@
             <Label Content="Forced &#13;Event/Enemy:" Style="{StaticResource header3}" Grid.Row="2" VerticalAlignment="Top"/>
 
             <ComboBox x:Name="comboBox_location" Style="{StaticResource comboBoxDark}" Grid.Column="1"/>
-            <TextBox x:Name="txtBox_precedingText" Style="{StaticResource summary}" Grid.Column="1" Grid.Row="1"/>
+            <TextBox x:Name="txtBox_precedingText" Style="{StaticResource summary}" Grid.Column="1" Grid.Row="1" AcceptsReturn="True"/>
             <Grid Grid.Column="1" Grid.Row="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>

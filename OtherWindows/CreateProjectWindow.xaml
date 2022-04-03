@@ -52,7 +52,7 @@
                 </Grid.RowDefinitions>
                 <Image x:Name="img_preview"/>
                 <Label x:Name="lbl_name" Grid.Row="1" Content="PREVIEW TITLE" Style="{StaticResource header1}" HorizontalAlignment="Center"/>
-                <Label x:Name="lbl_description" Grid.Row="2" Content="PREVIEW DESCRIPTION" Style="{StaticResource header2}" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="txtBlock_description" Text="PREVIEW DESCRIPTION" Style="{StaticResource summaryTextBlock}" Grid.Row="2"/>
                 <Button Grid.Row="3" Content="Edit Mod" Style="{StaticResource importBtnDesign}" Click="Edit_Click"/>
             </Grid>
 

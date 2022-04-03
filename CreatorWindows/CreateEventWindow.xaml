@@ -76,7 +76,7 @@
                 <Label Content="Event Description:" Style="{StaticResource header2}" Grid.Row="2"/>
                 <TextBox x:Name="txtBox_description" Style="{StaticResource summary}" Grid.Row="3"/>
                 <Label Content="Event Introduction:" Style="{StaticResource header2}" Grid.Row="4"/>
-                <TextBox x:Name="txtBox_flavor" Style="{StaticResource summary}" Grid.Row="5"/>
+                <TextBox x:Name="txtBox_flavor" Style="{StaticResource summary}" Grid.Row="5" AcceptsReturn="True"/>
             </Grid>
 
             <!--Option grid editor-->

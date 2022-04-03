@@ -27,10 +27,10 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
-            <Label Content="Ending Title:" Style="{StaticResource header3}" VerticalAlignment="Top"/>
+            <Label Content="Ending Title:" Style="{StaticResource header3}" VerticalAlignment="Top" />
             <Label Content="Ending Image:" Style="{StaticResource header3}" Grid.Row="1" VerticalAlignment="Top"/>
 
-            <TextBox x:Name="txtBox_endingTitle" Style="{StaticResource rightAlignedTxtBoxDesign}" Grid.Column="1" Grid.Row="0"/>
+            <TextBox x:Name="txtBox_endingTitle" Style="{StaticResource rightAlignedTxtBoxDesign}" Grid.Column="1" Grid.Row="0" TextChanged="CapLock_TextChanged"/>
             <Grid Grid.Column="1" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="6*"/>
@@ -58,10 +58,10 @@
             <Label Content="End Page #3:" Style="{StaticResource header3}" Grid.Row="2"/>
             <Label Content="End Page #4:" Style="{StaticResource header3}" Grid.Row="3"/>
 
-            <TextBox x:Name="txtBox_pageA" Grid.Column="1" Grid.Row="0" Style="{StaticResource summary}"/>
-            <TextBox x:Name="txtBox_pageB" Grid.Column="1" Grid.Row="1" Style="{StaticResource summary}"/>
-            <TextBox x:Name="txtBox_pageC" Grid.Column="1" Grid.Row="2" Style="{StaticResource summary}"/>
-            <TextBox x:Name="txtBox_pageD" Grid.Column="1" Grid.Row="3" Style="{StaticResource summary}"/>
+            <TextBox x:Name="txtBox_pageA" Grid.Column="1" Grid.Row="0" Style="{StaticResource summary}" AcceptsReturn="True"/>
+            <TextBox x:Name="txtBox_pageB" Grid.Column="1" Grid.Row="1" Style="{StaticResource summary}" AcceptsReturn="True"/>
+            <TextBox x:Name="txtBox_pageC" Grid.Column="1" Grid.Row="2" Style="{StaticResource summary}" AcceptsReturn="True"/>
+            <TextBox x:Name="txtBox_pageD" Grid.Column="1" Grid.Row="3" Style="{StaticResource summary}" AcceptsReturn="True"/>
         </Grid>
     </Grid>
 </Window>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,19 +23,21 @@ namespace Mod_the_Horror.CreatorWindows
     public partial class InvestigationTurnEditor : Window
     {
         public InvestigationTurn? investigationTurn = null;
+        private string rootDirectory = "";
         public InvestigationTurnEditor()
         {
             InitializeComponent();
             UIManager.InitializeComboBox(comboBox_location, @"GameInformation\EnemyLocations.txt");
         }
 
-        public void SetInvestigationTurn(InvestigationTurn turn) {
+        public void SetInvestigationTurn(InvestigationTurn turn, string rootDirectory) {
             investigationTurn = turn;
             lbl_num.Content = $"INVESTIGATION {investigationTurn.longProgressNum}";
             lbl_path.Content = investigationTurn.forcedEvent;
-            txtBox_precedingText.Text = investigationTurn.precedingText;
+            txtBox_precedingText.Text = investigationTurn.precedingText.Replace('#', '\n');
             UIManager.UpdateComboBox(comboBox_location, investigationTurn.location);
             comboBox_location.Items.Add("ending");
+            this.rootDirectory = rootDirectory;
         }
 
         private void ImportEventEnemy_Click(object sender, RoutedEventArgs e)
@@ -46,12 +49,11 @@ namespace Mod_the_Horror.CreatorWindows
                 switch (loadedModType)
                 {
                     case ModType.EVENT:
-                        investigationTurn.forcedEvent = potentialPath;
-                        lbl_path.Content = potentialPath;
-                        break;
+                        goto case ModType.ENEMY;
                     case ModType.ENEMY:
-                        investigationTurn.forcedEvent = potentialPath;
-                        lbl_path.Content = potentialPath;
+                        string relativePath = System.IO.Path.GetRelativePath(rootDirectory, potentialPath);
+                        investigationTurn.forcedEvent = relativePath;
+                        lbl_path.Content = relativePath;
                         break;
                     default:
                         //Show error Message
@@ -64,7 +66,7 @@ namespace Mod_the_Horror.CreatorWindows
         {
             if (investigationTurn != null)
             {
-                investigationTurn.precedingText = txtBox_precedingText.Text;
+                investigationTurn.precedingText = Regex.Replace(txtBox_precedingText.Text, @"\r\n?|\n", "#"); ;
                 investigationTurn.location = (string)comboBox_location.SelectedItem;
             }
             base.OnClosing(e);

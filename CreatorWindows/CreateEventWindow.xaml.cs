@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,7 +55,7 @@ namespace Mod_the_Horror
                 if (line.Contains("location=")) UIManager.UpdateComboBox(comboBox_location, ItoWriter.ExtractInfo(line));
                 if (line.Contains("author=")) txtBox_author.Text = ItoWriter.ExtractInfo(line);
                 if (line.Contains("contact=")) txtBox_contact.Text = ItoWriter.ExtractInfo(line);
-                if (line.Contains("flavor=")) txtBox_flavor.Text = ItoWriter.ExtractInfo(line);
+                if (line.Contains("flavor=")) txtBox_flavor.Text = ItoWriter.ExtractInfo(line, true);
                 if (line.Contains("options=")) txtBox_numOptions.Text = ItoWriter.ExtractInfo(line);
                 if (line.Contains("image=")) UpdateEventImagePath(ItoWriter.ExtractInfo(line));
                 if (line.Contains("about=")) txtBox_description.Text = ItoWriter.ExtractInfo(line);
@@ -229,6 +230,9 @@ namespace Mod_the_Horror
             eventOptions.Add(eoB);
             eventOptions.Add(eoC);
 
+            //Translate line breaks
+            string introduction = Regex.Replace(txtBox_flavor.Text, @"\r\n?|\n", "#");
+
             string spriteDirectory = System.IO.Path.Combine(modLocation, "event_sprites");
             if (!Directory.Exists(spriteDirectory))
             {
@@ -240,7 +244,7 @@ namespace Mod_the_Horror
             FileManager.SaveImage(img_event, eventImagePath);
 
             ItoWriter.WriteEvent(modLocation, fileName, txtBox_name.Text, txtBox_author.Text, location,
-                txtBox_contact.Text, txtBox_flavor.Text, int.Parse(txtBox_numOptions.Text), eventImagePath,
+                txtBox_contact.Text, introduction, int.Parse(txtBox_numOptions.Text), eventImagePath,
                 txtBox_description.Text, eventOptions);
         }
 

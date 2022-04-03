@@ -117,7 +117,7 @@ namespace Mod_the_Horror
                 $"subtitle=\"{subtitle}\"\n" +
                 $"type=\"{type}\"\n" +
                 $"location=\"{location}\"\n" +
-                $"author=\"{author}\"\n\n" +
+                $"author=\"{author}\"\n" +
                 $"intro=\"{intro}\"\n" +
                 $"can_run=\"{runValue}\"\n" +
                 $"health=\"{health}\"\n" +
@@ -166,11 +166,10 @@ namespace Mod_the_Horror
                 $"background=\"{relativeBackgroundPath}\"\n";
 
             foreach (InvestigationTurn turn in investigationTurns) {
-                string relativeEventPath = turn.forcedEvent.Equals("") ? "" : Path.GetRelativePath(locationToSave, turn.forcedEvent);
                 mysteryInfo = mysteryInfo +
                     $"{turn.progressNum}_loc=\"{turn.location}\"\n" +
                     $"{turn.progressNum}_txt=\"{turn.precedingText}\"\n" +
-                    $"{turn.progressNum}_frc=\"{relativeEventPath}\"\n";
+                    $"{turn.progressNum}_frc=\"{turn.forcedEvent}\"\n";
             }
 
             foreach (MysteryEnding end in endings) {
@@ -197,9 +196,9 @@ namespace Mod_the_Horror
         public static ModType ReadItoType(string path) {
             string[] allLines = System.IO.File.ReadAllLines(path);
             foreach (string line in allLines) {
-                if (line.Contains("character")) return ModType.CHARACTER;
-                if (line.Contains("event")) return ModType.EVENT;
-                if (line.Contains("enemy")) return ModType.ENEMY;
+                if (line.Contains("[character]")) return ModType.CHARACTER;
+                if (line.Contains("[event]")) return ModType.EVENT;
+                if (line.Contains("[enemy]")) return ModType.ENEMY;
                 if (line.Contains("[mystery]")) return ModType.MYSTERY;
             }
             return ModType.ERROR;
@@ -223,10 +222,12 @@ namespace Mod_the_Horror
         /// </summary>
         /// <param name="line">The requested line to extract information from.</param>
         /// <returns>The information stored in the line given.</returns>
-        public static string ExtractInfo(string line) {
+        public static string ExtractInfo(string line, bool replaceLineBreaks = false) {
             int startIndex = line.IndexOf("\"") + 1;
             int lastIndex = line.LastIndexOf("\"");
-            return line.Substring(startIndex, lastIndex - startIndex);
+            string infoExtracted = line.Substring(startIndex, lastIndex - startIndex);
+            if (replaceLineBreaks) infoExtracted = infoExtracted.Replace('#', '\n');
+            return infoExtracted;
         }
     }
 }

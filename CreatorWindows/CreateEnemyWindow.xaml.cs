@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -67,7 +68,7 @@ namespace Mod_the_Horror
                 if (line.Contains("subtitle=")) txtBox_subtitle.Text = ItoWriter.ExtractInfo(line);
                 if (line.Contains("location=")) UIManager.UpdateComboBox(comboBox_location, ItoWriter.ExtractInfo(line));
                 if (line.Length > 5 && line.Substring(0, 5).Equals("type=")) UIManager.UpdateComboBox(comboBox_type, ItoWriter.ExtractInfo(line));
-                if (line.Contains("intro=")) txtBox_introduction.Text = ItoWriter.ExtractInfo(line);
+                if (line.Contains("intro=")) txtBox_introduction.Text = ItoWriter.ExtractInfo(line, true);
                 if (line.Contains("author=")) txtBox_author.Text = ItoWriter.ExtractInfo(line);
                 if (line.Contains("can_run=")) UIManager.UpdateComboBox(comboBox_canRun, ItoWriter.ExtractInfo(line), canRunDecoder);
                 if (line.Contains("health=")) txtBox_health.Text = ItoWriter.ExtractInfo(line);
@@ -130,6 +131,9 @@ namespace Mod_the_Horror
             dmgValue = int.Parse(txtBox_dmgValue.Text);
             frameFreq = int.Parse(txtBox_frequency.Text);
 
+            //Translate line breaks
+            string introduction = Regex.Replace(txtBox_introduction.Text, @"\r\n?|\n", "#");
+
             string spriteDirectory = System.IO.Path.Combine(modLocation, "enemy_sprites");
             if (!Directory.Exists(spriteDirectory))
             {
@@ -143,7 +147,7 @@ namespace Mod_the_Horror
             FileManager.SaveImage(img_frame2, frame2Path);
 
             ItoWriter.WriteEnemy(modLocation, fileName, txtBox_name.Text, txtBox_subtitle.Text,
-                type, location, txtBox_author.Text, canRun, txtBox_introduction.Text, health, power,
+                type, location, txtBox_author.Text, canRun, introduction, health, power,
                 dmgType, dmgValue, txtBox_hitMsgA.Text, txtBox_hitMsgB.Text, txtBox_hitMsgC.Text, experience,
                 prizeType, prize, frameFreq, frame1Path, frame2Path);
         }
