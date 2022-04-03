@@ -45,10 +45,9 @@ namespace Mod_the_Horror
 
         public void InitializeMod(string modName, string path) {
             currentMod = new CharacterMod();
-            string rootDirectory = FileManager.CreateDirectory(modName, path);
-            UpdateCurrentDirectory(rootDirectory);
-            string spriteDirectory = FileManager.CreateDirectory("char_sprites", rootDirectory);
-            UpdateCurrentItoName($"{modName}.ito");
+
+            modLocation = FileManager.CreateDirectory(modName, path);
+            itoFileName = $"{modName}.ito";
         }
 
         public void UpdateUI() {

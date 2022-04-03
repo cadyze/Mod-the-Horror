@@ -103,10 +103,13 @@ namespace Mod_the_Horror
         public static void WriteEnemy(string locationToSave, string itoFileName, string name, string subtitle,
             string type, string location, string author, bool canRun, string intro, int health, int power,
             string dmgType, int dmgValue, string hitMsg1, string hitMsg2, string hitMsg3, int experience,
-            string prizeType, string prizeName, int frameFrequency, string spriteDirectoryName, string? frame1Name, string? frame2Name) {
+            string prizeType, string prizeName, int frameFrequency, string frame1Path, string frame2Path) {
 
-            string frame1Path = (frame1Name != null && !frame1Name.Equals("")) ? System.IO.Path.Combine(spriteDirectoryName, frame1Name) : "";
-            string frame2Path = (frame2Name != null && !frame2Name.Equals("")) ? System.IO.Path.Combine(spriteDirectoryName, frame2Name) : "";
+            string relativeFrame1Path = frame1Path.Equals("") ? "" : Path.GetRelativePath(locationToSave, frame1Path);
+            string relativeFrame2Path = frame2Path.Equals("") ? "" : Path.GetRelativePath(locationToSave, frame2Path);
+
+            if (!itoFileName.Contains(".ito")) itoFileName = itoFileName + ".ito";
+
             int runValue = canRun ? 1 : 0;
             string enemyInfo = "[enemy]\n" +
                 $"name=\"{name}\"\n" +
@@ -126,11 +129,11 @@ namespace Mod_the_Horror
                 $"hit01=\"{hitMsg1}\"\n" +
                 $"hit02=\"{hitMsg2}\"\n" +
                 $"hit03=\"{hitMsg3}\"\n" +
-                $"art01=\"{frame1Path}\"\n" +
-                $"art02=\"{frame2Path}\"\n" +
+                $"art01=\"{relativeFrame1Path}\"\n" +
+                $"art02=\"{relativeFrame2Path}\"\n" +
                 $"artfreq=\"{frameFrequency}\"\n";
-
-            TextWriter tw = new StreamWriter(System.IO.Path.Combine(locationToSave, itoFileName));
+            
+            TextWriter tw = new StreamWriter(Path.Combine(locationToSave, itoFileName));
             tw.WriteLine(enemyInfo);
             tw.Close();
         }
