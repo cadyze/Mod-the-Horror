@@ -67,9 +67,10 @@ namespace Mod_the_Horror
         }
 
         public static void WriteEvent(string locationToSave, string itoFileName, string name, string author, string evnLocation, string contact,
-            string flavor, int numOptions, string evnSpriteDirectoryName, string? evnSpriteName, string desc, List<EventOption> eventOptions) {
-            
-            string spritePath = (evnSpriteName != null && !evnSpriteName.Equals("")) ? System.IO.Path.Combine(evnSpriteDirectoryName, evnSpriteName) : "";
+            string flavor, int numOptions, string spritePath, string desc, List<EventOption> eventOptions) {
+
+            string relativeSpritePath = spritePath.Equals("") ? "" : Path.GetRelativePath(locationToSave, spritePath);
+
             string eventInfo = "[event]" +
                 $"\nname=\"{name}\"" +
                 $"\nlocation=\"{evnLocation}\"" +
@@ -77,7 +78,7 @@ namespace Mod_the_Horror
                 $"\ncontact=\"{contact}\"" +
                 $"\nflavor=\"{flavor}\"" +
                 $"\noptions=\"{numOptions}\"" +
-                $"\nimage=\"{spritePath}\"" +
+                $"\nimage=\"{relativeSpritePath}\"" +
                 $"\nabout=\"{desc}\"";
 
             switch (numOptions) {
