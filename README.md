@@ -1,5 +1,5 @@
 ### CURRENTLY NOT IN DEVELOPMENT AS OF 08/13/2024.
-
+---
 ### COMPATIBLE WITH WORLD OF HORROR VERSION 0.9.84f
 
 ### Base Game Bugs / Details to Watch Out For:
