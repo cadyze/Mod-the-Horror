@@ -28,33 +28,42 @@ namespace Mod_the_Horror.OtherWindows
         Mod? currentModSelected;
         string projectDirectory = "";
 
-        public void InitializeModList(string rootDirectory = "") {
-            if(!rootDirectory.Equals("")) projectDirectory = rootDirectory;
+        public void InitializeModList(string rootDirectory = "")
+        {
+            if (!rootDirectory.Equals("")) projectDirectory = rootDirectory;
             List<string> directories = new List<string>();
             AddDirectories(projectDirectory, directories);
 
-            foreach (string directory in directories) {
+            foreach (string directory in directories)
+            {
                 foreach (string mod in Directory.GetFiles(directory, "*.ito"))
                 {
                     ModType modType = ItoWriter.ReadItoType(mod);
                     if (modType != ModType.ERROR) mods.Add(new Mod(mod, modType));
                 }
             }
+
+            lbl_projectName.Content = $"{System.IO.Path.GetFileName(rootDirectory)}";
         }
 
-        public void AddDirectories(string path, List<string> directoryList) {
+        public void AddDirectories(string path, List<string> directoryList)
+        {
             string[] directories = Directory.GetDirectories(path);
             if (directories.Length == 0) directoryList.Add(path);
-            else {
+            else
+            {
                 directoryList.Add(path);
-                foreach (string directory in directories) {
+                foreach (string directory in directories)
+                {
                     AddDirectories(directory, directoryList);
                 }
             }
         }
 
-        public void InitializeProject(string path) {
+        public void InitializeProject(string path)
+        {
             projectDirectory = path;
+            lbl_projectName.Content = $"{System.IO.Path.GetFileName(path)}";
         }
 
 
@@ -74,9 +83,20 @@ namespace Mod_the_Horror.OtherWindows
             if (buttonSender != null)
             {
                 Mod mod = (Mod)buttonSender.DataContext;
-                lbl_description.Content = mod.previewDescription;
-                lbl_name.Content = mod.previewName;
+                txtBlock_description.Text = mod.previewDescription;
+                lbl_name.Content = mod.modName;
                 currentModSelected = mod;
+
+                if (!mod.pathToPreview.Equals(""))
+                {
+                    string modDirectory = System.IO.Path.GetDirectoryName(mod.pathToMod);
+                    FileManager.UpdateImage(img_preview, System.IO.Path.Combine(modDirectory, mod.pathToPreview));
+                    img_preview.Visibility = Visibility.Visible;
+                }
+                else {
+                    FileManager.UpdateImage(img_preview, @"Sprites/PROJECT_NoSpriteFound.png");
+                    img_preview.Visibility = Visibility.Hidden;
+                }
 
                 grid_preview.Visibility = Visibility.Visible;
             }
@@ -85,9 +105,23 @@ namespace Mod_the_Horror.OtherWindows
         private void NewMod_Click(object sender, RoutedEventArgs e)
         {
             CreatorWindows.CreateNewMod createNewModWindow = new CreatorWindows.CreateNewMod();
-            createNewModWindow.ChosenDirectory = projectDirectory;
+            string eventEnemyDirectory = System.IO.Path.Combine(projectDirectory, "custom");
+            string charDirectory = System.IO.Path.Combine(projectDirectory, "character");
+            string mysteryDirectory = System.IO.Path.Combine(projectDirectory, "mystery");
+
+            if (!Directory.Exists(eventEnemyDirectory)) FileManager.CreateDirectory(projectDirectory, "custom");
+            if (!Directory.Exists(charDirectory)) FileManager.CreateDirectory(projectDirectory, "character");
+            if (!Directory.Exists(mysteryDirectory)) FileManager.CreateDirectory(projectDirectory, "mystery");
+
+            createNewModWindow.chosenEventDirectory = eventEnemyDirectory;
+            createNewModWindow.chosenEnemyDirectory = eventEnemyDirectory;
+            createNewModWindow.chosenCharDirectory = charDirectory;
+            createNewModWindow.chosenMysteryDirectory = mysteryDirectory;
+            createNewModWindow.createNewFolder = false;
+
             createNewModWindow.ShowDialog();
         }
+
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             mods.Clear();

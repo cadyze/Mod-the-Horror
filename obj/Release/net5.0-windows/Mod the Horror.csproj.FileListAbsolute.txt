@@ -56,3 +56,4 @@ C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windo
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\CreatorWindows\InvestigationTurnEditor.baml
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\CreatorWindows\MysteryEndingEditor.g.cs
 C:\Users\jacob\Desktop\Software Projects\Mod the Horror\obj\Release\net5.0-windows\CreatorWindows\MysteryEndingEditor.baml
+C:\Users\jacob\Desktop\Software Projects\Mod the Horror\bin\Release\net5.0-windows\Sprites\PROJECT_NoSpriteFound.png

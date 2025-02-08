@@ -11,6 +11,7 @@ namespace Mod_the_Horror.Classes
 
     {
         public string pathToPreview = "";
+        public string modName = "";
         public string previewName = "";
         public string previewDescription = "";
         public string pathToMod;
@@ -31,15 +32,28 @@ namespace Mod_the_Horror.Classes
             switch (modType) {
                 case ModType.CHARACTER:
                     foreach (string line in lines) {
-                        if (line.Length > 5 && line.Substring(0, 5).Equals("name=")) previewName = $"[CHARACTER] {ItoWriter.ExtractInfo(line)}";
-                        if (line.Contains("menu_desc=")) previewDescription = ItoWriter.ExtractInfo(line);
+                        if (line.Length > 5 && line.Substring(0, 5).Equals("name="))
+                        {
+                            modName = ItoWriter.ExtractInfo(line);
+                            previewName = $"[CHARACTER] {modName}";
+                        }
+                        if (line.Contains("menu_desc="))
+                        {
+                            string descInfo = ItoWriter.ExtractInfo(line);
+                            descInfo = descInfo.Substring(descInfo.LastIndexOf("#") + 1);
+                            previewDescription = descInfo;
+                        }
                         if (line.Contains("sprite_house=")) pathToPreview = ItoWriter.ExtractInfo(line);
                     }
                     break;
                 case ModType.ENEMY:
                     foreach (string line in lines)
                     {
-                        if (line.Length > 5 && line.Substring(0, 5).Equals("name=")) previewName = $"[ENEMY] {ItoWriter.ExtractInfo(line)}";
+                        if (line.Length > 5 && line.Substring(0, 5).Equals("name="))
+                        {
+                            modName = ItoWriter.ExtractInfo(line);
+                            previewName = $"[ENEMY] {modName}";
+                        }
                         if (line.Contains("subtitle=")) previewDescription = ItoWriter.ExtractInfo(line);
                         if (line.Contains("art01=")) pathToPreview = ItoWriter.ExtractInfo(line);
                     }
@@ -47,7 +61,11 @@ namespace Mod_the_Horror.Classes
                 case ModType.EVENT:
                     foreach (string line in lines)
                     {
-                        if (line.Length > 5 && line.Substring(0, 5).Equals("name=")) previewName = $"[EVENT] {ItoWriter.ExtractInfo(line)}";
+                        if (line.Length > 5 && line.Substring(0, 5).Equals("name="))
+                        {
+                            modName = ItoWriter.ExtractInfo(line);
+                            previewName = $"[EVENT] {modName}";
+                        }
                         if (line.Contains("about=")) previewDescription = ItoWriter.ExtractInfo(line);
                         if (line.Contains("image=")) pathToPreview = ItoWriter.ExtractInfo(line);
                     }
@@ -55,7 +73,11 @@ namespace Mod_the_Horror.Classes
                 case ModType.MYSTERY:
                     foreach (string line in lines)
                     {
-                        if (line.Length > 5 && line.Substring(0, 5).Equals("name=")) previewName = $"[MYSTERY] {ItoWriter.ExtractInfo(line)}";
+                        if (line.Length > 5 && line.Substring(0, 5).Equals("name="))
+                        {
+                            modName = ItoWriter.ExtractInfo(line);
+                            previewName = $"[MYSTERY] {modName}";
+                        }
                         if (line.Contains("description=")) previewDescription = ItoWriter.ExtractInfo(line);
                         if (line.Contains("background=")) pathToPreview = ItoWriter.ExtractInfo(line);
                     }

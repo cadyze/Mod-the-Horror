@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Mod_the_Horror.Classes;
+using System.Text.RegularExpressions;
 
 namespace Mod_the_Horror
 {
@@ -31,8 +32,7 @@ namespace Mod_the_Horror
         private string spriteHousePath = "";
         private string spritePortraitAPath = "";
         private string spritePortraitBPath = "";
-        private string currentDirectoryPath = "";
-        private string currentSpriteDirectoryPath = "";
+        private string modLocation = "";
         private string itoFileName = "";
         private CharacterMod? currentMod;
 
@@ -46,11 +46,9 @@ namespace Mod_the_Horror
 
         public void InitializeMod(string modName, string path) {
             currentMod = new CharacterMod();
-            string rootDirectory = FileManager.CreateDirectory(modName, path);
-            UpdateCurrentDirectory(rootDirectory);
-            string spriteDirectory = FileManager.CreateDirectory("char_sprites", rootDirectory);
-            UpdateCurrentSpriteDirectory(spriteDirectory);
-            UpdateCurrentItoName($"{modName}.ito");
+
+            modLocation = path;
+            itoFileName = $"{modName}.ito";
         }
 
         public void UpdateUI() {
@@ -82,58 +80,44 @@ namespace Mod_the_Horror
 
         public void UpdateCurrentItoName(string path) {
             itoFileName = System.IO.Path.GetFileName(path);
-            //string? directoryPath = System.IO.Path.GetDirectoryName(path);
-            //if (directoryPath != null) UpdateCurrentDirectory(directoryPath);
         }
         public void UpdateCurrentDirectory(string newPath) {
-            currentDirectoryPath = newPath;
+            modLocation = newPath;
         }
 
-        public void UpdateCurrentSpriteDirectory(string newPath) {
-            currentSpriteDirectoryPath = newPath;
-        }
-
-        public void UpdateSpriteIconPath(string newPath) {
-            spriteIconPath = newPath;
-            string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
-            Trace.WriteLine(newPath);
-            if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
-            if(!newPath.Equals("")) FileManager.UpdateImage(img_spriteIcon, System.IO.Path.Combine(currentDirectoryPath, spriteIconPath));
-        }
-
-        public void UpdateSpriteChibiPath(string newPath) {
-            spriteChibiPath = newPath;
-            string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
-            if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
-            if (!newPath.Equals("")) FileManager.UpdateImage(img_spriteChibi, System.IO.Path.Combine(currentDirectoryPath, spriteChibiPath));
-        }
-
-        public void UpdateSpriteBackPath(string newPath) {
-            spriteBackPath = newPath;
-            string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
-            if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
-            if (!newPath.Equals("")) FileManager.UpdateImage(img_spriteBack, System.IO.Path.Combine(currentDirectoryPath, spriteBackPath));
-        }
-
-        public void UpdateSpriteHousePath(string newPath) {
-            spriteHousePath = newPath;
-            string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
-            if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
-            if (!newPath.Equals("")) FileManager.UpdateImage(img_spriteHouse, System.IO.Path.Combine(currentDirectoryPath, spriteHousePath));
-        }
-
-        public void UpdateSpritePortraitAPath(string newPath) {
-            spritePortraitAPath = newPath;
-            string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
-            if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
-            if (!newPath.Equals("")) FileManager.UpdateImage(img_spritePortrait, System.IO.Path.Combine(currentDirectoryPath, spritePortraitAPath));
-        }
-        public void UpdateSpritePortraitBPath(string newPath)
+        public void UpdateSpriteIconPath(string relativePath) 
         {
-            spritePortraitBPath = newPath;
-            string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
-            if (currentSpriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(currentDirectoryPath, spriteLocation));
-            if (!newPath.Equals("")) FileManager.UpdateImage(img_spritePortraitB, System.IO.Path.Combine(currentDirectoryPath, spritePortraitBPath));
+            if (!relativePath.Equals("")) spriteIconPath = System.IO.Path.Combine(modLocation, relativePath);
+            FileManager.UpdateImage(img_spriteIcon, spriteIconPath);
+        }
+
+        public void UpdateSpriteChibiPath(string relativePath)
+        {
+            if (!relativePath.Equals("")) spriteChibiPath = System.IO.Path.Combine(modLocation, relativePath);
+            FileManager.UpdateImage(img_spriteChibi, spriteChibiPath);
+        }
+
+        public void UpdateSpriteBackPath(string relativePath)
+        {
+            if (!relativePath.Equals("")) spriteBackPath = System.IO.Path.Combine(modLocation, relativePath);
+            FileManager.UpdateImage(img_spriteBack, spriteBackPath);
+        }
+
+        public void UpdateSpriteHousePath(string relativePath)
+        {
+            if (!relativePath.Equals("")) spriteHousePath = System.IO.Path.Combine(modLocation, relativePath);
+            FileManager.UpdateImage(img_spriteHouse, spriteHousePath);
+        }
+
+        public void UpdateSpritePortraitAPath(string relativePath)
+        {
+            if (!relativePath.Equals("")) spritePortraitAPath = System.IO.Path.Combine(modLocation, relativePath);
+            FileManager.UpdateImage(img_spritePortrait, spritePortraitAPath);
+        }
+        public void UpdateSpritePortraitBPath(string relativePath)
+        {
+            if (!relativePath.Equals("")) spritePortraitBPath = System.IO.Path.Combine(modLocation, relativePath);
+            FileManager.UpdateImage(img_spritePortraitB, spritePortraitBPath);
         }
 
         public CreateCharacterWindow()
@@ -163,31 +147,41 @@ namespace Mod_the_Horror
 
         private void OnSaveClicked(object sender, RoutedEventArgs e)
         {
-            string? sprIconName = System.IO.Path.GetFileName(spriteIconPath);
-            string? sprBackName = System.IO.Path.GetFileName(spriteBackPath);
-            string? sprHouseName = System.IO.Path.GetFileName(spriteHousePath);
-            string? sprChibiName = System.IO.Path.GetFileName(spriteChibiPath);
-            string? sprPortraitName = System.IO.Path.GetFileName(spritePortraitAPath);
-            string? sprPortraitBName = System.IO.Path.GetFileName(spritePortraitBPath);
 
             string perkPackA = (string)comboBox_aPerkPack.SelectedItem;
             string perkPackB = (string)comboBox_bPerkPack.SelectedItem;
 
-            //Parses are safe here as the textboxes can only accept numbers
-            ItoWriter.WriteCustomCharacter(currentDirectoryPath, itoFileName, txtBox_name.Text, txtBox_author.Text, txtBox_contact.Text,
-                int.Parse(txtBox_strength.Text), int.Parse(txtBox_dexterity.Text), int.Parse(txtBox_perception.Text),
-                int.Parse(txtBox_charisma.Text), int.Parse(txtBox_knowledge.Text), int.Parse(txtBox_luck.Text),
-                txtBox_aName.Text, txtBox_menuTag.Text, txtBox_menuDesc.Text, perkPackA, perkPackB,
-                txtBox_fullName.Text, txtBox_gender.Text, int.Parse(txtBox_age.Text), System.IO.Path.GetFileName(currentSpriteDirectoryPath), 
-                sprIconName, sprBackName, sprHouseName, sprChibiName, sprPortraitName, sprPortraitBName);
+            string spriteDirectory = System.IO.Path.Combine(modLocation, "char_sprites");
+            if (!Directory.Exists(spriteDirectory))
+            {
+                FileManager.CreateDirectory("char_sprites", modLocation);
+            }
+
+            spriteIconPath = spriteIconPath.Equals("") ? "" : System.IO.Path.Combine(spriteDirectory, System.IO.Path.GetFileName(spriteIconPath));
+            spriteBackPath = spriteBackPath.Equals("") ? "" : System.IO.Path.Combine(spriteDirectory, System.IO.Path.GetFileName(spriteBackPath));
+            spriteHousePath = spriteHousePath.Equals("") ? "" : System.IO.Path.Combine(spriteDirectory, System.IO.Path.GetFileName(spriteHousePath));
+            spriteChibiPath = spriteChibiPath.Equals("") ? "" : System.IO.Path.Combine(spriteDirectory, System.IO.Path.GetFileName(spriteChibiPath));
+            spritePortraitAPath = spritePortraitAPath.Equals("") ? "" : System.IO.Path.Combine(spriteDirectory, System.IO.Path.GetFileName(spritePortraitAPath));
+            spritePortraitBPath = spritePortraitBPath.Equals("") ? "" : System.IO.Path.Combine(spriteDirectory, System.IO.Path.GetFileName(spritePortraitBPath));
+
+            //Translate line breaks
+            string description = Regex.Replace(txtBox_menuDesc.Text, @"\r\n?|\n", "#");
 
             //Save images
-            FileManager.SaveImage(img_spriteIcon, System.IO.Path.Combine(currentSpriteDirectoryPath, sprIconName));
-            FileManager.SaveImage(img_spriteBack, System.IO.Path.Combine(currentSpriteDirectoryPath, sprBackName));
-            FileManager.SaveImage(img_spriteHouse, System.IO.Path.Combine(currentSpriteDirectoryPath, sprHouseName));
-            FileManager.SaveImage(img_spriteChibi, System.IO.Path.Combine(currentSpriteDirectoryPath, sprChibiName));
-            FileManager.SaveImage(img_spritePortrait, System.IO.Path.Combine(currentSpriteDirectoryPath, sprPortraitName));
-            FileManager.SaveImage(img_spritePortraitB, System.IO.Path.Combine(currentSpriteDirectoryPath, sprPortraitBName));
+            FileManager.SaveImage(img_spriteIcon, spriteIconPath);
+            FileManager.SaveImage(img_spriteBack, spriteBackPath);
+            FileManager.SaveImage(img_spriteHouse, spriteHousePath);
+            FileManager.SaveImage(img_spriteChibi, spriteChibiPath);
+            FileManager.SaveImage(img_spritePortrait, spritePortraitAPath);
+            FileManager.SaveImage(img_spritePortraitB, spritePortraitBPath);
+
+            //Parses are safe here as the textboxes can only accept numbers
+            ItoWriter.WriteCustomCharacter(modLocation, itoFileName, txtBox_name.Text, txtBox_author.Text, txtBox_contact.Text,
+                int.Parse(txtBox_strength.Text), int.Parse(txtBox_dexterity.Text), int.Parse(txtBox_perception.Text),
+                int.Parse(txtBox_charisma.Text), int.Parse(txtBox_knowledge.Text), int.Parse(txtBox_luck.Text),
+                txtBox_aName.Text, txtBox_menuTag.Text, description, perkPackA, perkPackB,
+                txtBox_fullName.Text, txtBox_gender.Text, int.Parse(txtBox_age.Text),
+                spriteIconPath, spriteBackPath, spriteHousePath, spriteChibiPath, spritePortraitAPath, spritePortraitBPath);
         }
 
         private void btn_spriteIcon_Click(object sender, RoutedEventArgs e)

@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Mod_the_Horror.CreatorWindows
 {
@@ -83,7 +84,7 @@ namespace Mod_the_Horror.CreatorWindows
                     if (line.Contains("name=")) txtBox_name.Text = ItoWriter.ExtractInfo(line);
                     if (line.Contains("author=")) txtBox_author.Text = ItoWriter.ExtractInfo(line);
                     if (line.Contains("art=")) UpdateIcon(ItoWriter.ExtractInfo(line));
-                    if (line.Contains("description=")) txtBox_description.Text = ItoWriter.ExtractInfo(line);
+                    if (line.Contains("description=")) txtBox_description.Text = ItoWriter.ExtractInfo(line, true);
                 }
             }
 
@@ -94,9 +95,9 @@ namespace Mod_the_Horror.CreatorWindows
                 foreach (string line in sectionInfo)
                 {
                     if (line.Contains("art=")) UpdatePreviewArt(ItoWriter.ExtractInfo(line));
-                    if (line.Contains("text_one=")) txtBox_intro1.Text = ItoWriter.ExtractInfo(line);
-                    if (line.Contains("text_two=")) txtBox_intro2.Text = ItoWriter.ExtractInfo(line);
-                    if (line.Contains("text_three=")) txtBox_intro3.Text = ItoWriter.ExtractInfo(line);
+                    if (line.Contains("text_one=")) txtBox_intro1.Text = ItoWriter.ExtractInfo(line, true);
+                    if (line.Contains("text_two=")) txtBox_intro2.Text = ItoWriter.ExtractInfo(line, true);
+                    if (line.Contains("text_three=")) txtBox_intro3.Text = ItoWriter.ExtractInfo(line, true);
                 }
             }
 
@@ -200,10 +201,10 @@ namespace Mod_the_Horror.CreatorWindows
             //OVERALL ENDING
             if (sections.ContainsKey("big_ending"))
             {
-                string[] sectionInfo = sections["intro"].Split('\n');
+                string[] sectionInfo = sections["big_ending"].Split('\n');
                 foreach (string line in sectionInfo)
                 {
-                    if (line.Contains("end_txt=")) txtBox_endSummary.Text = ItoWriter.ExtractInfo(line);
+                    if (line.Contains("end_txt=")) txtBox_endSummary.Text = ItoWriter.ExtractInfo(line, true);
                 }
             }
         }
@@ -211,14 +212,12 @@ namespace Mod_the_Horror.CreatorWindows
         void UpdateIcon(string relativePath) 
         {
             if (!relativePath.Equals("")) iconPath = System.IO.Path.Combine(modLocation, relativePath);
-            Trace.WriteLine(iconPath);
             FileManager.UpdateImage(img_icon, iconPath);
         }
 
         void UpdatePreviewArt(string relativePath)
         {
             if (!relativePath.Equals("")) previewPath = System.IO.Path.Combine(modLocation, relativePath);
-            Trace.WriteLine(previewPath);
             FileManager.UpdateImage(img_mysteryPreview, previewPath);
         }
 
@@ -249,7 +248,8 @@ namespace Mod_the_Horror.CreatorWindows
             if (buttonSender != null) {
                 InvestigationTurn investigationTurn = (InvestigationTurn)buttonSender.DataContext;
                 InvestigationTurnEditor editor = new InvestigationTurnEditor();
-                editor.SetInvestigationTurn(investigationTurn);
+                string levelDirectory = System.IO.Path.GetDirectoryName(modLocation);
+                editor.SetInvestigationTurn(investigationTurn, levelDirectory);
                 editor.ShowDialog();
             }
         }
@@ -268,7 +268,9 @@ namespace Mod_the_Horror.CreatorWindows
         }
 
         private void Save_Click(object sender, RoutedEventArgs e) {
-            string[] intro = { txtBox_intro1.Text, txtBox_intro2.Text, txtBox_intro3.Text };
+            string[] intro = { Regex.Replace(txtBox_intro1.Text, @"\r\n?|\n", "#"),
+                Regex.Replace(txtBox_intro2.Text, @"\r\n?|\n", "#"),
+                Regex.Replace(txtBox_intro3.Text, @"\r\n?|\n", "#")};
 
             string spriteDirectory = System.IO.Path.Combine(modLocation, "mystery_sprites");
             if (!Directory.Exists(spriteDirectory)){
@@ -291,10 +293,12 @@ namespace Mod_the_Horror.CreatorWindows
                 if(!ending.pathToImage.Equals("")) FileManager.SaveImage(originalEndSource, ending.pathToImage);
             }
 
+            //Translate line breaks
+            string endSummary = Regex.Replace(txtBox_endSummary.Text, @"\r\n?|\n", "#");
+            string description = Regex.Replace(txtBox_description.Text, @"\r\n?|\n", "#");
 
-
-            ItoWriter.WriteMystery(modLocation, modName, txtBox_name.Text, txtBox_author.Text, txtBox_description.Text,
-                txtBox_endLocation.Text, txtBox_endSummary.Text, intro, Endings.ToArray(), InvestigationTurns.ToArray(),
+            ItoWriter.WriteMystery(modLocation, modName, txtBox_name.Text, txtBox_author.Text, description,
+                txtBox_endLocation.Text, endSummary, intro, Endings.ToArray(), InvestigationTurns.ToArray(),
                 iconPath, previewPath, backgroundPath);
         }
 
@@ -326,6 +330,12 @@ namespace Mod_the_Horror.CreatorWindows
                 backgroundPath = potentialPath;
                 FileManager.UpdateImage(img_background, backgroundPath);
             }
+        }
+
+        private void CapLock_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox txtBox = (TextBox)sender;
+            if (txtBox != null && txtBox.Text != null) txtBox.Text = txtBox.Text.ToString().ToUpper();
         }
     }
 }

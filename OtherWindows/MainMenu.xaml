@@ -91,7 +91,7 @@
         </Grid>
 
         <Label Style="{StaticResource header1}" Content="MOD THE HORROR" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="128"/>
-        <Label Style="{StaticResource header1}" Content="V. 0.1A" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="48"/>
+        <Label Style="{StaticResource header1}" Content="V. 0.2.1A" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="48"/>
         <Label Style="{StaticResource header1}" Content="CREATED BY CADYZE" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="48"/>
     </Grid>
 </Window>

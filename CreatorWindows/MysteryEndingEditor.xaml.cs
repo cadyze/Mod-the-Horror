@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,11 +34,10 @@ namespace Mod_the_Horror.CreatorWindows
             this.endingData = endingData;
             lbl_ending.Content = $"ENDING {endingData.EndingLetter}";
             txtBox_endingTitle.Text = endingData.endingTitle;
-            txtBox_pageA.Text = endingData.pageA;
-            txtBox_pageB.Text = endingData.pageB;
-            txtBox_pageC.Text = endingData.pageC;
-            txtBox_pageD.Text = endingData.pageD;
-            Trace.WriteLine("SAVEINGIGNG" + endingData.pathToImage);
+            txtBox_pageA.Text = endingData.pageA.Replace('#', '\n');
+            txtBox_pageB.Text = endingData.pageB.Replace('#', '\n');
+            txtBox_pageC.Text = endingData.pageC.Replace('#', '\n');
+            txtBox_pageD.Text = endingData.pageD.Replace('#', '\n');
             FileManager.UpdateImage(img_ending, endingData.pathToImage);
         }
 
@@ -53,13 +53,18 @@ namespace Mod_the_Horror.CreatorWindows
         protected override void OnClosing(CancelEventArgs e)
         {
             if (endingData != null) {
-                endingData.pageA = txtBox_pageA.Text;
-                endingData.pageB = txtBox_pageB.Text;
-                endingData.pageC = txtBox_pageC.Text;
-                endingData.pageD = txtBox_pageD.Text;
+                endingData.pageA = Regex.Replace(txtBox_pageA.Text, @"\r\n?|\n", "#");
+                endingData.pageB = Regex.Replace(txtBox_pageB.Text, @"\r\n?|\n", "#");
+                endingData.pageC = Regex.Replace(txtBox_pageC.Text, @"\r\n?|\n", "#");
+                endingData.pageD = Regex.Replace(txtBox_pageD.Text, @"\r\n?|\n", "#");
                 endingData.endingTitle = txtBox_endingTitle.Text;
             }
             base.OnClosing(e);
+        }
+        private void CapLock_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox txtBox = (TextBox)sender;
+            if (txtBox != null && txtBox.Text != null) txtBox.Text = txtBox.Text.ToString().ToUpper();
         }
     }
 }

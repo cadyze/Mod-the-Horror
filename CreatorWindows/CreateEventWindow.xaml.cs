@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,8 +24,7 @@ namespace Mod_the_Horror
     public partial class CreateEventWindow : Window
     {
         private string fileName = "";
-        private string directoryPath = "";
-        private string spriteDirectoryPath = "";
+        private string modLocation = "";
         private string eventImagePath = "";
         private Dictionary<string, string> eventStatDecoder = new Dictionary<string, string>()
         {
@@ -44,8 +45,6 @@ namespace Mod_the_Horror
         {
             string rootDirectory = FileManager.CreateDirectory(modName, path);
             UpdateCurrentDirectory(rootDirectory);
-            string spriteDirectory = FileManager.CreateDirectory("event_art", rootDirectory);
-            UpdateCurrentSpriteDirectory(spriteDirectory);
             UpdateCurrentItoName($"{modName}.ito");
         }
 
@@ -56,7 +55,7 @@ namespace Mod_the_Horror
                 if (line.Contains("location=")) UIManager.UpdateComboBox(comboBox_location, ItoWriter.ExtractInfo(line));
                 if (line.Contains("author=")) txtBox_author.Text = ItoWriter.ExtractInfo(line);
                 if (line.Contains("contact=")) txtBox_contact.Text = ItoWriter.ExtractInfo(line);
-                if (line.Contains("flavor=")) txtBox_flavor.Text = ItoWriter.ExtractInfo(line);
+                if (line.Contains("flavor=")) txtBox_flavor.Text = ItoWriter.ExtractInfo(line, true);
                 if (line.Contains("options=")) txtBox_numOptions.Text = ItoWriter.ExtractInfo(line);
                 if (line.Contains("image=")) UpdateEventImagePath(ItoWriter.ExtractInfo(line));
                 if (line.Contains("about=")) txtBox_description.Text = ItoWriter.ExtractInfo(line);
@@ -115,20 +114,15 @@ namespace Mod_the_Horror
             fileName = System.IO.Path.GetFileName(path);
         }
 
-        public void UpdateEventImagePath(string newPath)
+        public void UpdateEventImagePath(string relativePath)
         {
-            eventImagePath = newPath;
-            string? spriteLocation = System.IO.Path.GetDirectoryName(newPath);
-            if (spriteDirectoryPath.Equals("") && spriteLocation != null) UpdateCurrentSpriteDirectory(System.IO.Path.Combine(directoryPath, spriteLocation));
-            if (!newPath.Equals("")) FileManager.UpdateImage(img_event, System.IO.Path.Combine(directoryPath, eventImagePath));
+            if (!relativePath.Equals("")) eventImagePath = System.IO.Path.Combine(modLocation, relativePath);
+            FileManager.UpdateImage(img_event, eventImagePath);
         }
 
-        public void UpdateCurrentSpriteDirectory(string newPath) {
-            spriteDirectoryPath = newPath;
-        }
         public void UpdateCurrentDirectory(string newPath)
         {
-            directoryPath = newPath;
+            modLocation = newPath;
         }
 
         public CreateEventWindow()
@@ -236,13 +230,22 @@ namespace Mod_the_Horror
             eventOptions.Add(eoB);
             eventOptions.Add(eoC);
 
-            string? sprEventName = System.IO.Path.GetFileName(eventImagePath);
+            //Translate line breaks
+            string introduction = Regex.Replace(txtBox_flavor.Text, @"\r\n?|\n", "#");
 
-            ItoWriter.WriteEvent(directoryPath, fileName, txtBox_name.Text, txtBox_author.Text, location,
-                txtBox_contact.Text, txtBox_flavor.Text, int.Parse(txtBox_numOptions.Text), System.IO.Path.GetFileName(spriteDirectoryPath), sprEventName,
+            string spriteDirectory = System.IO.Path.Combine(modLocation, "event_sprites");
+            if (!Directory.Exists(spriteDirectory))
+            {
+                FileManager.CreateDirectory("event_sprites", modLocation);
+            }
+
+            eventImagePath = eventImagePath.Equals("") ? "" : System.IO.Path.Combine(spriteDirectory, System.IO.Path.GetFileName(eventImagePath));
+
+            FileManager.SaveImage(img_event, eventImagePath);
+
+            ItoWriter.WriteEvent(modLocation, fileName, txtBox_name.Text, txtBox_author.Text, location,
+                txtBox_contact.Text, introduction, int.Parse(txtBox_numOptions.Text), eventImagePath,
                 txtBox_description.Text, eventOptions);
-
-            FileManager.SaveImage(img_event, System.IO.Path.Combine(spriteDirectoryPath, sprEventName));
         }
 
         private void ChangeEventSprite_Click(object sender, RoutedEventArgs e)

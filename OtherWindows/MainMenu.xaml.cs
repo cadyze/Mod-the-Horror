@@ -75,7 +75,6 @@ namespace Mod_the_Horror
             {
                 OtherWindows.CreateProject createProjectWindow = new OtherWindows.CreateProject();
                 createProjectWindow.InitializeModList(potentialPath);
-                Trace.WriteLine(potentialPath);
                 createProjectWindow.ShowDialog();
             }
         }
